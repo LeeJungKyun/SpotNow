@@ -6,32 +6,6 @@
     android:gravity="bottom"
     android:orientation="vertical">
 
-<!--    back button, 신고버튼-->
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1">
-        <ImageButton
-            android:id="@+id/back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:layout_marginLeft="@dimen/profile_back_button_left_margin"
-            android:layout_marginTop="@dimen/profile_back_button_top_margin"
-            android:background="@null"
-            android:src="@drawable/ic_baseline_arrow_back_ios_24" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/report_button_left_margin"
-            android:layout_marginTop="@dimen/profile_back_button_top_margin"
-            android:text="신고"
-            android:textColor="@color/black"
-            android:backgroundTint="#FFDBDB"/>
-    </FrameLayout>
-
 <!--    프로필 레이아웃 -->
     <LinearLayout
         android:layout_width="match_parent"
@@ -92,21 +66,21 @@
             <TextView
                 android:id="@+id/hosting_num"
                 android:text="7"
-                android:textSize ="20sp"
+                android:textSize ="18sp"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 />
             <TextView
                 android:id="@+id/following_num"
                 android:text="12"
-                android:textSize ="20sp"
+                android:textSize ="18sp"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 />
             <TextView
                 android:id="@+id/follow_num"
                 android:text="17"
-                android:textSize ="20sp"
+                android:textSize ="18sp"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 />
@@ -115,22 +89,22 @@
         <TableRow>
             <TextView
                 android:id="@+id/hosting"
-                android:text="Hosting"
-                android:textSize ="18sp"
+                android:text="호스팅"
+                android:textSize ="15sp"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 />
             <TextView
                 android:id="@+id/following"
                 android:text="팔로잉"
-                android:textSize ="18sp"
+                android:textSize ="15sp"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 />
             <TextView
                 android:id="@+id/follow"
                 android:text="팔로우"
-                android:textSize ="18sp"
+                android:textSize ="15sp"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 />
@@ -184,16 +158,40 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="800">
-
+        android:layout_weight="800"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/address_left_margin"
+            android:text="선호 스포츠"/>
+        <TextView
+            android:padding="20dp"
+            android:layout_width="289dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="@dimen/activity_list_left_margin"
+            android:layout_marginTop="@dimen/activity_list_top_margin"
+            android:background="#E2F5FF"/>
     </LinearLayout>
 
     <!--    활동지역-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="800">
-
+        android:layout_weight="800"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/address_left_margin"
+            android:text="활동지역"/>
+        <TextView
+            android:layout_width="289dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="@dimen/address_left_margin"
+            android:layout_marginTop="@dimen/address_top_margin"
+            android:background="#EEE9FB"/>
     </LinearLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"

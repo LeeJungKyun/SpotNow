@@ -11,4 +11,8 @@
     <dimen name="profile_name_top_margin">90dp</dimen>
     <dimen name="profile_description_left_margin">120px</dimen>
     <dimen name="profile_description_top_margin">120dp</dimen>
+    <dimen name="activity_list_left_margin">56dp</dimen>
+    <dimen name="activity_list_top_margin">18dp</dimen>
+    <dimen name="address_left_margin">56dp</dimen>
+    <dimen name="address_top_margin">18dp</dimen>
 </resources>
