@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "281358896640",
+    "firebase_url": "https://spotnow-6c14b-default-rtdb.firebaseio.com",
+    "project_id": "spotnow-6c14b",
+    "storage_bucket": "spotnow-6c14b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:281358896640:android:d72e934d763583d5cad2e5",
+        "android_client_info": {
+          "package_name": "com.example.spotnow"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "281358896640-ve2cp7trpkc6sa8eknb4ommubitfcs3n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeH8XL2Nz4FOo3TIOpX6peXqUXAVR6n2g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "281358896640-ve2cp7trpkc6sa8eknb4ommubitfcs3n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
