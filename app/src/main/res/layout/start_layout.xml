@@ -16,8 +16,8 @@
         app:layout_constraintTop_toTopOf="parent">
         <ImageView
             android:layout_gravity="center_horizontal"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
             android:id="@+id/SpotNow_logo"
             android:src="@drawable/main_page"/>
         <Button
