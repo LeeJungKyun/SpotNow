@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SpotNow</string>
+    <dimen name="common_big_margin">24dp</dimen>
+    <dimen name="common_middle_margin">20dp</dimen>
+    <dimen name="common_small_margin">16dp</dimen>
     <dimen name="profile_back_button_left_margin">24px</dimen>
     <dimen name="profile_back_button_top_margin">64px</dimen>
     <dimen name="report_button_left_margin">300dp</dimen>

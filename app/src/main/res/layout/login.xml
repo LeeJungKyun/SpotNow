@@ -14,17 +14,15 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:src="@drawable/logo"
-        android:layout_marginBottom="24dp"/>
-
+        android:layout_marginBottom="@dimen/common_big_margin"/>
     <EditText
         android:layout_width="342dp"
         android:layout_height="50dp"
         android:hint="이메일"
         android:textSize="16dp"
         android:paddingLeft="12dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="@dimen/common_small_margin"
         android:background="@drawable/custom_edittext_userinfo">
-
     </EditText>
 
     <EditText
@@ -37,14 +35,13 @@
         android:background="@drawable/custom_edittext_userinfo">
     </EditText>
 
-
     <Button
         android:layout_width="342dp"
         android:layout_height="50dp"
         android:text="로그인"
         android:textColor="@color/white"
         android:textStyle="bold"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="@dimen/common_small_margin"
         android:background="@drawable/radius_button_login">
     </Button>
 
