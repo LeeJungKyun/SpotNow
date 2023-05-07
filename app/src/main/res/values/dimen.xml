@@ -5,8 +5,10 @@
     <dimen name="profile_back_button_top_margin">64px</dimen>
     <dimen name="report_button_left_margin">300dp</dimen>
     <dimen name="report_button_top_margin">50dp</dimen>
-    <dimen name="profile_image_left_margin">40dp</dimen>
-    <dimen name="profile_image_top_margin">70dp</dimen>
-    <dimen name="profile_name_left_margin">120px</dimen>
+    <dimen name="profile_image_left_margin">50dp</dimen>
+    <dimen name="profile_image_top_margin">20dp</dimen>
+    <dimen name="profile_name_left_margin">80px</dimen>
     <dimen name="profile_name_top_margin">90dp</dimen>
+    <dimen name="profile_description_left_margin">120px</dimen>
+    <dimen name="profile_description_top_margin">120dp</dimen>
 </resources>
