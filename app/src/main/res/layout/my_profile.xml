@@ -1,28 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+    android:gravity="bottom"
+    android:orientation="vertical">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
         <ImageButton
-            android:src="@drawable/ic_baseline_arrow_back_ios_24"
+            android:id="@+id/back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/back"
-            android:background="@null"
+            android:layout_gravity="top"
             android:layout_marginLeft="@dimen/profile_back_button_left_margin"
             android:layout_marginTop="@dimen/profile_back_button_top_margin"
-            />
-    </LinearLayout>
+            android:background="@null"
+            android:src="@drawable/ic_baseline_arrow_back_ios_24" />
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/report_button_left_margin"
+            android:layout_marginTop="@dimen/profile_back_button_top_margin"
+            android:text="신고"
+            android:textColor="@color/black"
+            android:backgroundTint="#FFDBDB"/>
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="100"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/profile_image"
+            android:layout_width="124dp"
+            android:layout_height="124dp"
+            android:layout_marginTop="@dimen/profile_image_top_margin"
+            android:layout_marginLeft="@dimen/profile_image_left_margin"
+            android:background="@drawable/circle"
+            app:civ_border_overlay="true"
+            app:civ_border_width="5dp"
+            app:civ_border_color="#000000"
+            android:src="@drawable/ic_launcher_foreground" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="윤서겅듀"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/profile_name_top_margin"
+            android:layout_marginLeft="@dimen/profile_name_left_margin"/>
+    </LinearLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_gravity="bottom"
         android:id="@+id/bottomNavigationView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
