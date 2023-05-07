@@ -1,18 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
     tools:context=".MainActivity">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/SpotNowLogo"
+        android:layout_marginBottom="24dp"/>
 
-    </FrameLayout>
+    <EditText
+        android:layout_width="342dp"
+        android:layout_height="50dp"
+        android:hint="이메일"
+        android:textSize="16dp"
+        android:paddingLeft="12dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/custom_edittext_userinfo">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </EditText>
+
+    <EditText
+        android:layout_width="342dp"
+        android:layout_height="50dp"
+        android:textSize="16dp"
+        android:paddingLeft="12dp"
+        android:hint="비밀번호"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/custom_edittext_userinfo">
+    </EditText>
+
+
+    <Button
+        android:layout_width="342dp"
+        android:layout_height="50dp"
+        android:text="로그인"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/radius_button_login">
+    </Button>
+
+    <Button
+        android:layout_width="342dp"
+        android:layout_height="50dp"
+        android:textStyle="bold"
+        android:background="@drawable/radius_button_sign_up"
+        android:text="회원가입">
+    </Button>
+
+</LinearLayout>
