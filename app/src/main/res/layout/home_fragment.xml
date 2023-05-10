@@ -5,16 +5,38 @@
     android:gravity="center"
     android:orientation="vertical">
 
+
     <RelativeLayout
         android:id="@+id/map_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
+
+
     </RelativeLayout>
+
+    <EditText
+        android:id="@+id/search_bar"
+        android:layout_width="369dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="@dimen/common_middle_margin"
+        android:layout_marginBottom="@dimen/common_middle_margin"
+        android:layout_centerHorizontal="true"
+        android:hint="장소, 주소 검색"
+        android:maxLines="1"
+        android:paddingLeft="12dp"
+        android:textSize="16dp"
+        android:imeOptions="actionSearch"
+        android:inputType="text"
+        android:background="@drawable/custom_edittext_userinfo">
+
+    </EditText>
+
 
     <Button
         android:id="@+id/reset_location_button"
         android:layout_width="70dp"
         android:layout_height="70dp"
+        android:layout_marginBottom="50dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:background="@drawable/reset_location" />
