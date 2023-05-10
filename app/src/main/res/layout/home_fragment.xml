@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.sothree.slidinguppanel.SlidingUpPanelLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_panel"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:gravity="bottom"
     android:background="#00FFFFFF"
+    android:gravity="bottom"
     app:umanoDragView="@id/drawer"
-    app:umanoPanelHeight="70dp"
     app:umanoOverlay="true"
-    app:umanoShadowHeight="0dp">
+    app:umanoPanelHeight="70dp"
+    app:umanoShadowHeight="0dp"
+    tools:context=".MainActivity">
 
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
@@ -60,25 +59,28 @@
     </RelativeLayout>
 
     <LinearLayout
-        android:background="@color/colorTransparent"
         android:id="@+id/drawer"
-        android:layout_width="match_parent"
+        android:layout_width="369dp"
         android:layout_height="400dp"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorTransparent"
+        android:layout_marginHorizontal="20dp"
         android:orientation="vertical">
 
         <View
             android:id="@+id/swipe"
-            android:background="@drawable/swipe_tip_background"
             android:layout_width="60dp"
             android:layout_height="5dp"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:layout_gravity="center_horizontal"/>
+            android:background="@drawable/swipe_tip_background" />
 
         <RelativeLayout
-            android:background="@drawable/drawer_background"
             android:layout_width="match_parent"
-            android:layout_height="600dp">
+            android:layout_height="600dp"
+            android:background="@drawable/drawer_background">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -88,5 +90,4 @@
                 android:textSize="15dp" />
         </RelativeLayout>
     </LinearLayout>
-
 </com.sothree.slidinguppanel.SlidingUpPanelLayout>

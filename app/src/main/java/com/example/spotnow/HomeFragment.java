@@ -63,7 +63,8 @@ public class HomeFragment extends Fragment {
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
                 //검색창에서 엔터키 눌렀을 때 이벤트 처리
                 if (i == KeyEvent.KEYCODE_ENTER) {
-                    Toast.makeText(getContext(), "엔터키가 클릭되었습니다.", Toast.LENGTH_SHORT).show();
+                    String searchWord= String.valueOf(searchbar.getText());
+                    Toast.makeText(getContext(),  searchWord, Toast.LENGTH_SHORT).show();
 
                     return true;
                 }
