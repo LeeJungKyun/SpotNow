@@ -40,4 +40,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     // Kakao maps sdk
     implementation files('libs/libDaumMapAndroid.jar')
+    //FOR NAVER MAP API
+    implementation 'com.naver.maps:map-sdk:3.14.0'
+
 }

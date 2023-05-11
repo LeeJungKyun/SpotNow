@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!--permissions for KAKAO MAP API-->
+    <!--permissions for MAP API-->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -32,7 +32,8 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <meta-data android:name="com.kakao.sdk.AppKey" android:value="c99ce7431b29c1d337fc3c361cecc480" />
+        <meta-data android:name="com.naver.maps.map.CLIENT_ID" android:value="7z4yarok73" />
+
     </application>
 
 </manifest>

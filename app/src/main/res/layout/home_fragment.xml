@@ -21,13 +21,12 @@
         android:orientation="vertical">
 
 
-        <RelativeLayout
-            android:id="@+id/map_view"
+        <fragment
+            android:id="@+id/map_fragment"
+            android:name="com.naver.maps.map.MapFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent" />
 
-
-        </RelativeLayout>
 
         <EditText
             android:id="@+id/search_bar"
