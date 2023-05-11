@@ -17,6 +17,7 @@
         android:layout_marginBottom="@dimen/common_big_margin"/>
 
     <EditText
+        android:id="@+id/sign_up_email"
         android:layout_width="342dp"
         android:layout_height="50dp"
         android:hint="이메일"
@@ -28,6 +29,7 @@
     </EditText>
 
     <EditText
+        android:id="@+id/sign_up_pw"
         android:layout_width="342dp"
         android:layout_height="50dp"
         android:textSize="16dp"
@@ -38,16 +40,19 @@
     </EditText>
 
     <EditText
+        android:id="@+id/sign_up_name"
         android:layout_width="342dp"
         android:layout_height="50dp"
         android:textSize="16dp"
         android:paddingLeft="12dp"
-        android:hint="닉네임"
+        android:hint="이름"
         android:layout_marginBottom="@dimen/common_middle_margin"
         android:background="@drawable/custom_edittext_userinfo">
     </EditText>
 
+
     <EditText
+        android:id="@+id/sign_up_sport"
         android:layout_width="342dp"
         android:layout_height="50dp"
         android:textSize="16dp"
@@ -58,6 +63,7 @@
     </EditText>
 
     <EditText
+        android:id="@+id/sign_up_region"
         android:layout_width="342dp"
         android:layout_height="50dp"
         android:textSize="16dp"
@@ -68,6 +74,7 @@
     </EditText>
 
     <Button
+        android:id="@+id/btn_join"
         android:layout_width="342dp"
         android:layout_height="50dp"
         android:text="회원가입"

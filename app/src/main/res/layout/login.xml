@@ -4,18 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical"
     android:gravity="center"
     tools:context=".MainActivity">
 
     <ImageView
-        android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:src="@drawable/logo"
         android:layout_marginBottom="@dimen/common_big_margin"/>
     <EditText
+        android:id="@+id/login_email"
         android:layout_width="342dp"
         android:layout_height="50dp"
         android:hint="이메일"
@@ -26,6 +27,7 @@
     </EditText>
 
     <EditText
+        android:id="@+id/login_pw"
         android:layout_width="342dp"
         android:layout_height="50dp"
         android:textSize="16dp"
@@ -36,6 +38,7 @@
     </EditText>
 
     <Button
+        android:id="@+id/login_sign_in_button"
         android:layout_width="342dp"
         android:layout_height="50dp"
         android:text="로그인"
@@ -46,6 +49,7 @@
     </Button>
 
     <Button
+        android:id="@+id/login_signup_button"
         android:layout_width="342dp"
         android:layout_height="50dp"
         android:textStyle="bold"

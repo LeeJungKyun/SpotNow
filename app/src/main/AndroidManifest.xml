@@ -12,6 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SpotNow"
         tools:targetApi="31">
+        <activity android:name=".signUpActivity"></activity>
+        <activity android:name=".homeActivity"></activity>
         <activity
             android:name=".MainActivity"
             android:exported="true">
