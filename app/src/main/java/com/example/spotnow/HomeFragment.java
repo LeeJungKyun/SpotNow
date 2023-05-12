@@ -16,8 +16,6 @@ import android.widget.Toast;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
-import net.daum.mf.map.api.MapPOIItem;
-import net.daum.mf.map.api.MapPoint;
 import com.naver.maps.map.MapView;
 
 public class HomeFragment extends Fragment {
