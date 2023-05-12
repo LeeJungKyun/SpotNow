@@ -25,7 +25,6 @@ public class LoginActivity extends AppCompatActivity
     Button sign_in_button;
     private EditText editTextEmail;
     private EditText editTextPassword;
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
