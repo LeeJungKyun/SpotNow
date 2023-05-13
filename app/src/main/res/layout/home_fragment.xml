@@ -11,7 +11,7 @@
     app:umanoOverlay="true"
     app:umanoPanelHeight="70dp"
     app:umanoShadowHeight="0dp"
-    tools:context=".MainActivity">
+    >
 
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"

@@ -42,6 +42,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/profile_introduce"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="저는 윤서겅듀에요"
@@ -166,6 +167,7 @@
             android:layout_marginLeft="@dimen/address_left_margin"
             android:text="선호 스포츠"/>
         <TextView
+            android:id="@+id/profile_like_sport"
             android:padding="20dp"
             android:layout_width="289dp"
             android:layout_height="50dp"
@@ -186,6 +188,7 @@
             android:layout_marginLeft="@dimen/address_left_margin"
             android:text="활동지역"/>
         <TextView
+            android:id="@+id/profile_region"
             android:layout_width="289dp"
             android:layout_height="50dp"
             android:layout_marginLeft="@dimen/address_left_margin"
