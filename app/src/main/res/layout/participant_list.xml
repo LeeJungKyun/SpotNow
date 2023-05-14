@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".participantActivity">
+<!--일단 10개씩 박음-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center_vertical"
+            android:adjustViewBounds="true"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/back" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="300dp"
+            android:hint="제목 들어갈 거임"
+            android:layout_height="25dp"
+            android:background="@drawable/box_background"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="10dp"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/Owner"
+        android:layout_width="300dp"
+        android:layout_height="25dp"
+        android:layout_marginLeft="60dp"
+        android:hint="방 생성자 이름"
+        android:textSize="10sp" />
+
+    <!-- 대기자 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop = "70dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_gravity="center_vertical"
+            android:adjustViewBounds="true"
+            android:src="@drawable/person" />
+
+        <TextView
+            android:layout_width="300dp"
+            android:hint="대기자"
+            android:textStyle = "bold"
+            android:layout_height="25dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="10dp"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/box_background"
+        android:layout_gravity = "center"
+        android:orientation = "vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation = "horizontal">
+
+            <ImageButton
+                android:id = "@+id/WaitingA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight = "1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src = "@drawable/listperson" />
+
+            <ImageButton
+                android:id = "@+id/WaitingB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight = "1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src = "@drawable/listperson" />
+            <ImageButton
+                android:id = "@+id/WaitingC"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight = "1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src = "@drawable/listperson" />
+            <ImageButton
+                android:id = "@+id/WaitingD"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight = "1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src = "@drawable/listperson" />
+            <ImageButton
+                android:id = "@+id/WaitingE"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight = "1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src = "@drawable/listperson" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation = "horizontal">
+
+            <ImageButton
+                android:id = "@+id/WaitingF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight = "1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src = "@drawable/listperson" />
+
+            <ImageButton
+                android:id = "@+id/WaitingG"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight = "1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src = "@drawable/listperson" />
+            <ImageButton
+                android:id = "@+id/WaitingH"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight = "1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src = "@drawable/listperson" />
+            <ImageButton
+                android:id = "@+id/WaitingI"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight = "1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src = "@drawable/listperson" />
+            <ImageButton
+                android:id = "@+id/WaitingJ"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight = "1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src = "@drawable/listperson" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- 참여자 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop = "30dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_gravity="center_vertical"
+            android:adjustViewBounds="true"
+            android:src="@drawable/person" />
+
+        <TextView
+            android:layout_width="300dp"
+            android:hint="참여자"
+            android:textStyle = "bold"
+            android:layout_height="25dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="10dp"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/box_background"
+        android:layout_gravity = "center"
+        android:orientation = "vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation = "horizontal">
+
+            <ImageButton
+                android:id = "@+id/ParticipantA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight = "1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src = "@drawable/listperson" />
+
+            <ImageButton
+                android:id = "@+id/ParticipantB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight = "1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src = "@drawable/listperson" />
+            <ImageButton
+                android:id = "@+id/ParticipantC"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight = "1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src = "@drawable/listperson" />
+            <ImageButton
+                android:id = "@+id/ParticipantD"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight = "1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src = "@drawable/listperson" />
+            <ImageButton
+                android:id = "@+id/ParticipantE"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight = "1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src = "@drawable/listperson" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation = "horizontal">
+
+            <ImageButton
+                android:id = "@+id/ParticipantF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight = "1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src = "@drawable/listperson" />
+
+            <ImageButton
+                android:id = "@+id/ParticipantG"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight = "1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src = "@drawable/listperson" />
+            <ImageButton
+                android:id = "@+id/ParticipantH"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight = "1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src = "@drawable/listperson" />
+            <ImageButton
+                android:id = "@+id/ParticipantI"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight = "1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src = "@drawable/listperson" />
+            <ImageButton
+                android:id = "@+id/ParticipantJ"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight = "1"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src = "@drawable/listperson" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

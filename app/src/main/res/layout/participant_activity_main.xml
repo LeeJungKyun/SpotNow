@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".participantActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="61dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:adjustViewBounds="true"
+            android:src="@drawable/person" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="300dp"
+            android:hint="제목 들어갈 거임"
+            android:layout_height="25dp"
+            android:background="@drawable/box_background"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="10dp"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <!-- Activity 사진 -->
+
+    <ImageView
+        android:id="@+id/place_holder_image"
+        android:layout_width="370dp"
+        android:layout_height="200dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/example"
+        android:background="@drawable/box_background"
+        android:scaleType="centerCrop"
+        android:gravity="center" />
+
+
+
+    <TextView
+        android:id="@+id/bottom_text_view"
+        android:layout_width="370dp"
+        android:layout_height="200dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:hint="Activity 내용 들어갈 거임"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/box_background"
+        android:gravity="center"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end">
+
+        <Button
+            android:id="@+id/writeParticipateInfo"
+            android:layout_width="78dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/button_style_1"
+            android:text="참여"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id = "@+id/writeReport"
+            android:layout_width="78dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/button_style_2"
+            android:text="신고"
+            android:textColor="@android:color/white"
+            android:onClick = "callReport" />
+    </LinearLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <View
+                android:id = "@+id/divider"
+                android:layout_width="400dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:background="@android:color/darker_gray" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:text="댓글"
+                android:textSize="18sp"
+                android:layout_below="@id/divider"
+                android:layout_marginTop="5dp" />
+        </RelativeLayout>
+    </ScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation = "horizontal">
+
+        <EditText
+            android:id = "@+id/comment"
+            android:layout_width="330dp"
+            android:layout_height="match_parent"
+            android:hint = "댓글 작성" />
+
+        <Button
+            android:id="@+id/writeComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="입력" />
+    </LinearLayout>
+
+</LinearLayout>

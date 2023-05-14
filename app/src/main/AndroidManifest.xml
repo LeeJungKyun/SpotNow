@@ -28,6 +28,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".SignUpActivity"></activity>
+        <activity android:name=".ownerActivity"></activity>
+        <activity android:name=".participantActivity"></activity>
         <activity
             android:name=".LoginActivity"
             android:exported="true">
