@@ -46,23 +46,6 @@ public class LoginActivity extends AppCompatActivity
 
         FirebaseManager.init();
 
-        ArrayList<String> path = new ArrayList<>();
-        path.add("5cCu0sBUaDXynAsvjp7CJiZzocv2");
-        path.add("follower");
-        //FirebaseManager.ReadData("users", path);
-
-        FirebaseManager.GetReferencePath("users", path).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if (!task.isSuccessful()) {
-                    Log.e("firebase", "Error getting data", task.getException());
-                }
-                else {
-                    Log.d("firebase", String.valueOf(task.getResult().getValue()));
-                }
-            }
-        });
-
 
         firebaseAuth = FirebaseAuth.getInstance();
         editTextEmail = (EditText) findViewById(R.id.login_email);

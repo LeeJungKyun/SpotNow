@@ -22,6 +22,11 @@ public abstract class FirebaseManager {
         database = FirebaseDatabase.getInstance();
     }
 
+    //[WriteData쓰는 방법]
+    //    ArrayList<String> path = new ArrayList<>();
+//        path.add("5cCu0sBUaDXynAsvjp7CJiZzocv2");
+//        path.add("follower");
+//    FirebaseManager.WriteData("users", path, "sex", 123);
     public static <T>void WriteData(String ref, ArrayList<String> path, String valueName, T data){
         DatabaseReference nDatabase = database.getReference(ref);
 
@@ -35,6 +40,22 @@ public abstract class FirebaseManager {
         nDatabase.child(valueName).push().setValue(data);
     }
 
+    //[Read쓰는 방법]
+    //    ArrayList<String> path = new ArrayList<>();
+//        path.add("5cCu0sBUaDXynAsvjp7CJiZzocv2");
+//        path.add("follower");
+//
+//        FirebaseManager.GetReferencePath("users", path).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+//        @Override
+//        public void onComplete(@NonNull Task<DataSnapshot> task) {
+//            if (!task.isSuccessful()) {
+//                Log.e("firebase", "Error getting data", task.getException());
+//            }
+//            else {
+//                Log.d("firebase", String.valueOf(task.getResult().getValue()));
+//            }
+//        }
+//    });
     public static DatabaseReference GetReferencePath(String ref, ArrayList<String> path){
         DatabaseReference nDatabase = database.getReference(ref);
 
