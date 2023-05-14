@@ -18,4 +18,14 @@
     <dimen name="activity_list_top_margin">18dp</dimen>
     <dimen name="address_left_margin">56dp</dimen>
     <dimen name="address_top_margin">18dp</dimen>
+    <string-array name="activity_types">
+        <item>*선택*</item>
+        <item>축구</item>
+        <item>농구</item>
+        <item>풋살</item>
+        <item>탁구</item>
+        <item>배드민턴</item>
+        <item>족구</item>
+        <item>직접입력</item>
+    </string-array>
 </resources>

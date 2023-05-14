@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ownerActivity">
+    <!-- 이건 Activity 등록하는 부분임 수정할때 여기서 조금만 고치음 -->
+
+        <EditText
+            android:id="@+id/title"
+            android:layout_width="370dp"
+            android:hint="제목을 입력해주세요"
+            android:layout_height="25dp"
+            android:background="@drawable/box_background"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="12sp" />
+
+    <!-- Activity 사진 -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        >
+
+        <ImageView
+            android:id="@+id/place_holder_image"
+            android:layout_width="370dp"
+            android:layout_height="200dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/box_background" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="사진을 올려서 참여율을 올려보세요"
+            android:textColor="#808080" />
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/bottom_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/box_background"
+        android:orientation="vertical">
+        <!-- 종목 선택 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="액티비티 종목" />
+
+        <Spinner
+            android:id="@+id/sport_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <!-- 시작시간 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="시작시간" />
+
+        <EditText
+            android:id="@+id/start_time_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint = "YYYY-MM-DD-HH:MM"
+            android:inputType="time" />
+
+        <!-- 종료시간 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="종료시간" />
+
+        <EditText
+            android:id="@+id/end_time_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint = "YYYY-MM-DD-HH:MM"
+            android:inputType="time" />
+
+
+        <!-- 인원수 입력 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="인원수" />
+
+        <EditText
+            android:id="@+id/participant_count_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
+        <!-- 내용 입력 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="내용" />
+
+        <EditText
+            android:id="@+id/content_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start|top"
+            android:inputType="textMultiLine"
+            android:minLines="5" />
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        android:gravity="end">
+
+        <Button
+            android:id = "@+id/readParticipantList"
+            android:layout_width="78dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/button_style_1"
+            android:text="대기목록"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id = "@+id/deleteActivity"
+            android:layout_width="78dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/button_style_2"
+            android:text="삭제"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id = "@+id/modifyActivity"
+            android:layout_width="78dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/button_style_3"
+            android:text="등록"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <View
+                android:id = "@+id/divider"
+                android:layout_width="400dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:background="@android:color/darker_gray" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:text="댓글"
+                android:textSize="18sp"
+                android:layout_below="@id/divider"
+                android:layout_marginTop="5dp" />
+
+
+        </RelativeLayout>
+    </ScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation = "horizontal">
+
+        <EditText
+            android:id = "@+id/comment"
+            android:layout_width="330dp"
+            android:layout_height="match_parent"
+            android:hint = "댓글 작성" />
+
+        <Button
+            android:id = "@+id/writeComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text = "입력" />
+    </LinearLayout>
+</LinearLayout>
