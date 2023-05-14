@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,7 +17,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class signUpActivity extends AppCompatActivity
+public class SignUpActivity extends AppCompatActivity
 {
 
     private DatabaseReference mDatabase;
@@ -69,10 +70,10 @@ public class signUpActivity extends AppCompatActivity
     {
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        userInfo user = new userInfo(name, email, sport, region);
+        UserInfo user = new UserInfo(name, email, sport, region);
 
         firebaseAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>()
+                .addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<AuthResult>()
                 {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task)
@@ -89,7 +90,7 @@ public class signUpActivity extends AppCompatActivity
                         }
                         else
                         {
-                            // 계정이 중복된 경우
+                            // 회원가입 실패한 경우
                             Toast.makeText(getApplicationContext(), "이미 존재하는 계정입니다.", Toast.LENGTH_SHORT).show();
                         }
                     }

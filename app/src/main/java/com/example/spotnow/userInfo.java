@@ -1,18 +1,18 @@
 package com.example.spotnow;
 
-public class userInfo
+public class UserInfo
 {
     public String name;
     public String email;
     public String sport;
     public String region;
 
-    public userInfo()
+    public UserInfo()
     {
 
     }
 
-    public userInfo(String name, String email, String sport, String region) {
+    public UserInfo(String name, String email, String sport, String region) {
         this.name = name;
         this.email = email;
         this.sport = sport;
