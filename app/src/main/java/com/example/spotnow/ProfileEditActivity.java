@@ -3,6 +3,7 @@ package com.example.spotnow;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,8 +18,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
 
 public class ProfileEditActivity extends AppCompatActivity {
 
@@ -26,6 +30,7 @@ public class ProfileEditActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth mAuth;
+
 
     Button submit_button;
 
@@ -41,6 +46,29 @@ public class ProfileEditActivity extends AppCompatActivity {
         setContentView(R.layout.profile_edit);
 
         firebaseAuth = FirebaseAuth.getInstance();
+        ArrayList<String> path = new ArrayList<>();
+        path.add("5cCu0sBUaDXynAsvjp7CJiZzocv2");
+        path.add("follower");
+        FirebaseManager.WriteData("users",path,123);
+
+        ArrayList<String> path2 = new ArrayList<>();
+        path2.add("5cCu0sBUaDXynAsvjp7CJiZzocv2");
+
+        FirebaseManager.GetReferencePath("users", path2).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        @Override
+        public void onComplete(@NonNull Task<DataSnapshot> task) {
+            if (!task.isSuccessful()) {
+                Log.e("firebase", "Error getting data", task.getException());
+            }
+            else {
+                Log.d("firebase", String.valueOf(task.getResult().getValue().toString()));
+            }
+        }
+    });
+
+
+
+
 
         editTextPassword = (EditText) findViewById(R.id.profile_edit_pw);
         editTextPassword_check = (EditText) findViewById(R.id.profile_edit_pw_check);
