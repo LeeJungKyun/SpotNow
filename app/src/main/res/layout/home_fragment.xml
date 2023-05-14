@@ -81,12 +81,22 @@
             android:background="@drawable/drawer_background">
 
             <TextView
+                android:id="@+id/location_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
                 android:text="성남시 수정구 복정동"
                 android:textSize="15dp" />
+
+            <ListView
+                android:id="@+id/activity_listview"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/location_textview">
+
+            </ListView>
+
         </RelativeLayout>
     </LinearLayout>
 </com.sothree.slidinguppanel.SlidingUpPanelLayout>
