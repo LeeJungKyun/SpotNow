@@ -1,7 +1,6 @@
 package com.example.spotnow;
 
-public class UserInfo
-{
+public class UserInfo {
     public String name;
     public String email;
     public String sport;
@@ -11,8 +10,7 @@ public class UserInfo
 
     public String introduce_self;
 
-    public UserInfo()
-    {
+    public UserInfo() {
 
     }
 
