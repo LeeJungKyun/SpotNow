@@ -60,7 +60,7 @@ public class SignUpActivity extends AppCompatActivity
                 {
                     // 이메일과 비밀번호가 공백이 아닌 경우
                     createUser(editTextEmail.getText().toString(), editTextPassword.getText().toString(), editTextName.getText().toString(),
-                            editTextSport.getText().toString(),editTextRegion.getText().toString());
+                            editTextSport.getText().toString(),editTextRegion.getText().toString(),editTextPassword.getText().toString());
                 } else
                 {
                     // 이메일과 비밀번호가 공백인 경우
@@ -70,11 +70,11 @@ public class SignUpActivity extends AppCompatActivity
         });
     }
 
-    private void createUser(String email, String password, String name, String sport, String region)
+    private void createUser(String email, String password, String name, String sport, String region,String pw)
     {
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        UserInfo user = new UserInfo(name, email, sport, region,0,"",0,0);
+        UserInfo user = new UserInfo(name, email, sport, region,0,"",0,0,pw);
 
         firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<AuthResult>()

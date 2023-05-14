@@ -12,12 +12,13 @@ public class UserInfo {
 
     public Integer following_num;
     public Integer follower_num;
+    public String pw;
 
     public UserInfo() {
 
     }
 
-    public UserInfo(String name, String email, String sport, String region, int report_cnt, String introduce_self, Integer following_num, Integer follower_num) {
+    public UserInfo(String name, String email, String sport, String region, int report_cnt, String introduce_self, Integer following_num, Integer follower_num, String pw) {
         this.name = name;
         this.email = email;
         this.sport = sport;
@@ -26,6 +27,15 @@ public class UserInfo {
         this.introduce_self = introduce_self;
         this.following_num = following_num;
         this.follower_num = follower_num;
+        this.pw = pw;
+    }
+
+    public String getPw() {
+        return pw;
+    }
+
+    public void setPw(String pw) {
+        this.pw = pw;
     }
 
     public Integer getFollowing_num() {
