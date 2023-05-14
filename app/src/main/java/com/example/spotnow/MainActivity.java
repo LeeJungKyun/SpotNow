@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                             selectedFragment = new ActivityFragment();
                             break;
                         case R.id.profile:
-                            selectedFragment = new ProfileFragment();
+                            selectedFragment = new my_ProfileFragment();
                             break;
                     }
 

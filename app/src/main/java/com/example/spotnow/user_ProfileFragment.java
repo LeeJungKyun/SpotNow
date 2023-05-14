@@ -1,10 +1,13 @@
 package com.example.spotnow;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -19,55 +22,46 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class ProfileFragment extends Fragment {
+public class user_ProfileFragment extends Fragment {
     private FirebaseAuth mAuth;
 
     private DatabaseReference mDatabase;
 
     UserInfo userInfo;
 
-    public ProfileFragment() {
+    public user_ProfileFragment() {
         // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.profile_fragment, container, false);
+        View rootView = inflater.inflate(R.layout.profile, container, false);
 
         TextView name = rootView.findViewById(R.id.profile_name);
         TextView introduce = rootView.findViewById(R.id.profile_introduce);
         ProgressBar progressBar = rootView.findViewById(R.id.progressBar);
         TextView like_sport = rootView.findViewById(R.id.profile_like_sport);
         TextView region = rootView.findViewById(R.id.profile_region);
+        Button follow_button = rootView.findViewById(R.id.follow_button);
 
-        mAuth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = mAuth.getCurrentUser(); // 현재 로그인 한 유저 정보 반환
-
-        final String uid = currentUser.getUid(); // 유저의 uid 저장
-
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-
-        mDatabase.child("users").child(uid).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        follow_button.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if (!task.isSuccessful()) {
-                    Log.e("firebase", "Error getting data", task.getException());
+            public void onClick(View v)
+            {
+                if(true){
+                    follow_button.setText("언팔로우");
+                    follow_button.setBackgroundColor(Color.WHITE);
+                    follow_button.setTextColor(Color.BLACK);
                 }
-                else {
-                    userInfo = task.getResult().getValue(UserInfo.class); // 유저 정보 한번 불러오기
-
-                    // 데이터 반영
-                    name.setText(userInfo.getName());
-                    introduce.setText(userInfo.getIntroduce_self());
-                    like_sport.setText(userInfo.getSport());
-                    region.setText(userInfo.getRegion());
-                    progressBar.setProgress(100-userInfo.getReport_cnt());
-
+                else{
+                    follow_button.setText("팔로우");
+                    follow_button.setBackgroundColor(Color.BLUE);
+                    follow_button.setTextColor(Color.WHITE);
                 }
             }
         });
-
 
         // Inflate the layout for this fragment
         return rootView;
