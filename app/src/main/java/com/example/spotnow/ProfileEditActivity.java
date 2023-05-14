@@ -62,13 +62,12 @@ public class ProfileEditActivity extends AppCompatActivity {
             }
             else {
                 Log.d("firebase", String.valueOf(task.getResult().getValue().toString()));
+                ArrayList<String> path = new ArrayList<>();
+                path.add("5cCu0sBUaDXynAsvjp7CJiZzocv2");
+                path.add("follower");
             }
         }
     });
-
-
-
-
 
         editTextPassword = (EditText) findViewById(R.id.profile_edit_pw);
         editTextPassword_check = (EditText) findViewById(R.id.profile_edit_pw_check);
@@ -85,14 +84,18 @@ public class ProfileEditActivity extends AppCompatActivity {
 
         submit_button = (Button) findViewById(R.id.submit_button);
         submit_button.setOnClickListener(new View.OnClickListener() {
+            //수정버튼 눌렀을때
             @Override
             public void onClick(View v) {
                 //비밀번호가 일치하지 않을때
                 if (!editTextPassword.getText().toString().equals("") && !editTextPassword_check.getText().toString().equals("")) {
                     Toast.makeText(getApplicationContext(), "비밀번호가 일치하지 않습니다.", Toast.LENGTH_LONG).show();
                 } else {
+                    String currentUid = mAuth.getCurrentUser().getUid();
                     mDatabase = FirebaseDatabase.getInstance().getReference();
-
+                    ArrayList<String> path = new ArrayList<>();
+                    path.add("region");
+                    path.add("sport");
                 }
             }
         });

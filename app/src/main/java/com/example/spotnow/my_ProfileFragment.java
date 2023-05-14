@@ -72,7 +72,6 @@ public class my_ProfileFragment extends Fragment {
                     progressBar.setProgress(100-userInfo.getReport_cnt());
                     following.setText(Integer.toString(userInfo.getFollowing_num()));
                     follower.setText(Integer.toString(userInfo.getFollower_num()));
-
                 }
             }
         });
