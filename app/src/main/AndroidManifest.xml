@@ -24,6 +24,7 @@
 
         </activity>
         <activity android:name=".SignUpActivity"></activity>
+        <activity android:name=".ProfileEditActivity"></activity>
         <activity
             android:name=".LoginActivity"
             android:exported="true">
