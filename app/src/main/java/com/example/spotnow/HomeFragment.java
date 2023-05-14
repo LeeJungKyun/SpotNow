@@ -12,16 +12,21 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.graphics.MatrixKt;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.LocationTrackingMode;
 import com.naver.maps.map.MapFragment;
 import com.naver.maps.map.MapView;
 import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.UiSettings;
+import com.naver.maps.map.overlay.Marker;
+import com.naver.maps.map.overlay.Overlay;
 import com.naver.maps.map.util.FusedLocationSource;
+import com.naver.maps.map.util.MarkerIcons;
 
 public class HomeFragment extends Fragment implements OnMapReadyCallback {
     private MapFragment mapView; // MapView 객체 선언
@@ -113,6 +118,25 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         this.naverMap = naverMap;
         naverMap.setLocationSource(locationSource);
         naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
+
+        setMark(37.4551, 127.1352);
+    }
+
+    public void setMark(double latitude, double longitude){
+        Marker marker = new Marker();
+        marker.setPosition(new LatLng(latitude, longitude));
+        marker.setIcon(MarkerIcons.RED);
+        marker.setWidth(50);
+        marker.setHeight(60);
+        marker.setMap(naverMap);
+
+        marker.setOnClickListener(new Overlay.OnClickListener() {
+            @Override
+            public boolean onClick(@NonNull Overlay overlay) {
+                Toast.makeText(getContext(), "Makrer click!", Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
     }
 
 
