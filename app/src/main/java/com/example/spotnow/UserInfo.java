@@ -10,17 +10,38 @@ public class UserInfo {
 
     public String introduce_self;
 
+    public Integer following_num;
+    public Integer follower_num;
+
     public UserInfo() {
 
     }
 
-    public UserInfo(String name, String email, String sport, String region, int report_cnt, String introduce_self) {
+    public UserInfo(String name, String email, String sport, String region, int report_cnt, String introduce_self, Integer following_num, Integer follower_num) {
         this.name = name;
         this.email = email;
         this.sport = sport;
         this.region = region;
         this.report_cnt = report_cnt;
         this.introduce_self = introduce_self;
+        this.following_num = following_num;
+        this.follower_num = follower_num;
+    }
+
+    public Integer getFollowing_num() {
+        return following_num;
+    }
+
+    public void setFollowing_num(Integer following_num) {
+        this.following_num = following_num;
+    }
+
+    public Integer getFollower_num() {
+        return follower_num;
+    }
+
+    public void setFollower_num(Integer follower_num) {
+        this.follower_num = follower_num;
     }
 
     public int getReport_cnt() {

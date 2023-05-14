@@ -45,6 +45,8 @@ public class my_ProfileFragment extends Fragment {
         TextView like_sport = rootView.findViewById(R.id.profile_like_sport);
         TextView region = rootView.findViewById(R.id.profile_region);
         Button profile_edit_button = rootView.findViewById(R.id.profile_edit_button);
+        TextView following = rootView.findViewById(R.id.following_num);
+        TextView follower = rootView.findViewById(R.id.follower_num);
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser(); // 현재 로그인 한 유저 정보 반환
@@ -68,6 +70,8 @@ public class my_ProfileFragment extends Fragment {
                     like_sport.setText(userInfo.getSport());
                     region.setText(userInfo.getRegion());
                     progressBar.setProgress(100-userInfo.getReport_cnt());
+                    following.setText(Integer.toString(userInfo.getFollowing_num()));
+                    follower.setText(Integer.toString(userInfo.getFollower_num()));
 
                 }
             }
