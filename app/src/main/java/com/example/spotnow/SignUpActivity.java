@@ -89,8 +89,8 @@ public class SignUpActivity extends AppCompatActivity
 
                             mDatabase.child("users").child(uid).setValue(user); // 회원별 uid를 부모로 유저 정보 DB에 저장
 
-                            mDatabase.child("users").child(uid).child("following").push().setValue(user.getName());
-                            mDatabase.child("users").child(uid).child("follower").push().setValue(user.getName());
+                            //mDatabase.child("users").child(uid).child("following").push().setValue(user.getName());
+                            //mDatabase.child("users").child(uid).child("follower").push().setValue(user.getName());
 
                             Toast.makeText(getApplicationContext(), "회원가입 성공", Toast.LENGTH_SHORT).show();
                             finish();

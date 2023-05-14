@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EdgeEffect;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -24,19 +27,18 @@ public class SearchActivity extends AppCompatActivity
 {
 
     ArrayList<user_listview_info> userDataList;
-    String userList;
 
     private DatabaseReference mDatabase;
-
+    user_listview_adapter myAdapter;
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search);
 
-        this.InitializeUserData();
+        getUserList();
 
         ListView listView = (ListView)findViewById(R.id.user_listView);
-        final user_listview_adapter myAdapter = new user_listview_adapter(this,userDataList);
+        myAdapter = new user_listview_adapter(getApplicationContext(),userDataList);
 
         listView.setAdapter(myAdapter);
 
@@ -49,7 +51,6 @@ public class SearchActivity extends AppCompatActivity
             }
         });
 
-
     }
 
     //씨름중인 부분
@@ -60,16 +61,17 @@ public class SearchActivity extends AppCompatActivity
 
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot)
-            {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren())
                 {
-                    //UserInfo userInfo = snapshot.getValue(UserInfo.class);
+                    UserInfo userInfo = snapshot.getValue(UserInfo.class);
+                    userDataList.add(new user_listview_info(R.drawable.circle, userInfo.getName(),userInfo.getIntroduce_self()));
 
-                    Log.d("userinfo",(String) snapshot.getValue());
                 }
-            }
 
+                myAdapter.notifyDataSetChanged();
+
+            }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
