@@ -24,6 +24,7 @@ public class SignUpActivity extends AppCompatActivity
 
     private EditText editTextEmail;
     private EditText editTextPassword;
+    private EditText editTextPassword_re;
     private EditText editTextName;
     private EditText editTextSport;
     private EditText editTextRegion;
@@ -39,6 +40,7 @@ public class SignUpActivity extends AppCompatActivity
 
         editTextEmail = (EditText) findViewById(R.id.sign_up_email);
         editTextPassword = (EditText) findViewById(R.id.sign_up_pw);
+        editTextPassword_re = (EditText) findViewById(R.id.sign_up_pw_check);
         editTextName = (EditText) findViewById(R.id.sign_up_name);
         editTextSport = (EditText) findViewById(R.id.sign_up_sport);
         editTextRegion = (EditText) findViewById(R.id.sign_up_region);
@@ -50,6 +52,9 @@ public class SignUpActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
+                if(!editTextPassword_re.getText().toString().equals(editTextPassword.getText().toString())){
+                    Toast.makeText(getApplicationContext(), "비밀번호가 일치하지 않습니다.", Toast.LENGTH_LONG).show();
+                }
 
                 if (!editTextEmail.getText().toString().equals("") && !editTextPassword.getText().toString().equals(""))
                 {
