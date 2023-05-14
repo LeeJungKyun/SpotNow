@@ -7,16 +7,38 @@ public class UserInfo
     public String sport;
     public String region;
 
+    public int report_cnt;
+
+    public String introduce_self;
+
     public UserInfo()
     {
 
     }
 
-    public UserInfo(String name, String email, String sport, String region) {
+    public UserInfo(String name, String email, String sport, String region, int report_cnt, String introduce_self) {
         this.name = name;
         this.email = email;
         this.sport = sport;
         this.region = region;
+        this.report_cnt = report_cnt;
+        this.introduce_self = introduce_self;
+    }
+
+    public int getReport_cnt() {
+        return report_cnt;
+    }
+
+    public void setReport_cnt(int report_cnt) {
+        this.report_cnt = report_cnt;
+    }
+
+    public String getIntroduce_self() {
+        return introduce_self;
+    }
+
+    public void setIntroduce_self(String introduce_self) {
+        this.introduce_self = introduce_self;
     }
 
     public String getName() {

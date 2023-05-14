@@ -70,7 +70,7 @@ public class SignUpActivity extends AppCompatActivity
     {
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        UserInfo user = new UserInfo(name, email, sport, region);
+        UserInfo user = new UserInfo(name, email, sport, region,0,"");
 
         firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<AuthResult>()
