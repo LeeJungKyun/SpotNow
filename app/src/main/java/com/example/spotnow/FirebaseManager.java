@@ -27,7 +27,7 @@ public abstract class FirebaseManager {
 //        path.add("5cCu0sBUaDXynAsvjp7CJiZzocv2");
 //        path.add("follower");
 //    FirebaseManager.WriteData("users", path, "sex", 123);
-    public static <T>void WriteData(String ref, ArrayList<String> path, String valueName, T data){
+    public static <T>void WriteData(String ref, ArrayList<String> path, T data){
         DatabaseReference nDatabase = database.getReference(ref);
 
         if(path.size() == 0)
@@ -37,7 +37,7 @@ public abstract class FirebaseManager {
             nDatabase = nDatabase.child(path.get(i));
         }
 
-        nDatabase.child(valueName).push().setValue(data);
+        nDatabase.push().setValue(data);
     }
 
     //[Read쓰는 방법]
