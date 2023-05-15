@@ -7,8 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewOverlay;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,6 +30,9 @@ import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.overlay.Overlay;
 import com.naver.maps.map.util.FusedLocationSource;
 import com.naver.maps.map.util.MarkerIcons;
+import com.example.spotnow.activitySampleData;
+import com.example.spotnow.activity_listview_adapter;
+import java.util.ArrayList;
 
 public class HomeFragment extends Fragment implements OnMapReadyCallback {
     private MapFragment mapView; // MapView 객체 선언
@@ -39,7 +44,9 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     private FusedLocationSource locationSource;
     private NaverMap naverMap;
 
-
+    //액티비티 리스트뷰 관련
+    ArrayList<activitySampleData> activityDataList;
+    activity_listview_adapter myAdapter;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -88,9 +95,30 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
             }
         });
 
+        this.InitializeActivityData();
+        ListView listView = (ListView)rootView.findViewById(R.id.activity_listview);
+
+       myAdapter=new activity_listview_adapter(getActivity(),activityDataList);
+
+       listView.setAdapter(myAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView parent, View v, int position, long id){
+                Toast.makeText(getActivity(),
+                        myAdapter.getItem(position).getActivityTitle(),
+                        Toast.LENGTH_LONG).show();
+            }
+        });
 
 
         return rootView;
+    }
+    public void InitializeActivityData(){
+        activityDataList = new ArrayList<activitySampleData>();
+        activityDataList.add(new activitySampleData(R.drawable.circle,"소웨랑 농구 뜰 사람 구함1","가천대 운동장으로 집합"));
+        activityDataList.add(new activitySampleData(R.drawable.circle,"소웨랑 농구 뜰 사람 구함2","가천대 운동장으로 집합"));
+        activityDataList.add(new activitySampleData(R.drawable.circle,"소웨랑 농구 뜰 사람 구함3","가천대 운동장으로 집합"));
+
     }
 
     public void onStart(){
