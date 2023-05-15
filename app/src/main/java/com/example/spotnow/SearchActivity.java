@@ -30,31 +30,45 @@ public class SearchActivity extends AppCompatActivity
 
     private DatabaseReference mDatabase;
     user_listview_adapter myAdapter;
+
+    EditText search_bar;
+    Button search_button;
+
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search);
 
-        getUserList();
+        search_bar = findViewById(R.id.search_bar);
+        search_button = findViewById(R.id.search_button);
 
-        ListView listView = (ListView)findViewById(R.id.user_listView);
-        myAdapter = new user_listview_adapter(getApplicationContext(),userDataList);
-
-        listView.setAdapter(myAdapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+        search_button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView parent, View v, int position, long id){
-                Toast.makeText(getApplicationContext(),
-                        myAdapter.getItem(position).getName(),
-                        Toast.LENGTH_LONG).show();
+            public void onClick(View v) {
+                getUserList(search_bar.getText().toString());
+
+                ListView listView = (ListView)findViewById(R.id.user_listView);
+                myAdapter = new user_listview_adapter(getApplicationContext(),userDataList);
+
+                listView.setAdapter(myAdapter);
+
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+                    @Override
+                    public void onItemClick(AdapterView parent, View v, int position, long id){
+                        Toast.makeText(getApplicationContext(),
+                                myAdapter.getItem(position).getName(),
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
             }
         });
+
+
 
     }
 
     //씨름중인 부분
-    public void getUserList()
+    public void getUserList(String word)
     {
         mDatabase = FirebaseDatabase.getInstance().getReference("users");
         userDataList = new ArrayList<user_listview_info>();
@@ -65,7 +79,10 @@ public class SearchActivity extends AppCompatActivity
                 for(DataSnapshot snapshot : dataSnapshot.getChildren())
                 {
                     UserInfo userInfo = snapshot.getValue(UserInfo.class);
-                    userDataList.add(new user_listview_info(R.drawable.circle, userInfo.getName(),userInfo.getIntroduce_self()));
+                    if(userInfo.getName().contains(word))
+                    {
+                        userDataList.add(new user_listview_info(R.drawable.circle, userInfo.getName(),userInfo.getIntroduce_self()));
+                    }
 
                 }
 
