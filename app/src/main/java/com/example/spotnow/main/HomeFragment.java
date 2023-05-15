@@ -1,4 +1,4 @@
-package com.example.spotnow;
+package com.example.spotnow.main;
 
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -16,6 +16,7 @@ import androidx.core.graphics.MatrixKt;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.spotnow.R;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.LocationTrackingMode;
 import com.naver.maps.map.MapFragment;

@@ -1,4 +1,4 @@
-package com.example.spotnow;
+package com.example.spotnow.common;
 
 import android.os.Build;
 import android.util.Log;

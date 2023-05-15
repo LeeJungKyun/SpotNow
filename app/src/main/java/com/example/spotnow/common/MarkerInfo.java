@@ -1,4 +1,4 @@
-package com.example.spotnow;
+package com.example.spotnow.common;
 
 public class MarkerInfo {
     public double latitude;
