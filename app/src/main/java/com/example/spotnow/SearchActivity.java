@@ -2,7 +2,9 @@ package com.example.spotnow;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EdgeEffect;
@@ -27,12 +29,12 @@ public class SearchActivity extends AppCompatActivity
 {
 
     ArrayList<user_listview_info> userDataList;
-
+    ArrayList<spot_listview_info> spotDataList;
     private DatabaseReference mDatabase;
     user_listview_adapter myAdapter;
+    spot_listview_adapter myAdapter2;
 
     EditText search_bar;
-    Button search_button;
 
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -40,32 +42,81 @@ public class SearchActivity extends AppCompatActivity
         setContentView(R.layout.search);
 
         search_bar = findViewById(R.id.search_bar);
-        search_button = findViewById(R.id.search_button);
 
-        search_button.setOnClickListener(new View.OnClickListener() {
+        search_bar.setOnKeyListener(new View.OnKeyListener() {
             @Override
-            public void onClick(View v) {
-                getUserList(search_bar.getText().toString());
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
 
-                ListView listView = (ListView)findViewById(R.id.user_listView);
-                myAdapter = new user_listview_adapter(getApplicationContext(),userDataList);
+                    getUserList(search_bar.getText().toString());
+                    getSpotList(search_bar.getText().toString());
 
-                listView.setAdapter(myAdapter);
+                    ListView listView2 = (ListView)findViewById(R.id.spot_listView);
+                    myAdapter2 = new spot_listview_adapter(getApplicationContext(),spotDataList);
 
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-                    @Override
-                    public void onItemClick(AdapterView parent, View v, int position, long id){
-                        Toast.makeText(getApplicationContext(),
-                                myAdapter.getItem(position).getName(),
-                                Toast.LENGTH_LONG).show();
-                    }
-                });
+                    listView2.setAdapter(myAdapter2);
+
+                    listView2.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+                        @Override
+                        public void onItemClick(AdapterView parent, View v, int position, long id){
+                            Toast.makeText(getApplicationContext(),
+                                    myAdapter2.getItem(position).getName(),
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    });
+
+                    ListView listView = (ListView)findViewById(R.id.user_listView);
+                    myAdapter = new user_listview_adapter(getApplicationContext(),userDataList);
+
+                    listView.setAdapter(myAdapter);
+
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+                        @Override
+                        public void onItemClick(AdapterView parent, View v, int position, long id){
+                            Toast.makeText(getApplicationContext(),
+                                    myAdapter.getItem(position).getName(),
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    });
+
+                    return true;
+                }
+                return false;
             }
         });
 
+    }
 
+    public void getSpotList(String word)
+    {
+        mDatabase = FirebaseDatabase.getInstance().getReference("spots");
+        spotDataList = new ArrayList<spot_listview_info>();
+
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot : dataSnapshot.getChildren())
+                {
+                    SpotInfo spotInfo = snapshot.getValue(SpotInfo.class);
+                    if(spotInfo.getName().contains(word))
+                    {
+                        spotDataList.add(new spot_listview_info(R.drawable.gachon_logo, spotInfo.getName(),spotInfo.getAddress()));
+                    }
+
+                }
+
+                myAdapter2.notifyDataSetChanged();
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
     }
+
+
 
     //씨름중인 부분
     public void getUserList(String word)
@@ -81,7 +132,7 @@ public class SearchActivity extends AppCompatActivity
                     UserInfo userInfo = snapshot.getValue(UserInfo.class);
                     if(userInfo.getName().contains(word))
                     {
-                        userDataList.add(new user_listview_info(R.drawable.circle, userInfo.getName(),userInfo.getIntroduce_self()));
+                        userDataList.add(new user_listview_info(R.drawable.user_circle, userInfo.getName(),userInfo.getIntroduce_self()));
                     }
 
                 }
@@ -97,14 +148,16 @@ public class SearchActivity extends AppCompatActivity
 
     }
 
-    public void InitializeUserData()
+
+
+    /*public void InitializeUserData()
     {
         userDataList = new ArrayList<user_listview_info>();
 
         userDataList.add(new user_listview_info(R.drawable.circle, "정준희","15세 이상관람가"));
         userDataList.add(new user_listview_info(R.drawable.circle, "이윤서","19세 이상관람가"));
         userDataList.add(new user_listview_info(R.drawable.circle, "정성훈","12세 이상관람가"));
-    }
+    }*/
 }
 
 
