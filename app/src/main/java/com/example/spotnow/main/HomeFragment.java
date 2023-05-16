@@ -62,10 +62,9 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
             mapView = MapFragment.newInstance();
             fm.beginTransaction().add(R.id.map_fragment, mapView).commit();
         }
-
+        else
+            fm.beginTransaction().replace(R.id.map_fragment, mapView).commit();
         mapView.getMapAsync(this);
-
-
         locationSource = new FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE);
 
 
@@ -126,6 +125,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     }
 
     public void onResume(){
+
         super.onResume();
     }
 
@@ -145,6 +145,10 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(@NonNull NaverMap naverMap) {
         this.naverMap = naverMap;
+        initMap();
+    }
+
+    public void initMap(){
         naverMap.setLocationSource(locationSource);
         naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
 
@@ -168,15 +172,18 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         });
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
 
-//    @Override
-//    public void onDestroyView() {
-//        super.onDestroyView();
-//
-//        // Fragment1이 소멸될 때 MapView 객체도 함께 소멸시킴
-//        if (mapView != null) {
-//            mapView.onDestroy();
-//            mapView = null;
-//        }
-//    }
+        // Fragment1이 소멸될 때 MapView 객체도 함께 소멸시킴
+        if (mapView != null) {
+            mapView.onDestroy();
+            mapView = null;
+
+            Fragment fragment = getFragmentManager().findFragmentById(R.id.map_fragment);
+            if(fragment != null)
+                getFragmentManager().beginTransaction().remove(fragment).commit();
+        }
+    }
 }

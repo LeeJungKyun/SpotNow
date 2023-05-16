@@ -34,33 +34,35 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private Fragment selectedFragment = null;
 
-    private BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener =
-            new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    switch (item.getItemId()) {
-                        case R.id.home:
-                            selectedFragment = new HomeFragment();
-                            break;
-                        case R.id.my_activity:
-                            selectedFragment = new ActivityFragment();
-                            break;
-                        case R.id.profile:
-                            selectedFragment = new my_ProfileFragment();
-                            break;
-                    }
+    private BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener;
 
-                    if (selectedFragment != null) {
-                        getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, selectedFragment).commit();
-                    }
-                    return true;
-                }
-            };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        navigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.home:
+                        selectedFragment = new HomeFragment();
+                        break;
+                    case R.id.my_activity:
+                        selectedFragment = new ActivityFragment();
+                        break;
+                    case R.id.profile:
+                        selectedFragment = new my_ProfileFragment();
+                        break;
+                }
+
+                if (selectedFragment != null) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, selectedFragment).commit();
+                }
+                return true;
+            }
+        };
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
