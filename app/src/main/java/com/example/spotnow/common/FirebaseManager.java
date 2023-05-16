@@ -30,8 +30,8 @@ public abstract class FirebaseManager {
     public static <T>void WriteData(String ref, ArrayList<String> path, T data){
         DatabaseReference nDatabase = database.getReference(ref);
 
-        if(path.size() == 0)
-            return;
+        if(path == null)
+            nDatabase.push().setValue(data);
 
         for(int i =0; i< path.size(); i++){
             nDatabase = nDatabase.child(path.get(i));
@@ -59,8 +59,9 @@ public abstract class FirebaseManager {
     public static DatabaseReference GetReferencePath(String ref, ArrayList<String> path){
         DatabaseReference nDatabase = database.getReference(ref);
 
-        if(path.size() == 0)
-            return null;
+        if (path == null){
+            return nDatabase;
+        }
 
         for(int i =0; i< path.size(); i++){
             nDatabase = nDatabase.child(path.get(i));

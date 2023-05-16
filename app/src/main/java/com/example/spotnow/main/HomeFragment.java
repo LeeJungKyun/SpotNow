@@ -2,6 +2,7 @@ package com.example.spotnow.main;
 
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.spotnow.R;
+import com.example.spotnow.common.FirebaseManager;
+import com.example.spotnow.common.MarkerInfo;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.LocationTrackingMode;
 import com.naver.maps.map.MapFragment;
@@ -33,6 +40,8 @@ import com.naver.maps.map.util.MarkerIcons;
 import com.example.spotnow.activitySampleData;
 import com.example.spotnow.activity_listview_adapter;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class HomeFragment extends Fragment implements OnMapReadyCallback {
     private MapFragment mapView; // MapView 객체 선언
@@ -55,6 +64,9 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.home_fragment, container, false);
+
+        //로그인 안하고 디버깅할때 해야함
+        FirebaseManager.init();
 
         FragmentManager fm = getFragmentManager();
         mapView = (MapFragment)fm.findFragmentById(R.id.map_fragment);
@@ -152,12 +164,40 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         naverMap.setLocationSource(locationSource);
         naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
 
-        setMark(37.4551, 127.1352);
+        ArrayList<String> path = new ArrayList<String>();
+        DatabaseReference dr = FirebaseManager.GetReferencePath("spots",null);
+
+
+
+        HashMap<String, Object> spotResult = new HashMap<>();
+        dr.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        @Override
+        public void onComplete(@NonNull Task<DataSnapshot> task) {
+            if (!task.isSuccessful()) {
+                Log.e("firebase", "Error getting data", task.getException());
+            }
+            else {spotResult.putAll((HashMap<String, Object>) task.getResult().getValue());
+                Log.d("firebase", spotResult.toString());
+
+                for (Map.Entry<String, Object> entry : spotResult.entrySet()){
+                    MarkerInfo marker = new MarkerInfo((String)entry.getKey());
+
+                    Map<String, Object> value = (Map<String, Object>) entry.getValue();
+                    marker.latitude = (double)value.get("latitude");
+                    marker.longitude = (double)value.get("longitude");
+                    marker.spotID = (long)value.get("spotID");
+
+                    setMark(marker);
+                }
+            }
+        }
+        });
+
     }
 
-    public void setMark(double latitude, double longitude){
+    public void setMark(MarkerInfo m){
         Marker marker = new Marker();
-        marker.setPosition(new LatLng(latitude, longitude));
+        marker.setPosition(new LatLng(m.latitude, m.longitude));
         marker.setIcon(MarkerIcons.RED);
         marker.setWidth(50);
         marker.setHeight(60);
@@ -166,7 +206,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         marker.setOnClickListener(new Overlay.OnClickListener() {
             @Override
             public boolean onClick(@NonNull Overlay overlay) {
-                Toast.makeText(getContext(), "Makrer click!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), m.spotName + " Makrer click!", Toast.LENGTH_SHORT).show();
                 return true;
             }
         });

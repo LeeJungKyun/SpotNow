@@ -5,10 +5,11 @@ public class MarkerInfo {
     public double longitude;
     public String spotName;
     public String address;
-    public int spotID;
+    public long spotID;
 
 
     public MarkerInfo(String spotName){
+        this.spotName = spotName;
 
     }
 
