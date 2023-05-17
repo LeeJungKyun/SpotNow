@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     >
 
     <LinearLayout
@@ -28,8 +29,10 @@
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="80dp"
-            android:backgroundTint="#B30248FC"
+            android:textColor="@color/white"
+            android:layout_marginBottom="@dimen/common_small_margin"
             android:elevation="0dp"
+            android:background="@drawable/radius_button_login"
             android:text="시작하기"
             android:textStyle="bold" />
 
@@ -50,6 +53,7 @@
                 android:layout_marginLeft="10dp"
                 android:backgroundTint="@color/white"
                 android:text="로그인"
+                android:background="@drawable/radius_button_sign_up"
                 android:textColor="#B30248FC" />
         </LinearLayout>
 
