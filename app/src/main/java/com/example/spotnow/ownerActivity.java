@@ -113,6 +113,7 @@ public class ownerActivity extends AppCompatActivity {
                 String participantCount = participantCountEditText.getText().toString();
                 String content = contentEditText.getText().toString();
 
+
                 // 전체값 팔수 입력
                 if (TiTle.isEmpty() || sport == "*선택*" || startTime.isEmpty() || endTime.isEmpty() || participantCount.isEmpty() || content.isEmpty()) {
                     Toast.makeText(ownerActivity.this, "모든 항목을 입력해주세요.", Toast.LENGTH_SHORT).show();
@@ -135,7 +136,7 @@ public class ownerActivity extends AppCompatActivity {
                 //HomeFragment로부터 spotID를 받아옴
                 Intent getIntent = getIntent();
                 long spotID = getIntent.getLongExtra("spotID", 0);
-
+                String spotAddress=getIntent.getStringExtra("spotAddress");
 
                 createActivity(TiTle, sport, startTime, endTime, participantCount,spotID, content);
 

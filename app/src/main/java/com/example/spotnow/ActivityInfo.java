@@ -12,6 +12,7 @@ public class ActivityInfo {
 
     public long spotID;
 
+
     public ActivityInfo() {
 
     }
@@ -90,4 +91,5 @@ public class ActivityInfo {
     public void setActivityOwner(String activityOwner) {
         this.activityOwner = activityOwner;
     }
+
 }

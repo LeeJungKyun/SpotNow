@@ -18,14 +18,21 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.spotnow.ActivityInfo;
 import com.example.spotnow.R;
+import com.example.spotnow.SpotInfo;
+import com.example.spotnow.activity_listview_info;
 import com.example.spotnow.common.FirebaseManager;
 import com.example.spotnow.common.MarkerInfo;
 import com.example.spotnow.ownerActivity;
+import com.example.spotnow.spot_listview_info;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.LocationTrackingMode;
 import com.naver.maps.map.MapFragment;
@@ -54,11 +61,12 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     private NaverMap naverMap;
 
     //액티비티 리스트뷰 관련
-    ArrayList<activitySampleData> activityDataList;
+    ArrayList<activitySampleData> sampleDataList;
+    ArrayList<activity_listview_info> activityDataList;
     activity_listview_adapter myAdapter;
 
     public long clickedSpotID;
-
+    private DatabaseReference mDatabase;
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -110,22 +118,10 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
             }
         });
 
-        this.InitializeActivityData();
-        ListView listView = (ListView) rootView.findViewById(R.id.activity_listview);
+//        this.InitializeActivityData();
 
-        myAdapter = new activity_listview_adapter(getActivity(), activityDataList);
 
-        listView.setAdapter(myAdapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView parent, View v, int position, long id) {
-                Toast.makeText(getActivity(),
-                        myAdapter.getItem(position).getActivityTitle(),
-                        Toast.LENGTH_LONG).show();
-            }
-        });
-
-        //모닳창에서 플러스 버튼 눌러서 액티비티 생성하기
+        //모달창에서 플러스 버튼 눌러서 액티비티 생성하기
         plusButton = rootView.findViewById(R.id.createActivity_button);
         plusButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,12 +138,40 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         return rootView;
     }
 
-    public void InitializeActivityData() {
-        activityDataList = new ArrayList<activitySampleData>();
-        activityDataList.add(new activitySampleData(R.drawable.circle, "소웨랑 농구 뜰 사람 구함1", "가천대 운동장으로 집합"));
-        activityDataList.add(new activitySampleData(R.drawable.circle, "소웨랑 농구 뜰 사람 구함2", "가천대 운동장으로 집합"));
-        activityDataList.add(new activitySampleData(R.drawable.circle, "소웨랑 농구 뜰 사람 구함3", "가천대 운동장으로 집합"));
+//    public void InitializeActivityData() {
+//        sampleDataList = new ArrayList<activitySampleData>();
+//        sampleDataList.add(new activitySampleData(R.drawable.circle, "소웨랑 농구 뜰 사람 구함1", "가천대 운동장으로 집합"));
+//        sampleDataList.add(new activitySampleData(R.drawable.circle, "소웨랑 농구 뜰 사람 구함2", "가천대 운동장으로 집합"));
+//        sampleDataList.add(new activitySampleData(R.drawable.circle, "소웨랑 농구 뜰 사람 구함3", "가천대 운동장으로 집합"));
+//
+//    }
 
+    public void getActivityList(long spotID){
+        mDatabase = FirebaseDatabase.getInstance().getReference("activities");
+        activityDataList=new ArrayList<activity_listview_info>();
+
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot : dataSnapshot.getChildren())
+                {
+                    ActivityInfo activityInfo = snapshot.getValue(ActivityInfo.class);
+                    if(activityInfo.getSpotID()==(spotID))
+                    {
+                        activityDataList.add(new activity_listview_info(R.drawable.circle, activityInfo.getTitle(),activityInfo.getContent()));
+                    }
+
+                }
+
+                myAdapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     public void onStart() {
@@ -229,7 +253,25 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                 TextView activity_address = v.findViewById(R.id.location_textview);
                 activity_address.setText(m.spotName);
                 clickedSpotID = m.spotID;
+
+                getActivityList(clickedSpotID);
                 //리스트뷰 또한 클릭된 스팟에 존재하는 액티비티로 띄워야함..
+                ListView listView = (ListView) v.findViewById(R.id.activity_listview);
+
+                myAdapter = new activity_listview_adapter(getActivity(), activityDataList);
+
+                listView.setAdapter(myAdapter);
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView parent, View v, int position, long id) {
+                        Toast.makeText(getActivity(),
+                                myAdapter.getItem(position).getActivityTitle(),
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
+
+
+
                 Toast.makeText(getContext(), m.spotName + " Marker click!" + "spotID:" + clickedSpotID, Toast.LENGTH_SHORT).show();
 
 

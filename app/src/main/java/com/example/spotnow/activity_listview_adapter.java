@@ -14,9 +14,9 @@ public class activity_listview_adapter extends BaseAdapter {
 
     Context mContext = null;
     LayoutInflater mLayoutInflater = null;
-    ArrayList<activitySampleData> sample;
+    ArrayList<activity_listview_info> sample;
 
-    public activity_listview_adapter(Context context, ArrayList<activitySampleData> data) {
+    public activity_listview_adapter(Context context, ArrayList<activity_listview_info> data) {
         mContext = context;
         sample = data;
         mLayoutInflater = LayoutInflater.from(mContext);
@@ -33,7 +33,7 @@ public class activity_listview_adapter extends BaseAdapter {
     }
 
     @Override
-    public activitySampleData getItem(int position) {
+    public activity_listview_info getItem(int position) {
         return sample.get(position);
     }
 
@@ -47,7 +47,7 @@ public class activity_listview_adapter extends BaseAdapter {
 
         activityImage.setImageResource(sample.get(position).getActivityImage());
         activityTitle.setText(sample.get(position).getActivityTitle());
-        activityAddress.setText(sample.get(position).getActivityAddress());
+        activityAddress.setText(sample.get(position).getActivityContent());
 
         return view;
     }
