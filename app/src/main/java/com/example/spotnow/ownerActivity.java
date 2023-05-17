@@ -17,6 +17,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.spotnow.main.HomeFragment;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.text.SimpleDateFormat;
 
 public class ownerActivity extends AppCompatActivity {
@@ -35,6 +40,8 @@ public class ownerActivity extends AppCompatActivity {
     private EditText participantCountEditText;
     private EditText contentEditText;
     private EditText title;
+
+    private DatabaseReference mDatabase;
 
     private static final int PICK_IMAGE_REQUEST = 1;
 
@@ -113,30 +120,31 @@ public class ownerActivity extends AppCompatActivity {
                 }
 
                 // 날짜 형식 확인해준다잉
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH:mm");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm");
                 sdf.setLenient(false);
                 try {
                     sdf.parse(startTime);
                     sdf.parse(endTime);
                 } catch (ParseException e) {
-                    Toast.makeText(ownerActivity.this, "날짜 형식이 잘못되었습니다. 올바른 형식은 'YYYY-MM-DD-HH:MM'입니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ownerActivity.this, "날짜 형식이 잘못되었습니다. 올바른 형식은 'YYYYMMDDHHMM'입니다.", Toast.LENGTH_SHORT).show();
                     return;
                 } catch (java.text.ParseException e) {
                     throw new RuntimeException(e);
                 }
-                // 일단 누르면 intent 보내는걸로 예시로 짬 실제로는 DB에 보내야함 ㅇㅋ?
-                /* Intent intent = new Intent(ownerActivity.this, NextActivity.class);
-                intent.putExtra("title", TiTle);
-                intent.putExtra("sport", sport);
-                intent.putExtra("start_time", startTime);
-                intent.putExtra("end_time", endTime);
-                intent.putExtra("participant_count", participantCount);
-                intent.putExtra("content", content);
-                startActivity(intent); */
+
+                //HomeFragment로부터 spotID를 받아옴
+                Intent getIntent = getIntent();
+                long spotID = getIntent.getLongExtra("spotID", 0);
+
+
+                createActivity(TiTle, sport, startTime, endTime, participantCount,spotID, content);
+
+                finish();
             }
         });
 
     }
+
 
     private void callParticipantList() {
         // 대기 목록 호출
@@ -166,5 +174,15 @@ public class ownerActivity extends AppCompatActivity {
             Uri imageUri = data.getData();
             placeHolderImage.setImageURI(imageUri);
         }
+    }
+
+    //액티비티를 파이어베이스에 저장
+    private void createActivity(String title, String sport, String startTime, String endTime, String peopleCnt, long spotID, String content) {
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        ActivityInfo activity = new ActivityInfo(title, sport, content, startTime, endTime, peopleCnt, spotID, "unknown");
+        Toast.makeText(getApplicationContext(), activity.spotID+activity.title, Toast.LENGTH_SHORT).show();
+        mDatabase.child("activities").push().setValue(activity);
+
     }
 }

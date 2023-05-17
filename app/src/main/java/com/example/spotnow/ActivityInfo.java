@@ -8,14 +8,15 @@ public class ActivityInfo {
     public String endTime;
     public String peopleCnt;
 
+    public String activityOwner;
 
-    public int spotID;
+    public long spotID;
 
     public ActivityInfo() {
 
     }
 
-    public ActivityInfo(String title, String sport, String content, String startTime, String endTime, String peopleCnt, int spotID) {
+    public ActivityInfo(String title, String sport, String content, String startTime, String endTime, String peopleCnt, long spotID, String activityOwner) {
         this.title = title;
         this.sport = sport;
         this.content = content;
@@ -23,6 +24,7 @@ public class ActivityInfo {
         this.endTime = endTime;
         this.peopleCnt = peopleCnt;
         this.spotID = spotID;
+        this.activityOwner = activityOwner;
     }
 
     public String getTitle() {
@@ -73,11 +75,19 @@ public class ActivityInfo {
         this.peopleCnt = peopleCnt;
     }
 
-    public int getSpotID() {
+    public long getSpotID() {
         return spotID;
     }
 
     public void setSpotID(int spotID) {
         this.spotID = spotID;
+    }
+
+    public String getActivityOwner() {
+        return activityOwner;
+    }
+
+    public void setActivityOwner(String activityOwner) {
+        this.activityOwner = activityOwner;
     }
 }

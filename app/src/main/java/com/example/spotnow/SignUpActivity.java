@@ -86,7 +86,6 @@ public class SignUpActivity extends AppCompatActivity
                         {
                             // 회원가입 성공시
                             final String uid = task.getResult().getUser().getUid(); //회원가입 완료된 유저의 uid 가져오기
-
                             mDatabase.child("users").child(uid).setValue(user); // 회원별 uid를 부모로 유저 정보 DB에 저장
 
                             //mDatabase.child("users").child(uid).child("following").push().setValue(user.getName());

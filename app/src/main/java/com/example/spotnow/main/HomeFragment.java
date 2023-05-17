@@ -57,6 +57,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     ArrayList<activitySampleData> activityDataList;
     activity_listview_adapter myAdapter;
 
+    public long clickedSpotID;
+
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -84,7 +86,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
             @Override
             public void onClick(View v) {
                 // 버튼 클릭 이벤트 처리
-                v= HomeFragment.this.getView();
+                v = HomeFragment.this.getView();
                 TextView activity_address = v.findViewById(R.id.location_textview);
                 activity_address.setText("현위치");    //현재위치를 주소로 어떻게 가져오징..?
                 naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
@@ -124,11 +126,14 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         });
 
         //모닳창에서 플러스 버튼 눌러서 액티비티 생성하기
-        plusButton= rootView.findViewById(R.id.createActivity_button);
+        plusButton = rootView.findViewById(R.id.createActivity_button);
         plusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                //액티비티 생성 버튼을 누르는 동시에 spotID를 intent에 담아 ownerAcitivity에 넘겨줌
                 Intent intent = new Intent(getActivity(), ownerActivity.class);
+                intent.putExtra("spotID", clickedSpotID);
                 startActivity(intent);
             }
         });
@@ -220,13 +225,14 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
             public boolean onClick(@NonNull Overlay overlay) {
 
                 //마커 클릭시 모달창 위치 텍스트를 스팟이름으로 바꿔줌
-                View v= HomeFragment.this.getView();
+                View v = HomeFragment.this.getView();
                 TextView activity_address = v.findViewById(R.id.location_textview);
                 activity_address.setText(m.spotName);
-
+                clickedSpotID = m.spotID;
                 //리스트뷰 또한 클릭된 스팟에 존재하는 액티비티로 띄워야함..
+                Toast.makeText(getContext(), m.spotName + " Marker click!" + "spotID:" + clickedSpotID, Toast.LENGTH_SHORT).show();
 
-                Toast.makeText(getContext(), m.spotName + " Makrer click!", Toast.LENGTH_SHORT).show();
+
                 return true;
             }
         });
