@@ -10,8 +10,7 @@
     app:umanoDragView="@id/drawer"
     app:umanoOverlay="true"
     app:umanoPanelHeight="70dp"
-    app:umanoShadowHeight="0dp"
-    >
+    app:umanoShadowHeight="0dp">
 
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -61,8 +60,8 @@
         android:layout_width="369dp"
         android:layout_height="400dp"
         android:layout_centerHorizontal="true"
-        android:background="@color/colorTransparent"
         android:layout_marginHorizontal="20dp"
+        android:background="@color/colorTransparent"
         android:orientation="vertical">
 
         <View
@@ -77,11 +76,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="600dp"
-            android:orientation="vertical"
+            android:background="@drawable/drawer_background"
             android:gravity="center"
-            android:background="@drawable/drawer_background">
-
-
+            android:orientation="vertical">
             <TextView
                 android:id="@+id/location_textview"
                 android:layout_width="wrap_content"
@@ -91,13 +88,28 @@
                 android:layout_marginBottom="20dp"
                 android:text="성남시 수정구 복정동"
                 android:textSize="15dp" />
-
-            <ListView
-                android:id="@+id/activity_listview"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/createActivity_button"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/plus"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_alignParentRight="true"
+                    android:backgroundTint="@color/gray"/>                    >
+            </RelativeLayout>
+
+        <ListView
+            android:id="@+id/activity_listview"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
 
-        </LinearLayout>
     </LinearLayout>
-</com.sothree.slidinguppanel.SlidingUpPanelLayout>
+</LinearLayout></com.sothree.slidinguppanel.SlidingUpPanelLayout>

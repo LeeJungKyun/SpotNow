@@ -8,17 +8,21 @@ public class ActivityInfo {
     public String endTime;
     public String peopleCnt;
 
+
+    public int spotID;
+
     public ActivityInfo() {
 
     }
 
-    public ActivityInfo(String title, String sport, String content, String startTime, String endTime, String peopleCnt) {
+    public ActivityInfo(String title, String sport, String content, String startTime, String endTime, String peopleCnt, int spotID) {
         this.title = title;
         this.sport = sport;
         this.content = content;
         this.startTime = startTime;
         this.endTime = endTime;
         this.peopleCnt = peopleCnt;
+        this.spotID = spotID;
     }
 
     public String getTitle() {
@@ -67,5 +71,13 @@ public class ActivityInfo {
 
     public void setPeopleCnt(String peopleCnt) {
         this.peopleCnt = peopleCnt;
+    }
+
+    public int getSpotID() {
+        return spotID;
+    }
+
+    public void setSpotID(int spotID) {
+        this.spotID = spotID;
     }
 }
