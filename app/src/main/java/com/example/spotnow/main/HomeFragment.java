@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -39,6 +40,7 @@ import com.naver.maps.map.util.FusedLocationSource;
 import com.naver.maps.map.util.MarkerIcons;
 import com.example.spotnow.activitySampleData;
 import com.example.spotnow.activity_listview_adapter;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -69,12 +71,11 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         FirebaseManager.init();
 
         FragmentManager fm = getFragmentManager();
-        mapView = (MapFragment)fm.findFragmentById(R.id.map_fragment);
+        mapView = (MapFragment) fm.findFragmentById(R.id.map_fragment);
         if (mapView == null) {
             mapView = MapFragment.newInstance();
             fm.beginTransaction().add(R.id.map_fragment, mapView).commit();
-        }
-        else
+        } else
             fm.beginTransaction().replace(R.id.map_fragment, mapView).commit();
         mapView.getMapAsync(this);
         locationSource = new FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE);
@@ -85,20 +86,23 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
             @Override
             public void onClick(View v) {
                 // 버튼 클릭 이벤트 처리
+                v= HomeFragment.this.getView();
+                TextView activity_address = v.findViewById(R.id.location_textview);
+                activity_address.setText("현위치");    //현재위치를 주소로 어떻게 가져오징..?
                 naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
 
             }
         });
 
 
-        searchbar=rootView.findViewById(R.id.search_bar);
+        searchbar = rootView.findViewById(R.id.search_bar);
         searchbar.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
                 //검색창에서 엔터키 눌렀을 때 이벤트 처리
                 if (i == KeyEvent.KEYCODE_ENTER) {
-                    String searchWord= String.valueOf(searchbar.getText());
-                    Toast.makeText(getContext(),  searchWord, Toast.LENGTH_SHORT).show();
+                    String searchWord = String.valueOf(searchbar.getText());
+                    Toast.makeText(getContext(), searchWord, Toast.LENGTH_SHORT).show();
 
                     return true;
                 }
@@ -107,14 +111,14 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         });
 
         this.InitializeActivityData();
-        ListView listView = (ListView)rootView.findViewById(R.id.activity_listview);
+        ListView listView = (ListView) rootView.findViewById(R.id.activity_listview);
 
-       myAdapter=new activity_listview_adapter(getActivity(),activityDataList);
+        myAdapter = new activity_listview_adapter(getActivity(), activityDataList);
 
-       listView.setAdapter(myAdapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+        listView.setAdapter(myAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView parent, View v, int position, long id){
+            public void onItemClick(AdapterView parent, View v, int position, long id) {
                 Toast.makeText(getActivity(),
                         myAdapter.getItem(position).getActivityTitle(),
                         Toast.LENGTH_LONG).show();
@@ -124,25 +128,26 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
         return rootView;
     }
-    public void InitializeActivityData(){
+
+    public void InitializeActivityData() {
         activityDataList = new ArrayList<activitySampleData>();
-        activityDataList.add(new activitySampleData(R.drawable.circle,"소웨랑 농구 뜰 사람 구함1","가천대 운동장으로 집합"));
-        activityDataList.add(new activitySampleData(R.drawable.circle,"소웨랑 농구 뜰 사람 구함2","가천대 운동장으로 집합"));
-        activityDataList.add(new activitySampleData(R.drawable.circle,"소웨랑 농구 뜰 사람 구함3","가천대 운동장으로 집합"));
+        activityDataList.add(new activitySampleData(R.drawable.circle, "소웨랑 농구 뜰 사람 구함1", "가천대 운동장으로 집합"));
+        activityDataList.add(new activitySampleData(R.drawable.circle, "소웨랑 농구 뜰 사람 구함2", "가천대 운동장으로 집합"));
+        activityDataList.add(new activitySampleData(R.drawable.circle, "소웨랑 농구 뜰 사람 구함3", "가천대 운동장으로 집합"));
 
     }
 
-    public void onStart(){
+    public void onStart() {
         super.onStart();
     }
 
-    public void onResume(){
+    public void onResume() {
 
         super.onResume();
     }
 
     public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String[] permissions,  @NonNull int[] grantResults) {
+                                           @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (locationSource.onRequestPermissionsResult(
                 requestCode, permissions, grantResults)) {
             if (!locationSource.isActivated()) { // 권한 거부됨
@@ -160,42 +165,41 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         initMap();
     }
 
-    public void initMap(){
+    public void initMap() {
         naverMap.setLocationSource(locationSource);
         naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
 
         ArrayList<String> path = new ArrayList<String>();
-        DatabaseReference dr = FirebaseManager.GetReferencePath("spots",null);
-
+        DatabaseReference dr = FirebaseManager.GetReferencePath("spots", null);
 
 
         HashMap<String, Object> spotResult = new HashMap<>();
         dr.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-        @Override
-        public void onComplete(@NonNull Task<DataSnapshot> task) {
-            if (!task.isSuccessful()) {
-                Log.e("firebase", "Error getting data", task.getException());
-            }
-            else {spotResult.putAll((HashMap<String, Object>) task.getResult().getValue());
-                Log.d("firebase", spotResult.toString());
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                } else {
+                    spotResult.putAll((HashMap<String, Object>) task.getResult().getValue());
+                    Log.d("firebase", spotResult.toString());
 
-                for (Map.Entry<String, Object> entry : spotResult.entrySet()){
-                    MarkerInfo marker = new MarkerInfo((String)entry.getKey());
+                    for (Map.Entry<String, Object> entry : spotResult.entrySet()) {
+                        MarkerInfo marker = new MarkerInfo((String) entry.getKey());
 
-                    Map<String, Object> value = (Map<String, Object>) entry.getValue();
-                    marker.latitude = (double)value.get("latitude");
-                    marker.longitude = (double)value.get("longitude");
-                    marker.spotID = (long)value.get("spotID");
+                        Map<String, Object> value = (Map<String, Object>) entry.getValue();
+                        marker.latitude = (double) value.get("latitude");
+                        marker.longitude = (double) value.get("longitude");
+                        marker.spotID = (long) value.get("spotID");
 
-                    setMark(marker);
+                        setMark(marker);
+                    }
                 }
             }
-        }
         });
 
     }
 
-    public void setMark(MarkerInfo m){
+    public void setMark(MarkerInfo m) {
         Marker marker = new Marker();
         marker.setPosition(new LatLng(m.latitude, m.longitude));
         marker.setIcon(MarkerIcons.RED);
@@ -206,6 +210,14 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         marker.setOnClickListener(new Overlay.OnClickListener() {
             @Override
             public boolean onClick(@NonNull Overlay overlay) {
+
+                //마커 클릭시 모달창 위치 텍스트를 스팟이름으로 바꿔줌
+                View v= HomeFragment.this.getView();
+                TextView activity_address = v.findViewById(R.id.location_textview);
+                activity_address.setText(m.spotName);
+
+                //리스트뷰 또한 클릭된 스팟에 존재하는 액티비티로 띄워야함..
+
                 Toast.makeText(getContext(), m.spotName + " Makrer click!", Toast.LENGTH_SHORT).show();
                 return true;
             }
@@ -222,7 +234,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
             mapView = null;
 
             Fragment fragment = getFragmentManager().findFragmentById(R.id.map_fragment);
-            if(fragment != null)
+            if (fragment != null)
                 getFragmentManager().beginTransaction().remove(fragment).commit();
         }
     }
