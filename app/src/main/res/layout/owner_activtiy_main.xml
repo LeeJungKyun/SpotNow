@@ -7,17 +7,17 @@
     tools:context=".ownerActivity">
     <!-- 이건 Activity 등록하는 부분임 수정할때 여기서 조금만 고치음 -->
 
-        <EditText
-            android:id="@+id/title"
-            android:layout_width="370dp"
-            android:hint="제목을 입력해주세요"
-            android:layout_height="25dp"
-            android:background="@drawable/box_background"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:textSize="12sp" />
+    <EditText
+        android:id="@+id/title"
+        android:layout_width="370dp"
+        android:hint="제목을 입력해주세요"
+        android:layout_height="35dp"
+        android:background="@drawable/box_background"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="12sp" />
 
     <!-- Activity 사진 -->
     <RelativeLayout
@@ -35,6 +35,7 @@
             android:background="@drawable/box_background" />
 
         <TextView
+            android:id="@+id/text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -47,7 +48,7 @@
     <LinearLayout
         android:id="@+id/bottom_text_view"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="310dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="8dp"
@@ -69,12 +70,35 @@
             android:layout_height="wrap_content"
             android:text="시작시간" />
 
-        <EditText
-            android:id="@+id/start_time_edit_text"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint = "YYYY-MM-DD-HH:MM"
-            android:inputType="time" />
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/month_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Spinner
+                android:id="@+id/day_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Spinner
+                android:id="@+id/hour_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Spinner
+                android:id="@+id/minute_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+        </LinearLayout>
 
         <!-- 종료시간 -->
         <TextView
@@ -82,12 +106,35 @@
             android:layout_height="wrap_content"
             android:text="종료시간" />
 
-        <EditText
-            android:id="@+id/end_time_edit_text"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint = "YYYY-MM-DD-HH:MM"
-            android:inputType="time" />
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/end_month_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Spinner
+                android:id="@+id/end_day_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Spinner
+                android:id="@+id/end_hour_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Spinner
+                android:id="@+id/end_minute_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+        </LinearLayout>
 
 
         <!-- 인원수 입력 -->

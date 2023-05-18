@@ -1,6 +1,7 @@
 package com.example.spotnow;
 
 public class ActivityInfo {
+    public String imageUrl;
     public String title;
     public String sport;
     public String content;
@@ -17,7 +18,7 @@ public class ActivityInfo {
 
     }
 
-    public ActivityInfo(String title, String sport, String content, String startTime, String endTime, String peopleCnt, long spotID, String activityOwner) {
+    public ActivityInfo(String title, String sport, String content, String startTime, String endTime, String peopleCnt, long spotID, String imageUrl, String activityOwner) {
         this.title = title;
         this.sport = sport;
         this.content = content;
@@ -25,6 +26,7 @@ public class ActivityInfo {
         this.endTime = endTime;
         this.peopleCnt = peopleCnt;
         this.spotID = spotID;
+        this.imageUrl = imageUrl;
         this.activityOwner = activityOwner;
     }
 
@@ -74,6 +76,14 @@ public class ActivityInfo {
 
     public void setPeopleCnt(String peopleCnt) {
         this.peopleCnt = peopleCnt;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public long getSpotID() {

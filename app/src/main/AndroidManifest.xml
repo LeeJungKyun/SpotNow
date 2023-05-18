@@ -27,6 +27,9 @@
         </activity>
         <activity android:name=".LoginActivity"
             android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,16 +37,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".ProfileEditActivity"></activity>
-        <activity
-            android:name=".SearchActivity"
-            android:exported="true">
-
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity android:name=".participantActivity"></activity>
         <activity android:name=".ownerActivity"></activity>
+        <activity android:name=".participantActivity"></activity>
+        <activity android:name=".SearchActivity"></activity>
+
         <meta-data android:name="com.naver.maps.map.CLIENT_ID" android:value="7z4yarok73" />
 
     </application>

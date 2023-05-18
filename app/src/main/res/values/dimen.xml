@@ -26,6 +26,94 @@
         <item>탁구</item>
         <item>배드민턴</item>
         <item>족구</item>
-        <item>직접입력</item>
+        <item>기타</item>
+    </string-array>
+
+    <string-array name="years">
+        <item>2023</item>
+        <item>2024</item>
+    </string-array>
+    <string-array name="months">
+        <item>1월</item>
+        <item>2월</item>
+        <item>3월</item>
+        <item>4월</item>
+        <item>5월</item>
+        <item>6월</item>
+        <item>7월</item>
+        <item>8월</item>
+        <item>9월</item>
+        <item>10월</item>
+        <item>11월</item>
+        <item>12월</item>
+    </string-array>
+
+    <string-array name="days">
+        <item>1일</item>
+        <item>2일</item>
+        <item>3일</item>
+        <item>4일</item>
+        <item>5일</item>
+        <item>6일</item>
+        <item>7일</item>
+        <item>8일</item>
+        <item>9일</item>
+        <item>10일</item>
+        <item>11일</item>
+        <item>12일</item>
+        <item>13일</item>
+        <item>14일</item>
+        <item>15일</item>
+        <item>16일</item>
+        <item>17일</item>
+        <item>18일</item>
+        <item>19일</item>
+        <item>20일</item>
+        <item>21일</item>
+        <item>22일</item>
+        <item>23일</item>
+        <item>24일</item>
+        <item>25일</item>
+        <item>26일</item>
+        <item>27일</item>
+        <item>28일</item>
+        <item>29일</item>
+        <item>30일</item>
+        <item>31일</item>
+
+    </string-array>
+
+    <string-array name="hours">
+        <item>00시</item>
+        <item>01시</item>
+        <item>02시</item>
+        <item>03시</item>
+        <item>04시</item>
+        <item>05시</item>
+        <item>06시</item>
+        <item>07시</item>
+        <item>08시</item>
+        <item>09시</item>
+        <item>10시</item>
+        <item>11시</item>
+        <item>12시</item>
+        <item>13시</item>
+        <item>14시</item>
+        <item>15시</item>
+        <item>16시</item>
+        <item>17시</item>
+        <item>18시</item>
+        <item>19시</item>
+        <item>20시</item>
+        <item>21시</item>
+        <item>22시</item>
+        <item>23시</item>
+    </string-array>
+
+    <string-array name="minutes">
+        <item>00분</item>
+        <item>15분</item>
+        <item>30분</item>
+        <item>45분</item>
     </string-array>
 </resources>
