@@ -7,6 +7,7 @@ import android.net.ParseException;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,9 +21,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.spotnow.common.FirebaseManager;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -31,6 +37,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.text.BreakIterator;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 
@@ -64,7 +71,9 @@ public class ownerActivity extends AppCompatActivity {
 
     private static final int PICK_IMAGE_REQUEST = 1;
     private Uri selectedImageUri; // 선택된 이미지의 Uri를 저장하는 변수
+    private String activityOwner;
 
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,6 +160,45 @@ public class ownerActivity extends AppCompatActivity {
         endMinuteAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         endMinuteSpinner.setAdapter(endMinuteAdapter);
 
+
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser(); // 현재 로그인 한 유저 정보 반환
+
+        final String uid = currentUser.getUid(); // 유저의 uid 저장
+
+        ArrayList<String> path = new ArrayList<>();
+        path.add(uid);
+        path.add("name");
+        FirebaseManager.GetReferencePath("users", path).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        @Override
+        public void onComplete(@NonNull Task<DataSnapshot> task) {
+            if (!task.isSuccessful()) {
+                Log.e("firebase", "Error getting data", task.getException());
+            }
+            else {
+                Log.d("firebase", String.valueOf(task.getResult().getValue()));
+                activityOwner=String.valueOf(task.getResult().getValue());
+            }
+        }
+    });
+
+
+//        mDatabase = FirebaseDatabase.getInstance().getReference();
+//        mDatabase.child("users").child(uid).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<DataSnapshot> task) {
+//                if (!task.isSuccessful()) {
+//                    Log.e("firebase", "Error getting data", task.getException());
+//                }
+//                else {
+//                    userInfo = task.getResult().getValue(UserInfo.class); // 유저 정보 한번 불러오기
+//
+//
+//                }
+//            }
+//        });
+
+
         modifyActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -198,7 +246,7 @@ public class ownerActivity extends AppCompatActivity {
                 String spotAddress = getIntent.getStringExtra("spotAddress");
 
                 // 이미지 업로드 후 액티비티 저장
-                uploadImageAndCreateActivity(TiTle, sport, startTime, endTime, participantCount, content, spotID);
+                uploadImageAndCreateActivity(TiTle, sport, startTime, endTime, participantCount, content, spotID,activityOwner);
 
                 finish();
             }
@@ -238,7 +286,7 @@ public class ownerActivity extends AppCompatActivity {
         }
     }
 
-    private void uploadImageAndCreateActivity(String title, String sport, String startTime, String endTime, String peopleCnt, String content, long spotID) {
+    private void uploadImageAndCreateActivity(String title, String sport, String startTime, String endTime, String peopleCnt, String content, long spotID,String activityOwner) {
         if (selectedImageUri != null) {
             StorageReference imageRef = mStorage.child("images/" + UUID.randomUUID().toString());
 
@@ -254,7 +302,7 @@ public class ownerActivity extends AppCompatActivity {
                                     String imageUrl = uri.toString();
 
                                     // 액티비티 정보와 이미지 URL을 함께 저장
-                                    createActivity(title, sport, startTime, endTime, peopleCnt, content, spotID, imageUrl);
+                                    createActivity(title, sport, startTime, endTime, peopleCnt, content, spotID, imageUrl,activityOwner);
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
@@ -274,14 +322,15 @@ public class ownerActivity extends AppCompatActivity {
                     });
         } else {
             // 이미지가 선택되지 않았을 경우에도 액티비티 저장
-            createActivity(title, sport, startTime, endTime, peopleCnt, content, spotID, null);
+            createActivity(title, sport, startTime, endTime, peopleCnt, content, spotID, null,activityOwner);
         }
     }
 
-    private void createActivity(String title, String sport, String startTime, String endTime, String peopleCnt, String content, long spotID, String imageUrl) {
+    private void createActivity(String title, String sport, String startTime, String endTime, String peopleCnt, String content, long spotID, String imageUrl,String activityOwner) {
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        ActivityInfo activity = new ActivityInfo(title, sport, content, startTime, endTime, peopleCnt, spotID, imageUrl, "unKnown");
+
+        ActivityInfo activity = new ActivityInfo(title, sport, content, startTime, endTime, peopleCnt, spotID, imageUrl, activityOwner);
         Toast.makeText(getApplicationContext(), activity.spotID + activity.title, Toast.LENGTH_SHORT).show();
         mDatabase.child("activities").push().setValue(activity);
     }
