@@ -102,9 +102,7 @@ public class SearchActivity extends AppCompatActivity
                     {
                         spotDataList.add(new spot_listview_info(R.drawable.gachon_logo, spotInfo.getName(),spotInfo.getAddress()));
                     }
-
                 }
-
                 myAdapter2.notifyDataSetChanged();
 
             }
@@ -115,9 +113,6 @@ public class SearchActivity extends AppCompatActivity
         });
 
     }
-
-
-
     //씨름중인 부분
     public void getUserList(String word)
     {

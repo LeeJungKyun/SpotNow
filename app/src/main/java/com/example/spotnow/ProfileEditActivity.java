@@ -1,5 +1,7 @@
 package com.example.spotnow;
 
+import static com.example.spotnow.common.FirebaseManager.database;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ProfileEditActivity extends AppCompatActivity {
 
@@ -28,7 +31,7 @@ public class ProfileEditActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth mAuth;
 
-
+    DatabaseReference ref = database.getReference("server/saving-data/SpotNow");
     Button submit_button;
 
     private EditText editTextPassword;
@@ -41,30 +44,6 @@ public class ProfileEditActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_edit);
-
-
-//        ArrayList<String> path = new ArrayList<>();
-//        path.add("5cCu0sBUaDXynAsvjp7CJiZzocv2");
-//        path.add("follower");
-//        FirebaseManager.WriteData("users",path,123);
-//
-//        ArrayList<String> path2 = new ArrayList<>();
-//        path2.add("5cCu0sBUaDXynAsvjp7CJiZzocv2");
-//
-//        FirebaseManager.GetReferencePath("users", path2).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-//        @Override
-//        public void onComplete(@NonNull Task<DataSnapshot> task) {
-//            if (!task.isSuccessful()) {
-//                Log.e("firebase", "Error getting data", task.getException());
-//            }
-//            else {
-//                Log.d("firebase", String.valueOf(task.getResult().getValue().toString()));
-//                ArrayList<String> path = new ArrayList<>();
-//                path.add("5cCu0sBUaDXynAsvjp7CJiZzocv2");
-//                path.add("follower");
-//            }
-//        }
-//    });
 
         editTextPassword = (EditText) findViewById(R.id.profile_edit_pw);
         editTextPassword_check = (EditText) findViewById(R.id.profile_edit_pw_check);
@@ -91,21 +70,10 @@ public class ProfileEditActivity extends AppCompatActivity {
                     firebaseAuth = FirebaseAuth.getInstance();
                     String currentUid = mAuth.getCurrentUser().getUid();
                     mDatabase = FirebaseDatabase.getInstance().getReference();
-                    ArrayList<String> path = new ArrayList<>();
-                    path.add(currentUid);
-                    path.add("pw");
-                    path.add("region");
-                    path.add("sport");
-                    FirebaseManager.GetReferencePath("users", path).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DataSnapshot> task) {
-                            if (!task.isSuccessful()) {
-                                Log.e("firebase", "Error getting data", task.getException());
-                            } else {
-                                Log.d("firebase", task.getResult().getValue().toString());
-                            }
-                        }
-                    });
+
+                    DatabaseReference usersRef = ref.child("users");
+
+//                    Map<String, User> users = new HashMap<>();
                 }
             }
         });
