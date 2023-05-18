@@ -23,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class ProfileEditActivity extends AppCompatActivity {
 
@@ -30,8 +31,6 @@ public class ProfileEditActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth mAuth;
-
-    DatabaseReference ref = database.getReference("server/saving-data/SpotNow");
     Button submit_button;
 
     private EditText editTextPassword;
@@ -64,17 +63,25 @@ public class ProfileEditActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //비밀번호가 일치하지 않을때
-                if (!editTextPassword.getText().toString().equals("") && !editTextPassword_check.getText().toString().equals("")) {
+                /*if (!editTextPassword.getText().toString().equals("") && !editTextPassword_check.getText().toString().equals("")) {
                     Toast.makeText(getApplicationContext(), "비밀번호가 일치하지 않습니다.", Toast.LENGTH_LONG).show();
-                } else {
+                } else {*/
                     firebaseAuth = FirebaseAuth.getInstance();
                     String currentUid = mAuth.getCurrentUser().getUid();
-                    mDatabase = FirebaseDatabase.getInstance().getReference();
 
-                    DatabaseReference usersRef = ref.child("users");
+                    mDatabase = FirebaseDatabase.getInstance().getReference("users").child(currentUid);
 
-//                    Map<String, User> users = new HashMap<>();
-                }
+                    Map<String, Object> userUpdates = new HashMap<>();
+
+                    userUpdates.put("pw",editTextPassword.getText().toString());
+                    userUpdates.put("introduce_self",editTextdescription.getText().toString());
+                    userUpdates.put("sport",editTextsports.getText().toString());
+                    userUpdates.put("region",editTextregion.getText().toString());
+
+                    mDatabase.updateChildren(userUpdates);
+                    finish();
+
+
             }
         });
     }
