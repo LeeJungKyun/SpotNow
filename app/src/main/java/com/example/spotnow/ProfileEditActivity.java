@@ -46,7 +46,7 @@ public class ProfileEditActivity extends AppCompatActivity {
 
         editTextPassword = (EditText) findViewById(R.id.profile_edit_pw);
         editTextPassword_check = (EditText) findViewById(R.id.profile_edit_pw_check);
-        String newPwd;
+        String newPwd = editTextPassword_check.getText().toString();
         editTextdescription = (EditText) findViewById(R.id.profile_edit_description);
         String newDescription = editTextdescription.getText().toString();
         editTextsports = (EditText) findViewById(R.id.profile_edit_sport);
@@ -63,9 +63,9 @@ public class ProfileEditActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //비밀번호가 일치하지 않을때
-                /*if (!editTextPassword.getText().toString().equals("") && !editTextPassword_check.getText().toString().equals("")) {
+                if (!editTextPassword.getText().toString().equals(editTextPassword_check.getText().toString())) {
                     Toast.makeText(getApplicationContext(), "비밀번호가 일치하지 않습니다.", Toast.LENGTH_LONG).show();
-                } else {*/
+                } else {
                     firebaseAuth = FirebaseAuth.getInstance();
                     String currentUid = mAuth.getCurrentUser().getUid();
 
@@ -73,15 +73,16 @@ public class ProfileEditActivity extends AppCompatActivity {
 
                     Map<String, Object> userUpdates = new HashMap<>();
 
-                    userUpdates.put("pw",editTextPassword.getText().toString());
-                    userUpdates.put("introduce_self",editTextdescription.getText().toString());
-                    userUpdates.put("sport",editTextsports.getText().toString());
-                    userUpdates.put("region",editTextregion.getText().toString());
+                    userUpdates.put("pw", newPwd);
+                    userUpdates.put("introduce_self", newDescription);
+                    userUpdates.put("sport", newSports);
+                    userUpdates.put("region", newRegion);
 
                     mDatabase.updateChildren(userUpdates);
                     finish();
 
 
+                }
             }
         });
     }
