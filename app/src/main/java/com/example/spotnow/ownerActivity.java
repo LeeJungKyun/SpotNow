@@ -201,30 +201,40 @@ public class ownerActivity extends AppCompatActivity {
 
         modifyActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                String TiTle = title.getText().toString();
-                String sport = activityTypeSpinner.getSelectedItem().toString();
+            public void onClick(View view) {uploadActivity();}
+        });
 
-                String month = monthSpinner.getSelectedItem().toString();
-                String day = daySpinner.getSelectedItem().toString();
-                String hour = hourSpinner.getSelectedItem().toString();
-                String minute = minuteSpinner.getSelectedItem().toString();
-                String startTime = month + "-" + day + "-" + hour + ":" + minute;
+    }
 
-                String endMonth = endMonthSpinner.getSelectedItem().toString(); // 추가된 부분
-                String endDay = endDaySpinner.getSelectedItem().toString(); // 추가된 부분
-                String endHour = endHourSpinner.getSelectedItem().toString(); // 추가된 부분
-                String endMinute = endMinuteSpinner.getSelectedItem().toString(); // 추가된 부분
-                String endTime = endMonth + "-" + endDay + "-" + endHour + ":" + endMinute; // 추가된 부분
+    private void callParticipantList() {
+        // 대기 목록 호출
+        // 이부분은 아마 등록하는 부분에서는 지워도 될듯 혹시 몰라 남겨놓음
+    }
 
-                String participantCount = participantCountEditText.getText().toString();
-                String content = contentEditText.getText().toString();
+    public void uploadActivity(){
+        String TiTle = title.getText().toString();
+        String sport = activityTypeSpinner.getSelectedItem().toString();
 
-                // 전체값 팔수 입력
-                if (TiTle.isEmpty() || sport.equals("*선택*") || startTime.isEmpty() || endTime.isEmpty() || participantCount.isEmpty() || content.isEmpty()) {
-                    Toast.makeText(ownerActivity.this, "모든 항목을 입력해주세요.", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+        String month = monthSpinner.getSelectedItem().toString();
+        String day = daySpinner.getSelectedItem().toString();
+        String hour = hourSpinner.getSelectedItem().toString();
+        String minute = minuteSpinner.getSelectedItem().toString();
+        String startTime = month + "-" + day + "-" + hour + ":" + minute;
+
+        String endMonth = endMonthSpinner.getSelectedItem().toString(); // 추가된 부분
+        String endDay = endDaySpinner.getSelectedItem().toString(); // 추가된 부분
+        String endHour = endHourSpinner.getSelectedItem().toString(); // 추가된 부분
+        String endMinute = endMinuteSpinner.getSelectedItem().toString(); // 추가된 부분
+        String endTime = endMonth + "-" + endDay + "-" + endHour + ":" + endMinute; // 추가된 부분
+
+        String participantCount = participantCountEditText.getText().toString();
+        String content = contentEditText.getText().toString();
+
+        // 전체값 팔수 입력
+        if (TiTle.isEmpty() || sport.equals("*선택*") || startTime.isEmpty() || endTime.isEmpty() || participantCount.isEmpty() || content.isEmpty()) {
+            Toast.makeText(ownerActivity.this, "모든 항목을 입력해주세요.", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
                 /* 날짜 형식 확인
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH:mm");
@@ -240,23 +250,15 @@ public class ownerActivity extends AppCompatActivity {
                 }
                 */
 
-                // HomeFragment로부터 spotID를 받아옴
-                Intent getIntent = getIntent();
-                long spotID = getIntent.getLongExtra("spotID", 0);
-                String spotAddress = getIntent.getStringExtra("spotAddress");
+        // HomeFragment로부터 spotID를 받아옴
+        Intent getIntent = getIntent();
+        long spotID = getIntent.getLongExtra("spotID", 0);
+        String spotAddress = getIntent.getStringExtra("spotAddress");
 
-                // 이미지 업로드 후 액티비티 저장
-                uploadImageAndCreateActivity(TiTle, sport, startTime, endTime, participantCount, content, spotID,activityOwner);
+        // 이미지 업로드 후 액티비티 저장
+        uploadImageAndCreateActivity(TiTle, sport, startTime, endTime, participantCount, content, spotID,activityOwner);
 
-                finish();
-            }
-        });
-
-    }
-
-    private void callParticipantList() {
-        // 대기 목록 호출
-        // 이부분은 아마 등록하는 부분에서는 지워도 될듯 혹시 몰라 남겨놓음
+        finish();
     }
 
     private void sendComment() {
@@ -334,4 +336,6 @@ public class ownerActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), activity.spotID + activity.title, Toast.LENGTH_SHORT).show();
         mDatabase.child("activities").push().setValue(activity);
     }
+
+
 }

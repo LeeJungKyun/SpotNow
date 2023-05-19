@@ -14,6 +14,7 @@ public class ActivityInfo {
     public long spotID;
 
 
+
     public ActivityInfo() {
 
     }
