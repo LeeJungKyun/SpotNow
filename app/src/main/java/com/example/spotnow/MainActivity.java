@@ -113,7 +113,6 @@ public class MainActivity extends AppCompatActivity {
                             }
                             @Override
                             public void onCancelled(DatabaseError databaseError) {
-                                // 쿼리 수행 중 오류 발생 시의 처리
                             }
                         });
                         break;
