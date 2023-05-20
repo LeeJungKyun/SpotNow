@@ -22,8 +22,10 @@ import com.example.spotnow.ActivityInfo;
 import com.example.spotnow.R;
 import com.example.spotnow.SpotInfo;
 import com.example.spotnow.activity_listview_info;
+import com.example.spotnow.common.Coordinate;
 import com.example.spotnow.common.FirebaseManager;
 import com.example.spotnow.common.MarkerInfo;
+import com.example.spotnow.common.Utility;
 import com.example.spotnow.ownerActivity;
 import com.example.spotnow.spot_listview_info;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -75,6 +77,10 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.home_fragment, container, false);
 
+        // 주소 문자열로 가져오는 방법
+        String result = Utility.GetAddressFromGPS(getContext(),Utility.GetGPS(getContext()));
+
+        Toast.makeText(getContext(), result,Toast.LENGTH_SHORT).show();
         //로그인 안하고 디버깅할때 해야함
         FirebaseManager.init();
 
@@ -224,8 +230,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                         MarkerInfo marker = new MarkerInfo((String) entry.getKey());
 
                         Map<String, Object> value = (Map<String, Object>) entry.getValue();
-                        marker.latitude = (double) value.get("latitude");
-                        marker.longitude = (double) value.get("longitude");
+                        marker.location = new Coordinate((double) value.get("latitude"),(double) value.get("longitude"));
                         marker.spotID = (long) value.get("spotID");
 
                         setMark(marker);
@@ -238,7 +243,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
     public void setMark(MarkerInfo m) {
         Marker marker = new Marker();
-        marker.setPosition(new LatLng(m.latitude, m.longitude));
+        marker.setPosition(new LatLng(m.location._latitude, m.location._longitude));
         marker.setIcon(MarkerIcons.RED);
         marker.setWidth(50);
         marker.setHeight(60);

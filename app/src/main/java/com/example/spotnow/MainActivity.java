@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 if (dataSnapshot.exists()) {
                                     // 데이터가 존재할 때의 액티비티 시작
-                                    selectedFragment = new ownerFragment();
+                                    //selectedFragment = new ownerActivity();
                                 } else {
                                     // 데이터가 존재하지 않는 경우
                                     selectedFragment = new participantFragment();

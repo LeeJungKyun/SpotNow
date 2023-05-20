@@ -1,8 +1,7 @@
 package com.example.spotnow.common;
 
 public class MarkerInfo {
-    public double latitude;
-    public double longitude;
+    public Coordinate location;
     public String spotName;
     public String address;
     public long spotID;
@@ -14,3 +13,4 @@ public class MarkerInfo {
     }
 
 }
+
