@@ -11,6 +11,7 @@ import android.location.LocationManager;
 import androidx.core.app.ActivityCompat;
 
 import java.io.IOException;
+import java.util.Locale;
 
 public abstract class Utility {
     public static Coordinate GetGPS(Context context) {
@@ -26,7 +27,7 @@ public abstract class Utility {
     }
 
     public static String GetAddressFromGPS(Context context, Coordinate loc){
-        Geocoder geocoder = new Geocoder(context);
+        Geocoder geocoder = new Geocoder(context, Locale.KOREA);
         String result = "";
         try{
             result = geocoder.getFromLocation(loc._latitude,loc._longitude,1).get(0).getAddressLine(0);
