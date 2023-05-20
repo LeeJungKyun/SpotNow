@@ -1,5 +1,7 @@
 package com.example.spotnow;
 
+import java.net.URL;
+
 public class ActivityInfo {
     public String imageUrl;
     public String title;

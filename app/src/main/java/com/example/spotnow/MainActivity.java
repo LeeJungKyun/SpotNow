@@ -79,18 +79,18 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> path = new ArrayList<>();
         path.add(uid);
         path.add("name");
-        FirebaseManager.GetReferencePath("users", path).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if (!task.isSuccessful()) {
-                    Log.e("firebase", "Error getting data", task.getException());
-                } else {
-                    Log.d("firebase", String.valueOf(task.getResult().getValue()));
-                    activityOwner = String.valueOf(task.getResult().getValue());
-                }
-            }
-        });
-        Query query = mDatabase.orderByChild("activityOwner").equalTo(activityOwner);
+//        FirebaseManager.GetReferencePath("users", path).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<DataSnapshot> task) {
+//                if (!task.isSuccessful()) {
+//                    Log.e("firebase", "Error getting data", task.getException());
+//                } else {
+//                    Log.d("firebase", String.valueOf(task.getResult().getValue()));
+//                    activityOwner = String.valueOf(task.getResult().getValue());
+//                }
+//            }
+//        });
+//        Query query = mDatabase.orderByChild("activityOwner").equalTo(activityOwner);
 
         navigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -100,21 +100,24 @@ public class MainActivity extends AppCompatActivity {
                         selectedFragment = new HomeFragment();
                         break;
                     case R.id.my_activity:
-                        query.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                if (dataSnapshot.exists()) {
-                                    // 데이터가 존재할 때의 액티비티 시작
-                                    //selectedFragment = new ownerActivity();
-                                } else {
-                                    // 데이터가 존재하지 않는 경우
-                                    selectedFragment = new participantFragment();
-                                }
-                            }
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-                            }
-                        });
+
+
+//                        query.addValueEventListener(new ValueEventListener() {
+//                            @Override
+//                            public void onDataChange(DataSnapshot dataSnapshot) {
+//                                if (dataSnapshot.exists()) {
+//                                    // 데이터가 존재할 때의 액티비티 시작
+//                                    //selectedFragment = new ownerFragment();
+//                                } else {
+//                                    // 데이터가 존재하지 않는 경우
+//                                    selectedFragment = new participantFragment();
+//                                }
+//                            }
+//                            @Override
+//                            public void onCancelled(DatabaseError databaseError) {
+//                            }
+//                        });
+
                         break;
                     case R.id.profile:
                         selectedFragment = new my_ProfileFragment();

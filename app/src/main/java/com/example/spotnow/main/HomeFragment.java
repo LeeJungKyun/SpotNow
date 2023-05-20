@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -69,6 +68,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
     public long clickedSpotID;
     private DatabaseReference mDatabase;
+
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -81,6 +81,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         String result = Utility.GetAddressFromGPS(getContext(),Utility.GetGPS(getContext()));
 
         Toast.makeText(getContext(), result,Toast.LENGTH_SHORT).show();
+
         //로그인 안하고 디버깅할때 해야함
         FirebaseManager.init();
 
@@ -164,7 +165,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                     ActivityInfo activityInfo = snapshot.getValue(ActivityInfo.class);
                     if(activityInfo.getSpotID()==(spotID))
                     {
-                        activityDataList.add(new activity_listview_info(R.drawable.circle, activityInfo.getTitle(),activityInfo.getContent()));
+                        activityDataList.add(new activity_listview_info(activityInfo.getImageUrl(), activityInfo.getTitle(),activityInfo.getContent()));
                     }
 
                 }
@@ -269,6 +270,9 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView parent, View v, int position, long id) {
+
+                        //여기 부분에 액티비티 리스트 아이템 클릭했을 때 그 액티비티 창 뜨도록 해야함
+
                         Toast.makeText(getActivity(),
                                 myAdapter.getItem(position).getActivityTitle(),
                                 Toast.LENGTH_LONG).show();

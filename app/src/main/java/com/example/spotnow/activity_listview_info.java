@@ -1,21 +1,21 @@
 package com.example.spotnow;
 
 public class activity_listview_info {
-    private int activityImage;
+    private String activityImage;
     private String activityTitle;
     private String activityContent;
 
-    public activity_listview_info(int activityImage, String activityTitle, String activityAddress) {
+    public activity_listview_info(String activityImage, String activityTitle, String activityAddress) {
         this.activityImage = activityImage;
         this.activityTitle = activityTitle;
         this.activityContent = activityAddress;
     }
 
-    public int getActivityImage() {
+    public String getActivityImage() {
         return activityImage;
     }
 
-    public void setActivityImage(int activityImage) {
+    public void setActivityImage(String activityImage) {
         this.activityImage = activityImage;
     }
 
