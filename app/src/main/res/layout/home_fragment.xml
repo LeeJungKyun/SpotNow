@@ -88,7 +88,7 @@
                 android:layout_marginBottom="20dp"
                 android:text="현위치"
                 android:textStyle="bold"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

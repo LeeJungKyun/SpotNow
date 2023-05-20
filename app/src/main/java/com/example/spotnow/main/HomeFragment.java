@@ -79,10 +79,10 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
         // 주소 문자열로 가져오는 방법
         String result = Utility.GetAddressFromGPS(getContext(),Utility.GetGPS(getContext()));
+        TextView activity_address = rootView.findViewById(R.id.location_textview);
+        activity_address.setText(result);
 
-        Toast.makeText(getContext(), result,Toast.LENGTH_SHORT).show();
-
-        //로그인 안하고 디버깅할때 해야함
+        //로그인 안하고 디버깅할때 해야함소
         FirebaseManager.init();
 
         FragmentManager fm = getFragmentManager();
@@ -103,7 +103,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                 // 버튼 클릭 이벤트 처리
                 v = HomeFragment.this.getView();
                 TextView activity_address = v.findViewById(R.id.location_textview);
-                activity_address.setText("현위치");    //현재위치를 주소로 어떻게 가져오징..?
+                activity_address.setText(result);
                 naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
 
             }
