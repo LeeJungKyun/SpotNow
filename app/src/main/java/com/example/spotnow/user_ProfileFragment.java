@@ -31,6 +31,7 @@ public class user_ProfileFragment extends Fragment {
     UserInfo userInfo;
     String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
+    Button follow_button;
     private boolean isFollowing = false;
 
     public user_ProfileFragment() {
@@ -41,7 +42,7 @@ public class user_ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.profile, container, false);
-        Button follow_button = rootView.findViewById(R.id.follow_button);
+        follow_button = rootView.findViewById(R.id.follow_button);
 
         checkFollowStatus();
 
@@ -104,9 +105,9 @@ public class user_ProfileFragment extends Fragment {
 
     private void updateButton() {
         if (isFollowing) {
-//            follow_button.setText("언팔로우");
+            follow_button.setText("언팔로우");
         } else {
-//            follow_button.setText("팔로우");
+            follow_button.setText("팔로우");
         }
     }
 }
