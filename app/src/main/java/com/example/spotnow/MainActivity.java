@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
                                     selectedFragment = new ownerFragment();
                                 } else {
                                     // 찾는 값이 ArrayList 안에 없을 때
-                                    selectedFragment = new participantFragment();
+                                    //selectedFragment = new participantFragment();
                                 }
                             }
                             @Override

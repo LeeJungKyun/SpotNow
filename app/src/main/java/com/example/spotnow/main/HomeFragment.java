@@ -26,6 +26,7 @@ import com.example.spotnow.common.FirebaseManager;
 import com.example.spotnow.common.MarkerInfo;
 import com.example.spotnow.common.Utility;
 import com.example.spotnow.ownerActivity;
+import com.example.spotnow.participantFragment;
 import com.example.spotnow.spot_listview_info;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -269,15 +270,18 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                 listView.setAdapter(myAdapter);
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
-                    public void onItemClick(AdapterView parent, View v, int position, long id) {
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        // 클릭한 액티비티 정보 가져오기
+                        activity_listview_info selectedItem = myAdapter.getItem(position);
 
-                        //여기 부분에 액티비티 리스트 아이템 클릭했을 때 그 액티비티 창 뜨도록 해야함
-
-                        Toast.makeText(getActivity(),
-                                myAdapter.getItem(position).getActivityTitle(),
-                                Toast.LENGTH_LONG).show();
+                        // ParticipantActivity로 이동하는 인텐트 생성
+                        Intent intent = new Intent(getActivity(), participantFragment.class);
+                        intent.putExtra("activityTitle", selectedItem.getActivityTitle());
+                        intent.putExtra("activityContent", selectedItem.getActivityContent());
+                        startActivity(intent);
                     }
                 });
+
 
 
 

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".participantActivity">
+    tools:context=".participantFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,11 +22,11 @@
             android:id="@+id/title"
             android:layout_width="300dp"
             android:hint="제목 들어갈 거임"
-            android:layout_height="25dp"
+            android:layout_height="35dp"
             android:background="@drawable/box_background"
             android:layout_marginLeft="0dp"
             android:layout_marginTop="10dp"
-            android:textSize="12sp" />
+            android:textSize="20sp" />
     </LinearLayout>
 
     <!-- Activity 사진 -->
@@ -40,8 +40,9 @@
         android:layout_marginTop="8dp"
         android:src="@drawable/example"
         android:background="@drawable/box_background"
-        android:scaleType="centerCrop"
+        android:scaleType="fitCenter"
         android:gravity="center" />
+
 
 
 
