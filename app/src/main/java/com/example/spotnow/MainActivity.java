@@ -56,42 +56,43 @@ public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener;
 
-    private DatabaseReference mDatabase;
+    private DatabaseReference mDatabaseA;
+    private DatabaseReference mDatabaseU;
     private StorageReference mStorage;
     private FirebaseAuth mAuth;
-    private String activityOwner;
-
+    private String name;
+    private ArrayList<String> activityOwners;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mStorage = FirebaseStorage.getInstance().getReference();
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("activities");
-
+        activityOwners = new ArrayList<>();
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser(); // 현재 로그인 한 유저 정보 반환
 
         final String uid = currentUser.getUid(); // 유저의 uid 저장
 
-        ArrayList<String> path = new ArrayList<>();
-        path.add(uid);
-        path.add("name");
-//        FirebaseManager.GetReferencePath("users", path).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<DataSnapshot> task) {
-//                if (!task.isSuccessful()) {
-//                    Log.e("firebase", "Error getting data", task.getException());
-//                } else {
-//                    Log.d("firebase", String.valueOf(task.getResult().getValue()));
-//                    activityOwner = String.valueOf(task.getResult().getValue());
-//                }
-//            }
-//        });
-//        Query query = mDatabase.orderByChild("activityOwner").equalTo(activityOwner);
+        mStorage = FirebaseStorage.getInstance().getReference();
+        mDatabaseA = FirebaseDatabase.getInstance().getReference().child("activities");
+        mDatabaseU = FirebaseDatabase.getInstance().getReference().child("users");
 
+        mDatabaseU.child(uid).child("name").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    String n = dataSnapshot.getValue(String.class);
+                    name = n;
+                    Log.d("NNNNN", "name = " + name);
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e("firebase", "Error getting data");
+            }
+        });
         navigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -100,24 +101,28 @@ public class MainActivity extends AppCompatActivity {
                         selectedFragment = new HomeFragment();
                         break;
                     case R.id.my_activity:
+                        mDatabaseA.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                    String activityOwner = snapshot.child("activityOwner").getValue(String.class);
+                                    activityOwners.add(activityOwner);
+                                }
+                                boolean isValueFound = activityOwners.contains(name);
 
-
-//                        query.addValueEventListener(new ValueEventListener() {
-//                            @Override
-//                            public void onDataChange(DataSnapshot dataSnapshot) {
-//                                if (dataSnapshot.exists()) {
-//                                    // 데이터가 존재할 때의 액티비티 시작
-//                                    //selectedFragment = new ownerFragment();
-//                                } else {
-//                                    // 데이터가 존재하지 않는 경우
-//                                    selectedFragment = new participantFragment();
-//                                }
-//                            }
-//                            @Override
-//                            public void onCancelled(DatabaseError databaseError) {
-//                            }
-//                        });
-
+                                if (isValueFound) {
+                                    // 찾는 값이 ArrayList 안에 있을 때
+                                    selectedFragment = new ownerFragment();
+                                } else {
+                                    // 찾는 값이 ArrayList 안에 없을 때
+                                    selectedFragment = new participantFragment();
+                                }
+                            }
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                                Log.e("firebase", "Error retrieving activity owners");
+                            }
+                        });
                         break;
                     case R.id.profile:
                         selectedFragment = new my_ProfileFragment();
