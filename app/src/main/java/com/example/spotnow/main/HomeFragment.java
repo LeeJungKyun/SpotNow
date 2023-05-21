@@ -13,9 +13,14 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout.PanelSlideListener;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout.PanelState;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.slidingpanelayout.widget.SlidingPaneLayout;
 
 import com.example.spotnow.ActivityInfo;
 import com.example.spotnow.R;
@@ -66,6 +71,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     ArrayList<activitySampleData> sampleDataList;
     ArrayList<activity_listview_info> activityDataList;
     activity_listview_adapter myAdapter;
+//    private SlidingPaneLayout slidingUp;
+    private SlidingUpPanelLayout slidingUp;
 
     public long clickedSpotID;
     private DatabaseReference mDatabase;
@@ -126,7 +133,9 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
             }
         });
 
-//        this.InitializeActivityData();
+
+        slidingUp=rootView.findViewById(R.id.main_panel);
+        slidingUp.setPanelState(PanelState.COLLAPSED);
 
 
         //모달창에서 플러스 버튼 눌러서 액티비티 생성하기
@@ -143,16 +152,11 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         });
 
 
+
         return rootView;
     }
 
-//    public void InitializeActivityData() {
-//        sampleDataList = new ArrayList<activitySampleData>();
-//        sampleDataList.add(new activitySampleData(R.drawable.circle, "소웨랑 농구 뜰 사람 구함1", "가천대 운동장으로 집합"));
-//        sampleDataList.add(new activitySampleData(R.drawable.circle, "소웨랑 농구 뜰 사람 구함2", "가천대 운동장으로 집합"));
-//        sampleDataList.add(new activitySampleData(R.drawable.circle, "소웨랑 농구 뜰 사람 구함3", "가천대 운동장으로 집합"));
-//
-//    }
+
 
     public void getActivityList(long spotID){
         mDatabase = FirebaseDatabase.getInstance().getReference("activities");
@@ -243,6 +247,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
     }
 
+
+
     public void setMark(MarkerInfo m) {
         Marker marker = new Marker();
         marker.setPosition(new LatLng(m.location._latitude, m.location._longitude));
@@ -282,7 +288,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                     }
                 });
 
-
+                slidingUp=v.findViewById(R.id.main_panel);
+                slidingUp.setPanelState(PanelState.EXPANDED);
 
 
                 Toast.makeText(getContext(), m.spotName + " Marker click!" + "spotID:" + clickedSpotID, Toast.LENGTH_SHORT).show();
