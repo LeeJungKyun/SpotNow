@@ -5,10 +5,13 @@ public class activity_listview_info {
     private String activityTitle;
     private String activityContent;
 
-    public activity_listview_info(String activityImage, String activityTitle, String activityAddress) {
+    private String activityOwner;
+
+    public activity_listview_info(String activityImage, String activityTitle, String activityAddress, String activityOwner) {
         this.activityImage = activityImage;
         this.activityTitle = activityTitle;
         this.activityContent = activityAddress;
+        this.activityOwner = activityOwner;
     }
 
     public String getActivityImage() {
@@ -33,5 +36,12 @@ public class activity_listview_info {
 
     public void setActivityContent(String activityContent) {
         this.activityContent = activityContent;
+    }
+    public String getActivityOwner() {
+        return activityOwner;
+    }
+
+    public void setActivityOwner(String activityOwner) {
+        this.activityOwner = activityOwner;
     }
 }

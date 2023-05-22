@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.spotnow.MainActivity;
 import com.example.spotnow.SearchActivity;
+import com.example.spotnow.ownerActivitymodify;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout.PanelSlideListener;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout.PanelState;
@@ -26,6 +27,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.slidingpanelayout.widget.SlidingPaneLayout;
 
 import com.example.spotnow.ActivityInfo;
+import com.example.spotnow.user_listview_info;
 import com.example.spotnow.R;
 import com.example.spotnow.SpotInfo;
 import com.example.spotnow.activity_listview_info;
@@ -43,6 +45,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.LocationTrackingMode;
 import com.naver.maps.map.MapFragment;
@@ -83,11 +88,31 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     public HomeFragment() {
         // Required empty public constructor
     }
-
+    private FirebaseAuth mAuth;
+    private String currentUserId = null;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.home_fragment, container, false);
 
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        ArrayList<String> path = new ArrayList<>();
+        path.add(currentUser.getUid());
+        path.add("name");
+
+        FirebaseManager.GetReferencePath("users", path).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                } else {
+                    Log.d("firebase", String.valueOf(task.getResult().getValue()));
+                    currentUserId = String.valueOf(task.getResult().getValue());
+
+                }
+            }
+        });
         // 주소 문자열로 가져오는 방법
         String result = Utility.GetAddressFromGPS(getContext(),Utility.GetGPS(getContext()));
         TextView activity_address = rootView.findViewById(R.id.location_textview);
@@ -186,7 +211,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                     ActivityInfo activityInfo = snapshot.getValue(ActivityInfo.class);
                     if(activityInfo.getSpotID()==(spotID))
                     {
-                        activityDataList.add(new activity_listview_info(activityInfo.getImageUrl(), activityInfo.getTitle(),activityInfo.getContent()));
+                        activityDataList.add(new activity_listview_info(activityInfo.getImageUrl(), activityInfo.getTitle(),activityInfo.getContent() ,activityInfo.getActivityOwner() ));
                     }
 
                 }
@@ -277,14 +302,15 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
             @Override
             public boolean onClick(@NonNull Overlay overlay) {
 
-                //마커 클릭시 모달창 위치 텍스트를 스팟이름으로 바꿔줌
+                // 마커 클릭시 모달창 위치 텍스트를 스팟이름으로 바꿔줌
                 View v = HomeFragment.this.getView();
                 TextView activity_address = v.findViewById(R.id.location_textview);
                 activity_address.setText(m.spotName);
                 clickedSpotID = m.spotID;
 
                 getActivityList(clickedSpotID);
-                //리스트뷰 또한 클릭된 스팟에 존재하는 액티비티로 띄워야함..
+
+                // 리스트뷰 또한 클릭된 스팟에 존재하는 액티비티로 띄워야함
                 ListView listView = (ListView) v.findViewById(R.id.activity_listview);
 
                 myAdapter = new activity_listview_adapter(getActivity(), activityDataList);
@@ -296,25 +322,31 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                         // 클릭한 액티비티 정보 가져오기
                         activity_listview_info selectedItem = myAdapter.getItem(position);
 
-                        // ParticipantActivity로 이동하는 인텐트 생성
-                        Intent intent = new Intent(getActivity(), participantFragment.class);
+                        String activityOwnerId = selectedItem.getActivityOwner();
+                        Class<?> activityClass = ownerActivitymodify.class;
+
+                        if (!currentUserId.equals(activityOwnerId)) {
+                            activityClass = participantFragment.class;
+                        }
+
+                        // Use the selected activityClass in the intent
+                        Intent intent = new Intent(getActivity(), activityClass);
                         intent.putExtra("activityTitle", selectedItem.getActivityTitle());
                         intent.putExtra("activityContent", selectedItem.getActivityContent());
                         startActivity(intent);
                     }
                 });
 
-                slidingUp=v.findViewById(R.id.main_panel);
+                slidingUp = v.findViewById(R.id.main_panel);
                 slidingUp.setPanelState(PanelState.EXPANDED);
 
-
                 Toast.makeText(getContext(), m.spotName + " Marker click!" + "spotID:" + clickedSpotID, Toast.LENGTH_SHORT).show();
-
 
                 return true;
             }
         });
     }
+
 
     @Override
     public void onDestroyView() {
