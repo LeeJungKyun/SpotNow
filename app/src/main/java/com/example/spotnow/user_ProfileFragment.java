@@ -32,6 +32,8 @@ public class user_ProfileFragment extends Fragment {
     String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
     Button follow_button;
+    String selected_name;
+    TextView user_name;
     private boolean isFollowing = false;
 
     public user_ProfileFragment() {
@@ -42,7 +44,21 @@ public class user_ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.profile, container, false);
-        follow_button = rootView.findViewById(R.id.follow_button);
+
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser(); // 현재 로그인 한 유저 정보 반환
+        final String uid = currentUser.getUid(); // 유저의 uid 저장
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        user_name = rootView.findViewById(R.id.profile_name);
+
+        if (getArguments() != null)
+        {
+            selected_name = getArguments().getString("selected_name"); // 번들에서 이름 가져오기
+            user_name.setText(selected_name); // 번들 데이터 잘 가져오는지 테스트
+        }
+
+        /*follow_button = rootView.findViewById(R.id.follow_button);
 
         checkFollowStatus();
 
@@ -55,7 +71,7 @@ public class user_ProfileFragment extends Fragment {
                     follow();
                 }
             }
-        });
+        });*/
 
         // Inflate the layout for this fragment
         return rootView;

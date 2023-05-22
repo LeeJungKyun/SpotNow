@@ -13,6 +13,9 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.spotnow.MainActivity;
+import com.example.spotnow.SearchActivity;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout.PanelSlideListener;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout.PanelState;
@@ -119,7 +122,16 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
 
         searchbar = rootView.findViewById(R.id.search_bar);
-        searchbar.setOnKeyListener(new View.OnKeyListener() {
+
+        searchbar.setOnClickListener(new View.OnClickListener() { // 검색 액티비티로 이동
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), SearchActivity.class);
+                getActivity().startActivityForResult(intent,1004);
+            }
+        });
+
+        /*searchbar.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
                 //검색창에서 엔터키 눌렀을 때 이벤트 처리
@@ -131,7 +143,10 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                 }
                 return false;
             }
-        });
+        });*/
+
+
+
 
 
         slidingUp=rootView.findViewById(R.id.main_panel);
@@ -155,6 +170,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
         return rootView;
     }
+
 
 
 
@@ -314,4 +330,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                 getFragmentManager().beginTransaction().remove(fragment).commit();
         }
     }
+
+
+
+
 }

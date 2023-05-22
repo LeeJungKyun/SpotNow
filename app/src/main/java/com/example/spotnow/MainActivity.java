@@ -27,6 +27,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -143,5 +144,25 @@ public class MainActivity extends AppCompatActivity {
         selectedFragment = new HomeFragment(); // 초기 화면을 Fragment1로 설정
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, selectedFragment).commit();
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode==1004) {
+            if (resultCode == RESULT_OK) {
+                Bundle bundle = new Bundle();
+                bundle.putString("selected_name",data.getStringExtra("selected_user_name")); // 선택된 유저 정보 번들에 담기
+
+                selectedFragment = new user_ProfileFragment();
+                selectedFragment.setArguments(bundle); // 프래그먼트 이동간 번들 담기
+
+                getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, selectedFragment).commit(); // 유저 정보 프래그먼트로 갈아끼우기
+
+            } else {
+                Toast.makeText(MainActivity.this, "result cancle!", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }

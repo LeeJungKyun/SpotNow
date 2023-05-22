@@ -1,5 +1,6 @@
 package com.example.spotnow;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -59,9 +60,10 @@ public class SearchActivity extends AppCompatActivity
                     listView2.setOnItemClickListener(new AdapterView.OnItemClickListener(){
                         @Override
                         public void onItemClick(AdapterView parent, View v, int position, long id){
-                            Toast.makeText(getApplicationContext(),
-                                    myAdapter2.getItem(position).getName(),
-                                    Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            intent.putExtra("selected_spot_name",myAdapter2.getItem(position).getName());
+                            startActivity(intent);
+                            finish();
                         }
                     });
 
@@ -73,9 +75,10 @@ public class SearchActivity extends AppCompatActivity
                     listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
                         @Override
                         public void onItemClick(AdapterView parent, View v, int position, long id){
-                            Toast.makeText(getApplicationContext(),
-                                    myAdapter.getItem(position).getName(),
-                                    Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            intent.putExtra("selected_user_name",myAdapter.getItem(position).getName());
+                            setResult(RESULT_OK,intent);
+                            finish();
                         }
                     });
 
