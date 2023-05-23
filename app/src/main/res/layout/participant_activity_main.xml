@@ -11,55 +11,75 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <ImageView
-            android:layout_width="61dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:adjustViewBounds="true"
-            android:src="@drawable/person" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="3dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="0dp"
+                android:adjustViewBounds="true"
+
+                android:src="@drawable/person_icon" />
+
+            <TextView
+                android:id="@+id/ownerName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="주인장" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/title"
             android:layout_width="300dp"
-            android:hint="제목 들어갈 거임"
             android:layout_height="35dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/box_background"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="10dp"
+            android:hint="제목 들어갈 거임"
             android:textSize="20sp" />
     </LinearLayout>
 
     <!-- Activity 사진 -->
     <ImageView
         android:id="@+id/place_holder_image"
-        android:layout_width="370dp"
+        android:layout_width="360dp"
         android:layout_height="200dp"
+        android:layout_gravity="center"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:layout_marginTop="8dp"
-        android:src="@drawable/example"
+        android:layout_marginRight="10dp"
         android:background="@drawable/box_background"
-        android:scaleType="fitCenter"
-        android:gravity="center" />
+        android:gravity="center"
+        android:scaleType="fitXY"
+        android:src="@drawable/example" />
 
     <TextView
         android:id="@+id/bottom_text_view"
-        android:layout_width="370dp"
+        android:layout_width="360dp"
         android:layout_height="200dp"
+        android:layout_gravity="center"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:hint="Activity 내용 들어갈 거임"
         android:layout_marginTop="8dp"
+        android:layout_marginRight="10dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/box_background"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:hint="Activity 내용 들어갈 거임" />
 
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="end">
+        android:layout_gravity="right"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/writeParticipateInfo"
@@ -71,14 +91,14 @@
             android:textColor="@android:color/white" />
 
         <Button
-            android:id = "@+id/writeReport"
+            android:id="@+id/writeReport"
             android:layout_width="78dp"
             android:layout_height="30dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/button_style_2"
+            android:onClick="callReport"
             android:text="신고"
-            android:textColor="@android:color/white"
-            android:onClick = "callReport" />
+            android:textColor="@android:color/white" />
     </LinearLayout>
 
 
@@ -91,34 +111,38 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <View
-                android:id = "@+id/divider"
-                android:layout_width="400dp"
+                android:id="@+id/divider"
+                android:layout_width="360dp"
                 android:layout_height="1dp"
+                android:layout_centerHorizontal="true"
                 android:layout_marginTop="8dp"
                 android:background="@android:color/darker_gray" />
 
             <TextView
-                android:id = "@+id/commentShow"
+                android:id="@+id/commentShow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:text="댓글"
-                android:textSize="18sp"
                 android:layout_below="@id/divider"
-                android:layout_marginTop="5dp" />
+                android:layout_gravity="start"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="5dp"
+                android:text="댓글"
+                android:textSize="18sp" />
         </RelativeLayout>
     </ScrollView>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation = "horizontal">
+        android:orientation="horizontal">
 
         <EditText
-            android:id = "@+id/comment"
+            android:id="@+id/comment"
             android:layout_width="330dp"
             android:layout_height="match_parent"
-            android:hint = "댓글 작성" />
+            android:hint="댓글 작성" />
 
         <Button
             android:id="@+id/writeComment"
