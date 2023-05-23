@@ -209,7 +209,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                     ActivityInfo activityInfo = snapshot.getValue(ActivityInfo.class);
                     if(activityInfo.getSpotID()==(spotID))
                     {
-                        activityDataList.add(new activity_listview_info(activityInfo.getImageUrl(), activityInfo.getTitle(),activityInfo.getContent() ,activityInfo.getActivityOwner() ));
+                        activityDataList.add(new activity_listview_info(activityInfo.getImageUrl(), activityInfo.getTitle(),activityInfo.getContent() ,activityInfo.getActivityOwner(),activityInfo.getSport(),activityInfo.getPeopleCnt(),activityInfo.getStartTime(),activityInfo.getEndTime() ));
                     }
                 }
                 myAdapter.notifyDataSetChanged();
@@ -324,6 +324,12 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                         Intent intent = new Intent(getActivity(), activityClass);
                         intent.putExtra("activityTitle", selectedItem.getActivityTitle());
                         intent.putExtra("activityContent", selectedItem.getActivityContent());
+                        intent.putExtra("activityOwner",selectedItem.getActivityOwner());
+                        intent.putExtra("activitySport",selectedItem.getActivitySport());
+                        intent.putExtra("activityPeopleCnt",selectedItem.getPeopleCnt());
+                        intent.putExtra("activityStartTime",selectedItem.getStartTime());
+                        intent.putExtra("activityEndTime",selectedItem.getEndTime());
+
                         startActivity(intent);
                     }
                 });

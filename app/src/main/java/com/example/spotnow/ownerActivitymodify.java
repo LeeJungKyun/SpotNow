@@ -30,7 +30,7 @@ public class ownerActivitymodify extends AppCompatActivity {
     private ImageView activityImageView;
     private TextView titleTextView;
     private TextView contentTextView;
-
+    private TextView ownerName;
     private DatabaseReference mDatabase;
 
     @Override
@@ -43,15 +43,22 @@ public class ownerActivitymodify extends AppCompatActivity {
         activityImageView = findViewById(R.id.place_holder_image);
         titleTextView = findViewById(R.id.title);
         contentTextView = findViewById(R.id.bottom_text_view);
+        ownerName = findViewById(R.id.ownerName);
 
         // 인텐트에서 데이터 받아오기
         Intent intent = getIntent();
         if (intent != null) {
             String activityTitle = intent.getStringExtra("activityTitle");
             String activityContent = intent.getStringExtra("activityContent");
+            String activityOwner = intent.getStringExtra("activityOwner");
+            String activitySport = intent.getStringExtra("activitySport");
+            String activityPeopleCnt = intent.getStringExtra("activityPeopleCnt");
+            String activityStartTime = intent.getStringExtra("activityStartTime");
+            String activityEndTime = intent.getStringExtra("activityEndTime");
 
+            ownerName.setText(activityOwner);
             titleTextView.setText(activityTitle);
-            contentTextView.setText(activityContent);
+            contentTextView.setText("종목: "+activitySport+"\n"+"내용: "+activityContent+"\n"+"시작시간: "+activityStartTime+"\n"+"종료시간: "+activityEndTime+"\n"+"인원: "+activityPeopleCnt);
 
             // Firebase에서 데이터 가져오기
             mDatabase = FirebaseDatabase.getInstance().getReference("activities");
@@ -74,6 +81,7 @@ public class ownerActivitymodify extends AppCompatActivity {
                         }
                     }
                 }
+
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
                     // 실패했으
@@ -97,6 +105,7 @@ public class ownerActivitymodify extends AppCompatActivity {
         });
 
     }
+
     private void showParticipantDialog() {
         participantDialog = new Dialog(this);
         participantDialog.setContentView(R.layout.participant_dialog);

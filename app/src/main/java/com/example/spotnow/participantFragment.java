@@ -32,6 +32,7 @@ public class participantFragment extends AppCompatActivity {
     private Button writeReportButton;
     private Button writeCommentButton;
     private ImageView activityImageView;
+    private TextView ownerName;
     private TextView titleTextView;
     private TextView contentTextView;
     private DatabaseReference mDatabase;
@@ -51,6 +52,7 @@ public class participantFragment extends AppCompatActivity {
         activityImageView = findViewById(R.id.place_holder_image);
         titleTextView = findViewById(R.id.title);
         contentTextView = findViewById(R.id.bottom_text_view);
+        ownerName = findViewById(R.id.ownerName);
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -63,9 +65,16 @@ public class participantFragment extends AppCompatActivity {
         if (intent != null) {
             String activityTitle = intent.getStringExtra("activityTitle");
             String activityContent = intent.getStringExtra("activityContent");
+            String activityOwner = intent.getStringExtra("activityOwner");
+            String activitySport = intent.getStringExtra("activitySport");
+            String activityPeopleCnt = intent.getStringExtra("activityPeopleCnt");
+            String activityStartTime = intent.getStringExtra("activityStartTime");
+            String activityEndTime = intent.getStringExtra("activityEndTime");
 
+            ownerName.setText(activityOwner);
             titleTextView.setText(activityTitle);
-            contentTextView.setText(activityContent);
+            contentTextView.setText("종목: "+activitySport+"\n"+"내용: "+activityContent+"\n"+"시작시간: "+activityStartTime+"\n"+"종료시간: "+activityEndTime+"\n"+"인원: "+activityPeopleCnt);
+
 
             // Firebase에서 데이터 가져오기
             mDatabase = FirebaseDatabase.getInstance().getReference("activities");
