@@ -60,7 +60,7 @@ public class SearchActivity extends AppCompatActivity
                     listView2.setOnItemClickListener(new AdapterView.OnItemClickListener(){
                         @Override
                         public void onItemClick(AdapterView parent, View v, int position, long id){
-                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            Intent intent = new Intent();
                             intent.putExtra("selected_spot_name",myAdapter2.getItem(position).getName());
                             startActivity(intent);
                             finish();

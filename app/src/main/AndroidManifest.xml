@@ -28,18 +28,21 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
 
         <activity android:name=".ProfileEditActivity"></activity>
         <activity android:name=".ownerActivity"></activity>
         <activity android:name=".participantFragment"></activity>
-        <activity android:name=".SearchActivity"></activity>
+        <activity android:name=".SearchActivity"
+            android:exported="true">
+
+        </activity>
 
         <meta-data android:name="com.naver.maps.map.CLIENT_ID" android:value="7z4yarok73" />
 

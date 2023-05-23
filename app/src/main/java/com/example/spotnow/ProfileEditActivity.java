@@ -29,7 +29,6 @@ public class ProfileEditActivity extends AppCompatActivity {
 
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
     private DatabaseReference mDatabase;
-    private FirebaseAuth firebaseAuth;
     private FirebaseAuth mAuth;
     Button submit_button;
 
@@ -45,8 +44,8 @@ public class ProfileEditActivity extends AppCompatActivity {
         setContentView(R.layout.profile_edit);
 
         //파이어베이스에서 정보 가져오기
-        firebaseAuth = FirebaseAuth.getInstance();
-        String currentUid = mAuth.getCurrentUser().getUid();
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        String currentUid = firebaseAuth.getCurrentUser().getUid();
         mDatabase = FirebaseDatabase.getInstance().getReference("users").child(currentUid);
 
         editTextPassword = (EditText) findViewById(R.id.profile_edit_pw);

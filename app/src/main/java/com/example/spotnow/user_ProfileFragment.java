@@ -24,6 +24,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 
 public class user_ProfileFragment extends Fragment {
     private FirebaseAuth mAuth;
@@ -34,6 +36,13 @@ public class user_ProfileFragment extends Fragment {
     Button follow_button;
     String selected_name;
     TextView user_name;
+    TextView introduce;
+    ProgressBar progressBar;
+    TextView like_sport;
+    TextView region;
+    TextView following;
+    TextView follower;
+
     private boolean isFollowing = false;
 
     public user_ProfileFragment() {
@@ -48,15 +57,45 @@ public class user_ProfileFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser(); // 현재 로그인 한 유저 정보 반환
         final String uid = currentUser.getUid(); // 유저의 uid 저장
-        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         user_name = rootView.findViewById(R.id.profile_name);
+        introduce = rootView.findViewById(R.id.profile_introduce);
+        progressBar = rootView.findViewById(R.id.progressBar);
+        like_sport = rootView.findViewById(R.id.profile_like_sport);
+        region = rootView.findViewById(R.id.profile_region);
+        following = rootView.findViewById(R.id.following_num);
+        follower = rootView.findViewById(R.id.follow_num);
 
         if (getArguments() != null)
         {
             selected_name = getArguments().getString("selected_name"); // 번들에서 이름 가져오기
-            user_name.setText(selected_name); // 번들 데이터 잘 가져오는지 테스트
         }
+
+        mDatabase = FirebaseDatabase.getInstance().getReference("users");
+
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot : dataSnapshot.getChildren())
+                {
+                    UserInfo userinfo = snapshot.getValue(UserInfo.class);
+                    if(userinfo.getName().equals(selected_name))
+                    {
+                        user_name.setText(userInfo.getName());
+                        introduce.setText(userInfo.getIntroduce_self());
+                        like_sport.setText(userInfo.getSport());
+                        region.setText(userInfo.getRegion());
+                        progressBar.setProgress(100-userInfo.getReport_cnt());
+                        following.setText(Integer.toString(userInfo.getFollowing_num()));
+                        follower.setText(Integer.toString(userInfo.getFollower_num()));
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         /*follow_button = rootView.findViewById(R.id.follow_button);
 
