@@ -84,4 +84,49 @@
             android:textColor="@android:color/white"
             android:onClick = "callReport" />
     </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <View
+                android:id = "@+id/divider"
+                android:layout_width="400dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:background="@android:color/darker_gray" />
+
+            <TextView
+                android:id = "@+id/commentShow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:text="댓글"
+                android:textSize="18sp"
+                android:layout_below="@id/divider"
+                android:layout_marginTop="5dp" />
+        </RelativeLayout>
+    </ScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation = "horizontal">
+
+        <EditText
+            android:id = "@+id/comment"
+            android:layout_width="330dp"
+            android:layout_height="match_parent"
+            android:hint = "댓글 작성" />
+
+        <Button
+            android:id = "@+id/writeComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text = "입력" />
+    </LinearLayout>
 </LinearLayout>
