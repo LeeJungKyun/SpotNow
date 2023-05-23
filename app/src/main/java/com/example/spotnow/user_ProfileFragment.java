@@ -1,9 +1,7 @@
 package com.example.spotnow;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +12,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -23,8 +19,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
 
 
 public class user_ProfileFragment extends Fragment {
@@ -42,6 +36,8 @@ public class user_ProfileFragment extends Fragment {
     TextView region;
     TextView following;
     TextView follower;
+
+    Button report_button;
 
     private boolean isFollowing = false;
 
@@ -65,6 +61,20 @@ public class user_ProfileFragment extends Fragment {
         region = rootView.findViewById(R.id.profile_region);
         following = rootView.findViewById(R.id.following_num);
         follower = rootView.findViewById(R.id.follow_num);
+        report_button = rootView.findViewById(R.id.report_button);
+
+        report_button.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Bundle args = new Bundle();
+                args.putString("name", selected_name);
+                reportPopupFragment reportPopupFragment = new reportPopupFragment();
+                reportPopupFragment.setArguments(args);
+                reportPopupFragment.show(getFragmentManager(),"custom_report_dialog");
+            }
+        });
 
         if (getArguments() != null)
         {
@@ -78,14 +88,14 @@ public class user_ProfileFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren())
                 {
-                    UserInfo userinfo = snapshot.getValue(UserInfo.class);
-                    if(userinfo.getName().equals(selected_name))
+                    UserInfo userinfo = snapshot.getValue(UserInfo.class); // 선택된 유저 정보와 일치하는 유저 객체 저장
+                    if(userinfo.getName().equals(selected_name)) // 똑같은 이름인지 돌면서 확인
                     {
                         user_name.setText(userinfo.getName());
                         introduce.setText(userinfo.getIntroduce_self());
                         like_sport.setText(userinfo.getSport());
                         region.setText(userinfo.getRegion());
-                        progressBar.setProgress(100-userinfo.getReport_cnt());
+                        progressBar.setProgress(100-userinfo.getReport_cnt()*5);
                         following.setText(Integer.toString(userinfo.getFollowing_num()));
                         follower.setText(Integer.toString(userinfo.getFollower_num()));
                     }
@@ -96,6 +106,8 @@ public class user_ProfileFragment extends Fragment {
 
             }
         });
+
+
 
         /*follow_button = rootView.findViewById(R.id.follow_button);
 

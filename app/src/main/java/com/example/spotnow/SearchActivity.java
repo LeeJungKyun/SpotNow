@@ -30,10 +30,8 @@ public class SearchActivity extends AppCompatActivity
 {
 
     ArrayList<user_listview_info> userDataList;
-    ArrayList<spot_listview_info> spotDataList;
     private DatabaseReference mDatabase;
     user_listview_adapter myAdapter;
-    spot_listview_adapter myAdapter2;
 
     EditText search_bar;
 
@@ -50,7 +48,8 @@ public class SearchActivity extends AppCompatActivity
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
 
                     getUserList(search_bar.getText().toString());
-                    getSpotList(search_bar.getText().toString());
+
+                    /*getSpotList(search_bar.getText().toString());
 
                     ListView listView2 = (ListView)findViewById(R.id.spot_listView);
                     myAdapter2 = new spot_listview_adapter(getApplicationContext(),spotDataList);
@@ -65,7 +64,7 @@ public class SearchActivity extends AppCompatActivity
                             startActivity(intent);
                             finish();
                         }
-                    });
+                    });*/
 
                     ListView listView = (ListView)findViewById(R.id.user_listView);
                     myAdapter = new user_listview_adapter(getApplicationContext(),userDataList);
@@ -90,33 +89,6 @@ public class SearchActivity extends AppCompatActivity
 
     }
 
-    public void getSpotList(String word)
-    {
-        mDatabase = FirebaseDatabase.getInstance().getReference("spots");
-        spotDataList = new ArrayList<spot_listview_info>();
-
-        mDatabase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot snapshot : dataSnapshot.getChildren())
-                {
-                    SpotInfo spotInfo = snapshot.getValue(SpotInfo.class);
-                    if(spotInfo.getName().contains(word))
-                    {
-                        spotDataList.add(new spot_listview_info(R.drawable.gachon_logo, spotInfo.getName(),spotInfo.getAddress()));
-                    }
-                }
-                myAdapter2.notifyDataSetChanged();
-
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-    }
-    //씨름중인 부분
     public void getUserList(String word)
     {
         mDatabase = FirebaseDatabase.getInstance().getReference("users");

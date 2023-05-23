@@ -38,6 +38,7 @@
         <activity android:name=".ProfileEditActivity"></activity>
         <activity android:name=".ownerActivity"></activity>
         <activity android:name=".participantFragment"></activity>
+        <activity android:name=".reportPopupFragment" android:theme="@android:style/Theme.Dialog"/>
         <activity android:name=".SearchActivity"
             android:exported="true">
 

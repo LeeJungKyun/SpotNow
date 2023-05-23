@@ -69,7 +69,7 @@ public class my_ProfileFragment extends Fragment {
                     introduce.setText(userInfo.getIntroduce_self());
                     like_sport.setText(userInfo.getSport());
                     region.setText(userInfo.getRegion());
-                    progressBar.setProgress(100-userInfo.getReport_cnt());
+                    progressBar.setProgress(100-userInfo.getReport_cnt()*5);
                     following.setText(Integer.toString(userInfo.getFollowing_num()));
                     follower.setText(Integer.toString(userInfo.getFollower_num()));
 

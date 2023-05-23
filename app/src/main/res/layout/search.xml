@@ -22,31 +22,7 @@
             android:textSize="16dp">
         </EditText>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="@dimen/common_big_margin">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:textSize="16sp"
-                android:textColor="#000000"
-                android:layout_marginLeft="@dimen/common_small_margin"
-                android:layout_marginBottom="@dimen/common_small_margin"
-                android:text="장소"/>
-            <ListView
-                android:id="@+id/spot_listView"
-                android:layout_gravity="left"
-                android:dividerHeight="@dimen/common_small_margin"
-                android:divider="#ffffff"
-                android:layout_marginLeft="@dimen/common_small_margin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
