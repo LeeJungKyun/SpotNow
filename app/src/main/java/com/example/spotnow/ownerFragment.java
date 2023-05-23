@@ -66,12 +66,9 @@ public class ownerFragment extends Fragment {
     private EditText participantCountEditText;
     private EditText contentEditText;
     private EditText title;
-
     private TextView textView;
-
     private DatabaseReference mDatabase;
     private StorageReference mStorage;
-
     private static final int PICK_IMAGE_REQUEST = 1;
     private Uri selectedImageUri; // 선택된 이미지의 Uri를 저장하는 변수
     private String activityOwner;
@@ -150,7 +147,7 @@ public class ownerFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // 댓글 작성을 수행
-                writeComment();
+                sendComment();
             }
         });
 
@@ -274,8 +271,10 @@ public class ownerFragment extends Fragment {
         // 구현 내용 생략
     }
 
-    private void writeComment() {
-        // 댓글 작성을 수행하는 메서드
-        // 구현 내용 생략
+    private void sendComment() {
+        String c = Comment.getText().toString();
+        Toast.makeText(getActivity().getApplicationContext(), c, Toast.LENGTH_SHORT).show();
+
+        Comment.setText("");
     }
 }

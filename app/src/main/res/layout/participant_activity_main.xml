@@ -30,7 +30,6 @@
     </LinearLayout>
 
     <!-- Activity 사진 -->
-
     <ImageView
         android:id="@+id/place_holder_image"
         android:layout_width="370dp"
@@ -42,9 +41,6 @@
         android:background="@drawable/box_background"
         android:scaleType="fitCenter"
         android:gravity="center" />
-
-
-
 
     <TextView
         android:id="@+id/bottom_text_view"
@@ -103,6 +99,7 @@
                 android:background="@android:color/darker_gray" />
 
             <TextView
+                android:id = "@+id/commentShow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
