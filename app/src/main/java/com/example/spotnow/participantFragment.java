@@ -16,6 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.example.spotnow.ActivityInfo;
 import com.example.spotnow.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,8 +34,10 @@ public class participantFragment extends AppCompatActivity {
     private ImageView activityImageView;
     private TextView titleTextView;
     private TextView contentTextView;
-
     private DatabaseReference mDatabase;
+    private String ActivityId;
+    private FirebaseAuth mAuth;
+    private String UID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +51,12 @@ public class participantFragment extends AppCompatActivity {
         activityImageView = findViewById(R.id.place_holder_image);
         titleTextView = findViewById(R.id.title);
         contentTextView = findViewById(R.id.bottom_text_view);
+
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
+            UID = currentUser.getUid();
+        }
 
         // 인텐트에서 데이터 받아오기
         Intent intent = getIntent();
@@ -67,6 +77,8 @@ public class participantFragment extends AppCompatActivity {
                         if (activity != null && activity.getContent().equals(activityContent)) {
                             // 원하는 데이터를 찾았을 경우
                             String activityId = snapshot.getKey();
+                            ActivityId = activityId;
+                            Toast.makeText(participantFragment.this, ActivityId,Toast.LENGTH_SHORT).show();
                             String imageUrl = activity.getImageUrl();
 
                             Glide.with(participantFragment.this).load(imageUrl).into(activityImageView);
@@ -104,7 +116,9 @@ public class participantFragment extends AppCompatActivity {
         writeCommentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendComment();
+                String c = comment.getText().toString();
+                sendComment(UID, c);
+                comment.setText("");
             }
         });
     }
@@ -123,12 +137,15 @@ public class participantFragment extends AppCompatActivity {
         participantDialog.show();
     }
 
-    private void sendComment() {
-        String c = comment.getText().toString();
+    private void sendComment(String UID, String c) {
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("activities").child(ActivityId).child("comment");
+        CommentInfo Comment = new CommentInfo(UID, c);
+
+        Toast.makeText(this, ActivityId, Toast.LENGTH_SHORT).show();
+
+        mDatabase.push().setValue(Comment);
 
         // 여기서 c를 가져와서 DB에 저장한 뒤 댓글 창에 보여주기
         Toast.makeText(this, c, Toast.LENGTH_SHORT).show();
-
-        comment.setText("");
     }
 }
