@@ -42,8 +42,6 @@ public class ownerActivitymodify extends AppCompatActivity {
 
         writeParticipateInfoButton = findViewById(R.id.writeParticipateInfo);
         writeReportButton = findViewById(R.id.writeReport);
-        writeCommentButton = findViewById(R.id.writeComment);
-        comment = findViewById(R.id.comment);
         activityImageView = findViewById(R.id.place_holder_image);
         titleTextView = findViewById(R.id.title);
         contentTextView = findViewById(R.id.bottom_text_view);
@@ -78,7 +76,6 @@ public class ownerActivitymodify extends AppCompatActivity {
                         }
                     }
                 }
-
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
                     // 실패했으
