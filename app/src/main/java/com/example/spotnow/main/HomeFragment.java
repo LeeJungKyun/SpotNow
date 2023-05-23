@@ -79,11 +79,11 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     ArrayList<activitySampleData> sampleDataList;
     ArrayList<activity_listview_info> activityDataList;
     activity_listview_adapter myAdapter;
-//    private SlidingPaneLayout slidingUp;
     private SlidingUpPanelLayout slidingUp;
 
     public long clickedSpotID;
     private DatabaseReference mDatabase;
+    public String output;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -118,7 +118,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         String result = Utility.GetAddressFromGPS(getContext(),Utility.GetGPS(getContext()));
         TextView activity_address = rootView.findViewById(R.id.location_textview);
         String input = result;
-
         //현위치의 주소 앞 뒤 적당히 자름
         int spaceCount = 0;
         int startIndex = -1;
@@ -137,7 +136,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         }
 
         if (startIndex != -1 && endIndex != -1) {
-            String output = input.substring(startIndex, endIndex);
+            output = input.substring(startIndex, endIndex);
             activity_address.setText(output);
         }
 //        activity_address.setText(result);
@@ -163,7 +162,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                 // 버튼 클릭 이벤트 처리
                 v = HomeFragment.this.getView();
                 TextView activity_address = v.findViewById(R.id.location_textview);
-                activity_address.setText(result);
+                activity_address.setText(output);
                 naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
 
             }
