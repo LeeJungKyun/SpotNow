@@ -22,7 +22,9 @@ package com.example.spotnow;
 //}
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -30,6 +32,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.spotnow.common.FirebaseManager;
@@ -64,10 +68,15 @@ public class MainActivity extends AppCompatActivity {
     private String name;
     private ArrayList<String> activityOwners;
 
+    private static final int PERMISSION_REQUEST_CODE = 100;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // GPS 퍼미션 요청
+        checkLocationPermission();
 
         activityOwners = new ArrayList<>();
 
@@ -162,6 +171,36 @@ public class MainActivity extends AppCompatActivity {
 
             } else {
                 Toast.makeText(MainActivity.this, "result cancle!", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private void checkLocationPermission() {
+        // 위치 권한이 이미 허용되어 있는지 확인합니다.
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            // 권한이 허용되지 않은 경우, 사용자에게 권한을 요청합니다.
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    PERMISSION_REQUEST_CODE);
+        } else {
+            // 권한이 이미 허용된 경우, 원하는 작업을 수행합니다.
+            // 예: GPS 기능 사용
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // 사용자가 권한을 허용한 경우, 원하는 작업을 수행합니다.
+                // 예: GPS 기능 사용
+            } else {
+                // 사용자가 권한을 거부한 경우, 알림을 표시하거나 다른 조치를 취합니다.
+                Toast.makeText(this, "위치 권한이 거부되었습니다.", Toast.LENGTH_SHORT).show();
             }
         }
     }

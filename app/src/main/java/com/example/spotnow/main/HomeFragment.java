@@ -113,6 +113,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                 }
             }
         });
+
         // 주소 문자열로 가져오는 방법
         String result = Utility.GetAddressFromGPS(getContext(),Utility.GetGPS(getContext()));
         TextView activity_address = rootView.findViewById(R.id.location_textview);
