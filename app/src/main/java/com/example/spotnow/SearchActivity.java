@@ -75,7 +75,7 @@ public class SearchActivity extends AppCompatActivity
                     listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
                         @Override
                         public void onItemClick(AdapterView parent, View v, int position, long id){
-                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            Intent intent = new Intent();
                             intent.putExtra("selected_user_name",myAdapter.getItem(position).getName());
                             setResult(RESULT_OK,intent);
                             finish();

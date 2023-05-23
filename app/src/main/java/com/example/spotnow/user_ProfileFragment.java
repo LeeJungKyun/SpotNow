@@ -81,13 +81,13 @@ public class user_ProfileFragment extends Fragment {
                     UserInfo userinfo = snapshot.getValue(UserInfo.class);
                     if(userinfo.getName().equals(selected_name))
                     {
-                        user_name.setText(userInfo.getName());
-                        introduce.setText(userInfo.getIntroduce_self());
-                        like_sport.setText(userInfo.getSport());
-                        region.setText(userInfo.getRegion());
-                        progressBar.setProgress(100-userInfo.getReport_cnt());
-                        following.setText(Integer.toString(userInfo.getFollowing_num()));
-                        follower.setText(Integer.toString(userInfo.getFollower_num()));
+                        user_name.setText(userinfo.getName());
+                        introduce.setText(userinfo.getIntroduce_self());
+                        like_sport.setText(userinfo.getSport());
+                        region.setText(userinfo.getRegion());
+                        progressBar.setProgress(100-userinfo.getReport_cnt());
+                        following.setText(Integer.toString(userinfo.getFollowing_num()));
+                        follower.setText(Integer.toString(userinfo.getFollower_num()));
                     }
                 }
             }
