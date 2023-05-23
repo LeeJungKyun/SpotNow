@@ -179,12 +179,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
             }
         });
 
-
-
-
         slidingUp=rootView.findViewById(R.id.main_panel);
         slidingUp.setPanelState(PanelState.COLLAPSED);
-
 
         //모달창에서 플러스 버튼 눌러서 액티비티 생성하기
         plusButton = rootView.findViewById(R.id.createActivity_button);
@@ -198,13 +194,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                 startActivity(intent);
             }
         });
-
-
-
         return rootView;
     }
-
-
 
     public void getActivityList(long spotID){
         mDatabase = FirebaseDatabase.getInstance().getReference("activities");
@@ -220,11 +211,8 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                     {
                         activityDataList.add(new activity_listview_info(activityInfo.getImageUrl(), activityInfo.getTitle(),activityInfo.getContent() ,activityInfo.getActivityOwner() ));
                     }
-
                 }
-
                 myAdapter.notifyDataSetChanged();
-
             }
 
             @Override
@@ -269,7 +257,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         ArrayList<String> path = new ArrayList<String>();
         DatabaseReference dr = FirebaseManager.GetReferencePath("spots", null);
 
-
         HashMap<String, Object> spotResult = new HashMap<>();
         dr.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
@@ -292,10 +279,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                 }
             }
         });
-
     }
-
-
 
     public void setMark(MarkerInfo m) {
         Marker marker = new Marker();
@@ -354,7 +338,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         });
     }
 
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -369,8 +352,4 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                 getFragmentManager().beginTransaction().remove(fragment).commit();
         }
     }
-
-
-
-
 }
