@@ -1,25 +1,5 @@
 package com.example.spotnow;
 
-//import androidx.appcompat.app.AppCompatActivity;
-//
-//import android.os.Bundle;
-//import android.content.pm.PackageInfo;
-//import android.content.pm.PackageManager;
-//import android.content.pm.Signature;
-//import android.util.Base64;
-//import android.util.Log;
-//
-//import java.security.MessageDigest;
-//import java.security.NoSuchAlgorithmException;
-//public class MainActivity extends AppCompatActivity {
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.login);
-//    }
-//
-//}
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
@@ -58,9 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
     private Fragment selectedFragment = null;
-
     private BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener;
-
     private DatabaseReference mDatabaseA;
     private DatabaseReference mDatabaseU;
     private StorageReference mStorage;
@@ -95,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
                 if (dataSnapshot.exists()) {
                     String n = dataSnapshot.getValue(String.class);
                     name = n;
-                    Log.d("NNNNN", "name = " + name);
                 }
             }
             @Override

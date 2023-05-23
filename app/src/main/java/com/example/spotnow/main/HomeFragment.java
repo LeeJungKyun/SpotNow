@@ -67,7 +67,7 @@ import java.util.Map;
 public class HomeFragment extends Fragment implements OnMapReadyCallback {
     private MapFragment mapView; // MapView 객체 선언
     private Button resetLocationButton; // 버튼 객체 선언
-    private EditText searchbar;
+    private TextView searchbar;
     private Button plusButton;
 
     //현 위치로 지정 부분
@@ -117,7 +117,30 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
         // 주소 문자열로 가져오는 방법
         String result = Utility.GetAddressFromGPS(getContext(),Utility.GetGPS(getContext()));
         TextView activity_address = rootView.findViewById(R.id.location_textview);
-        activity_address.setText(result);
+        String input = result;
+
+        //현위치의 주소 앞 뒤 적당히 자름
+        int spaceCount = 0;
+        int startIndex = -1;
+        int endIndex = -1;
+
+        for (int i = 0; i < input.length(); i++) {
+            if (input.charAt(i) == ' ') {
+                spaceCount++;
+                if (spaceCount == 1) {
+                    startIndex = i + 1; // 첫 번째 띄어쓰기 이후부터 시작
+                } else if (spaceCount == 5) {
+                    endIndex = i;
+                    break;
+                }
+            }
+        }
+
+        if (startIndex != -1 && endIndex != -1) {
+            String output = input.substring(startIndex, endIndex);
+            activity_address.setText(output);
+        }
+//        activity_address.setText(result);
 
         //로그인 안하고 디버깅할때 해야함소
         FirebaseManager.init();
@@ -157,21 +180,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
             }
         });
 
-        /*searchbar.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                //검색창에서 엔터키 눌렀을 때 이벤트 처리
-                if (i == KeyEvent.KEYCODE_ENTER) {
-                    String searchWord = String.valueOf(searchbar.getText());
-                    Toast.makeText(getContext(), searchWord, Toast.LENGTH_SHORT).show();
-
-                    return true;
-                }
-                return false;
-            }
-        });*/
-
-
 
 
 
@@ -196,7 +204,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
         return rootView;
     }
-
 
 
 

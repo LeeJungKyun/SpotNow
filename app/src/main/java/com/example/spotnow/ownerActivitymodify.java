@@ -25,10 +25,8 @@ import com.google.firebase.database.ValueEventListener;
 public class ownerActivitymodify extends AppCompatActivity {
 
     private Dialog participantDialog;
-    private EditText comment;
     private Button writeParticipateInfoButton;
     private Button writeReportButton;
-    private Button writeCommentButton;
     private ImageView activityImageView;
     private TextView titleTextView;
     private TextView contentTextView;
@@ -42,8 +40,6 @@ public class ownerActivitymodify extends AppCompatActivity {
 
         writeParticipateInfoButton = findViewById(R.id.writeParticipateInfo);
         writeReportButton = findViewById(R.id.writeReport);
-        writeCommentButton = findViewById(R.id.writeComment);
-        comment = findViewById(R.id.comment);
         activityImageView = findViewById(R.id.place_holder_image);
         titleTextView = findViewById(R.id.title);
         contentTextView = findViewById(R.id.bottom_text_view);
@@ -78,7 +74,6 @@ public class ownerActivitymodify extends AppCompatActivity {
                         }
                     }
                 }
-
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
                     // 실패했으
@@ -101,14 +96,7 @@ public class ownerActivitymodify extends AppCompatActivity {
             }
         });
 
-        writeCommentButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendComment();
-            }
-        });
     }
-
     private void showParticipantDialog() {
         participantDialog = new Dialog(this);
         participantDialog.setContentView(R.layout.participant_dialog);
@@ -121,14 +109,5 @@ public class ownerActivitymodify extends AppCompatActivity {
         participantDialog.setContentView(R.layout.report);
 
         participantDialog.show();
-    }
-
-    private void sendComment() {
-        String c = comment.getText().toString();
-
-        // 여기서 c를 가져와서 DB에 저장한 뒤 댓글 창에 보여주기
-        Toast.makeText(this, c, Toast.LENGTH_SHORT).show();
-
-        comment.setText("");
     }
 }

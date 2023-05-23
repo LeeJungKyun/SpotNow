@@ -263,8 +263,7 @@ public class ownerActivity extends AppCompatActivity {
 
     private void sendComment() {
         String comment = Comment.getText().toString();
-        // 이부분은 아마 등록하는 부분에서는 지워도 될듯 혹시 몰라 남겨놓음
-        // 여기서 comment를 가져와서 DB에 저장하고 댓글창에 보여주기
+
         Toast.makeText(getApplicationContext(), comment, Toast.LENGTH_SHORT).show();
 
         Comment.setText("");
