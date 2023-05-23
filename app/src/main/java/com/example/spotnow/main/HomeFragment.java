@@ -67,7 +67,7 @@ import java.util.Map;
 public class HomeFragment extends Fragment implements OnMapReadyCallback {
     private MapFragment mapView; // MapView 객체 선언
     private Button resetLocationButton; // 버튼 객체 선언
-    private EditText searchbar;
+    private TextView searchbar;
     private Button plusButton;
 
     //현 위치로 지정 부분
@@ -180,21 +180,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
             }
         });
 
-        /*searchbar.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                //검색창에서 엔터키 눌렀을 때 이벤트 처리
-                if (i == KeyEvent.KEYCODE_ENTER) {
-                    String searchWord = String.valueOf(searchbar.getText());
-                    Toast.makeText(getContext(), searchWord, Toast.LENGTH_SHORT).show();
-
-                    return true;
-                }
-                return false;
-            }
-        });*/
-
-
 
 
 
@@ -219,7 +204,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
         return rootView;
     }
-
 
 
 
