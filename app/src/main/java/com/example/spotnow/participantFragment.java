@@ -138,16 +138,20 @@ public class participantFragment extends AppCompatActivity {
     }
 
     private void sendComment(String UID, String c) {
+        if (c.trim().isEmpty()) {
+            // 댓글이 비어있는 경우 처리
+            Toast.makeText(this, "댓글을 입력해주세요.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         mDatabase = FirebaseDatabase.getInstance().getReference().child("activities").child(ActivityId).child("comment");
-        CommentInfo Comment = new CommentInfo(UID, c);
+        CommentInfo commentInfo = new CommentInfo(UID, c);
 
         Toast.makeText(this, ActivityId, Toast.LENGTH_SHORT).show();
 
-        mDatabase.push().setValue(Comment);
-        //firebase
-        // activity id를 찾아서
-        // user id 와 comment를 (id, comment) firebase에 저장
-        // 여기서 c를 가져와서 DB에 저장한 뒤 댓글 창에 보여주기
+        String commentId = mDatabase.push().getKey();
+        mDatabase.child(commentId).setValue(commentInfo);
         Toast.makeText(this, c, Toast.LENGTH_SHORT).show();
     }
+
 }
