@@ -144,7 +144,9 @@ public class participantFragment extends AppCompatActivity {
         Toast.makeText(this, ActivityId, Toast.LENGTH_SHORT).show();
 
         mDatabase.push().setValue(Comment);
-
+        //firebase
+        // activity id를 찾아서
+        // user id 와 comment를 (id, comment) firebase에 저장
         // 여기서 c를 가져와서 DB에 저장한 뒤 댓글 창에 보여주기
         Toast.makeText(this, c, Toast.LENGTH_SHORT).show();
     }

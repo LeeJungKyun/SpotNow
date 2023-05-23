@@ -1,31 +1,30 @@
 package com.example.spotnow;
-
 public class CommentInfo {
-    public String UserID;
-    public String Comment;
+    public String userid;
+    public String comment;
 
-    public CommentInfo(){
+    public CommentInfo() {
 
     }
-    public CommentInfo(String UserID, String Comment){
-        UserID = this.UserID;
-        Comment = this.Comment;
+
+    public CommentInfo(String userid, String comment) {
+        this.userid = userid;
+        this.comment = comment;
     }
 
-    public String getUserId() {
-        return UserID;
+    public String getUserid() {
+        return userid;
     }
 
-    public void setUserId(String userId) {
-        this.UserID = userId;
+    public void setUserid(String userid) {
+        this.userid = userid;
     }
 
-    public String getCommentText() {
-        return Comment;
+    public String getComment() {
+        return comment;
     }
 
-    public void setCommentText(String commentText) {
-        this.Comment = commentText;
+    public void setComment(String comment) {
+        this.comment = comment;
     }
-
 }

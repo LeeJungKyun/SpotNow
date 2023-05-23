@@ -263,7 +263,9 @@ public class ownerActivity extends AppCompatActivity {
 
     private void sendComment() {
         String comment = Comment.getText().toString();
-
+        //firebase
+        // activity id를 찾아서
+        // user id 와 comment를 (id, comment) firebase에 저장
         Toast.makeText(getApplicationContext(), comment, Toast.LENGTH_SHORT).show();
 
         Comment.setText("");
