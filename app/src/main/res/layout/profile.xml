@@ -179,8 +179,8 @@
         <ProgressBar
             android:layout_gravity="center"
             android:id="@+id/progressBar"
-            android:scaleY="3"
             style="?android:attr/progressBarStyleHorizontal"
+            android:progressDrawable="@drawable/custom_progressbar"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:progress="40"
