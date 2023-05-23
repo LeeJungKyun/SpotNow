@@ -1,23 +1,23 @@
 package com.example.spotnow;
+
 public class CommentInfo {
-    public String userid;
-    public String comment;
+    private String userID;
+    private String comment;
 
     public CommentInfo() {
-
     }
 
-    public CommentInfo(String userid, String comment) {
-        this.userid = userid;
+    public CommentInfo(String userID, String comment) {
+        this.userID = userID;
         this.comment = comment;
     }
 
-    public String getUserid() {
-        return userid;
+    public String getUserID() {
+        return userID;
     }
 
-    public void setUserid(String userid) {
-        this.userid = userid;
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 
     public String getComment() {
