@@ -2,6 +2,7 @@ package com.example.spotnow;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -125,13 +126,12 @@ public class user_ProfileFragment extends Fragment {
                 }
             }
         });
-
         // Inflate the layout for this fragment
         return rootView;
     }
 
     private void checkFollowStatus() {
-        String targetUserId = "targetUID";
+        String targetUserId = "targetUId";
 
         mDatabase.child(currentUserId).child("following").child(targetUserId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -142,6 +142,7 @@ public class user_ProfileFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("CheckFollowStatus","팔로우 상태 확인에서 에러");
                 //에러처리
             }
         });
@@ -153,9 +154,43 @@ public class user_ProfileFragment extends Fragment {
 
         //현재 들어와있는 User의 팔로워목록에 나를 추가
         mDatabase.child(targetUserId).child("followers").push().setValue(currentUserId);
+
         //내 팔로잉 목록에 현재 들어와있는 유저 추가
         mDatabase.child(currentUserId).child("following").push().setValue(targetUserId);
         isFollowing = true;
+
+        // currentUserId의 following_num 증가
+        DatabaseReference currentuserRef = mDatabase.child(currentUserId);
+        currentuserRef.child("following_num").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    int followingNum = dataSnapshot.getValue(Integer.class);
+                    followingNum++;
+                    currentuserRef.child("following_num").setValue(followingNum);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // 에러 처리
+            }
+        });
+        // targetUserId의 follower_num 증가
+        DatabaseReference targetuserRef = mDatabase.child(targetUserId);
+        targetuserRef.child("follower_num").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    int followerNum = dataSnapshot.getValue(Integer.class);
+                    followerNum++;
+                    targetuserRef.child("follower_num").setValue(followerNum);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // 에러 처리
+            }
+        });
 
         updateButton();
     }
@@ -165,8 +200,9 @@ public class user_ProfileFragment extends Fragment {
         //언팔로우할 대상
         String targetUserId = targetUId;
 
-        //들어와있는 User의 팔로워 목록에서 나를 삭제
+        //들어와있는 User의 팔로워 목록에서 나를 삭제하고 숫자 감소 시키기
         Query followerQuery = mDatabase.child(targetUserId).child("followers").orderByValue().equalTo(currentUserId);
+        DatabaseReference targetuserRef = mDatabase.child(targetUserId);
         followerQuery.addListenerForSingleValueEvent(new ValueEventListener(){
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot){
@@ -179,11 +215,27 @@ public class user_ProfileFragment extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError){
                 //예외 처리
+                Log.e("Unfollow","On cancelled");
+            }
+        });
+        targetuserRef.child("follower_num").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    int followerNum = dataSnapshot.getValue(Integer.class);
+                    followerNum--;
+                    targetuserRef.child("follower_num").setValue(followerNum);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // 에러 처리
             }
         });
 
         //내 팔로잉 목록에서 들어와있는 User 삭제
         Query followingQuery = mDatabase.child(currentUserId).child("following").orderByValue().equalTo(targetUserId);
+        DatabaseReference currentuserRef = mDatabase.child(currentUserId);
         followingQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -199,8 +251,22 @@ public class user_ProfileFragment extends Fragment {
                 //예외처리
             }
         });
+        currentuserRef.child("following_num").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    int followingNum = dataSnapshot.getValue(Integer.class);
+                    followingNum--;
+                    currentuserRef.child("following_num").setValue(followingNum);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // 에러 처리
+            }
+        });
         mDatabase.child(currentUserId).child("following").child(targetUserId).removeValue();
-
+        isFollowing = false;
         updateButton();
     }
 

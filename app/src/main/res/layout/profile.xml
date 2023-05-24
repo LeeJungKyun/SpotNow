@@ -120,7 +120,7 @@
                     />
                 <TextView
                     android:id="@+id/follow"
-                    android:text="팔로우"
+                    android:text="팔로워"
                     android:textSize ="15sp"
                     android:textAlignment="center"
                     android:textColor="@color/black"
