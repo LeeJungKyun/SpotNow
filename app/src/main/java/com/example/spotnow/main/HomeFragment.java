@@ -82,6 +82,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
     private SlidingUpPanelLayout slidingUp;
 
     public long clickedSpotID;
+    public String clickedSpotAddress;
     private DatabaseReference mDatabase;
     public String output;
 
@@ -273,6 +274,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                         Map<String, Object> value = (Map<String, Object>) entry.getValue();
                         marker.location = new Coordinate((double) value.get("latitude"),(double) value.get("longitude"));
                         marker.spotID = (long) value.get("spotID");
+                        marker.address=(String)value.get("address");
 
                         setMark(marker);
                     }
@@ -295,9 +297,12 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
                 // 마커 클릭시 모달창 위치 텍스트를 스팟이름으로 바꿔줌
                 View v = HomeFragment.this.getView();
-                TextView activity_address = v.findViewById(R.id.location_textview);
-                activity_address.setText(m.spotName);
+                TextView spotName = v.findViewById(R.id.location_textview);
+                spotName.setText(m.spotName);
+                TextView activity_address=v.findViewById(R.id.spotLocation);
+                activity_address.setText(m.address);
                 clickedSpotID = m.spotID;
+                clickedSpotAddress=m.address;
 
                 getActivityList(clickedSpotID);
 
