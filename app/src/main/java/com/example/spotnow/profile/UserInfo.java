@@ -1,4 +1,4 @@
-package com.example.spotnow;
+package com.example.spotnow.profile;
 
 public class UserInfo {
     public String name;

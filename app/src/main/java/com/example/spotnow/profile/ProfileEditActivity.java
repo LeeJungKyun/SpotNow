@@ -1,4 +1,4 @@
-package com.example.spotnow;
+package com.example.spotnow.profile;
 
 import static com.example.spotnow.common.FirebaseManager.database;
 
@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.spotnow.R;
 import com.example.spotnow.common.FirebaseManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;

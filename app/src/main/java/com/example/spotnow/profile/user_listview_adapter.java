@@ -1,4 +1,4 @@
-package com.example.spotnow;
+package com.example.spotnow.profile;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.spotnow.R;
 
 import java.util.ArrayList;
 

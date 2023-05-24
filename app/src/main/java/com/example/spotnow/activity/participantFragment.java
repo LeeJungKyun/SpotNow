@@ -1,4 +1,4 @@
-package com.example.spotnow;
+package com.example.spotnow.activity;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -14,7 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
-import com.example.spotnow.ActivityInfo;
 import com.example.spotnow.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

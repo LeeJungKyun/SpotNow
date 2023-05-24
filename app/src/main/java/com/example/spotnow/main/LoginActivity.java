@@ -1,4 +1,4 @@
-package com.example.spotnow;
+package com.example.spotnow.main;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.spotnow.R;
 import com.example.spotnow.common.FirebaseManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;

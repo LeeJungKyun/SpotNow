@@ -1,4 +1,4 @@
-package com.example.spotnow;
+package com.example.spotnow.activity;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -24,6 +24,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.spotnow.R;
 import com.example.spotnow.common.FirebaseManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ownerActivity">
+    tools:context=".activity.ownerActivity">
     <!-- 이건 Activity 등록하는 부분임 수정할때 여기서 조금만 고치음 -->
 
     <EditText

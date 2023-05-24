@@ -1,4 +1,4 @@
-package com.example.spotnow;
+package com.example.spotnow.activity;
 
 public class spot_listview_info
 {

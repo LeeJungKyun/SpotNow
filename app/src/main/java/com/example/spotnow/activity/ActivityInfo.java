@@ -1,4 +1,4 @@
-package com.example.spotnow;
+package com.example.spotnow.activity;
 
 import java.net.URL;
 
