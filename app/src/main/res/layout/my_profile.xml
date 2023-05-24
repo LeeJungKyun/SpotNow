@@ -129,6 +129,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
+            android:layout_marginTop="20dp"
             android:padding="10dp"
             android:layout_gravity="center_vertical"
             android:text="매너지수"/>
@@ -147,20 +148,23 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="800"
+        android:layout_weight="400"
         android:orientation="vertical"
         >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/address_left_margin"
             android:layout_marginLeft="@dimen/address_left_margin"
             android:text="선호 스포츠"/>
+
         <TextView
             android:layout_width="289dp"
             android:layout_height="50dp"
-            android:textAlignment="center"
+            android:layout_marginTop="@dimen/address_top_margin"
             android:layout_marginLeft="@dimen/activity_list_left_margin"
-            android:background="#E2F5FF"/>
+            android:background="#E2F5FF"
+            android:textAlignment="center" />
     </LinearLayout>
 
     <!--    활동지역-->
@@ -179,7 +183,6 @@
             android:layout_height="50dp"
             android:textAlignment="center"
             android:layout_marginLeft="@dimen/address_left_margin"
-            android:layout_marginTop="@dimen/address_top_margin"
             android:background="#EEE9FB"/>
     </LinearLayout>
 </LinearLayout>
