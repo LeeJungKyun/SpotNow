@@ -73,7 +73,9 @@
         android:layout_marginRight="10dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/box_background"
-        android:gravity="center" />
+        android:padding="40dp"
+        android:paddingLeft="50dp"
+        android:paddingTop="50dp"/>
 
 
     <LinearLayout

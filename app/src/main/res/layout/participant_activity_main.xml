@@ -42,9 +42,9 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/box_background"
+            android:hint="제목 들어갈 거임"
             android:paddingLeft="5dp"
             android:paddingTop="2dp"
-            android:hint="제목 들어갈 거임"
             android:textSize="20sp" />
     </LinearLayout>
 
@@ -72,8 +72,11 @@
         android:layout_marginRight="10dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/box_background"
-        android:gravity="center"
-        android:hint="Activity 내용 들어갈 거임" />
+        android:hint="Activity 내용 들어갈 거임"
+        android:padding="40dp"
+        android:paddingLeft="50dp"
+        android:paddingTop="50dp"
+        />
 
 
     <LinearLayout
