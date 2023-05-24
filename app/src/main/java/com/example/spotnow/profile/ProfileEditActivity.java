@@ -83,6 +83,22 @@ public class ProfileEditActivity extends AppCompatActivity {
 
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
+        mDatabase.child("profileImage").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        @Override
+        public void onComplete(@NonNull Task<DataSnapshot> task) {
+            if (!task.isSuccessful()) {
+                Log.e("firebase", "Error getting data", task.getException());
+            }
+            else {
+                Log.d("firebase", String.valueOf(task.getResult().getValue()));
+                ImageLoadTask imageLoadTask = new ImageLoadTask();
+                imageLoadTask.execute((String) task.getResult().getValue());
+            }
+        }
+    });
+
+
+
         submit_button = (Button) findViewById(R.id.submit_button);
         submit_button.setOnClickListener(new View.OnClickListener() {
             //수정버튼 눌렀을때
