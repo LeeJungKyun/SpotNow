@@ -23,6 +23,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import java.util.Date;
 
 public class participantFragment extends AppCompatActivity {
 
@@ -39,6 +40,7 @@ public class participantFragment extends AppCompatActivity {
     private String ActivityId;
     private FirebaseAuth mAuth;
     private String UID;
+    private long timestamp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,13 +101,14 @@ public class participantFragment extends AppCompatActivity {
                         }
                     }
                 }
-
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
                     // 실패했으
                     Toast.makeText(participantFragment.this, "Failed to read value.", Toast.LENGTH_SHORT).show();
                 }
             });
+
+//            mDatabase.child("activities").child(ActivityId).child("comment").orderByChild()
         }
 
         writeParticipateInfoButton.setOnClickListener(new View.OnClickListener() {
@@ -126,7 +129,8 @@ public class participantFragment extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String c = comment.getText().toString();
-                sendComment(UID, c);
+                timestamp = new Date().getTime();
+                sendComment(UID, c, timestamp);
                 comment.setText("");
             }
         });
@@ -146,7 +150,7 @@ public class participantFragment extends AppCompatActivity {
         participantDialog.show();
     }
 
-    private void sendComment(String UID, String c) {
+    private void sendComment(String UID, String c, long timestamp) {
         if (c.trim().isEmpty()) {
             // 댓글이 비어있는 경우 처리
             Toast.makeText(this, "댓글을 입력해주세요.", Toast.LENGTH_SHORT).show();
@@ -154,7 +158,7 @@ public class participantFragment extends AppCompatActivity {
         }
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("activities").child(ActivityId).child("comment");
-        CommentInfo commentInfo = new CommentInfo(UID, c);
+        CommentInfo commentInfo = new CommentInfo(UID, c, timestamp);
 
         Toast.makeText(this, ActivityId, Toast.LENGTH_SHORT).show();
 

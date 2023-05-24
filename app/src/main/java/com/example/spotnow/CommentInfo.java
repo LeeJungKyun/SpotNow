@@ -3,13 +3,15 @@ package com.example.spotnow;
 public class CommentInfo {
     private String userID;
     private String comment;
+    private long timestamp;
 
     public CommentInfo() {
     }
 
-    public CommentInfo(String userID, String comment) {
+    public CommentInfo(String userID, String comment, long timestamp) {
         this.userID = userID;
         this.comment = comment;
+        this.timestamp = timestamp;
     }
 
     public String getUserID() {
@@ -27,4 +29,8 @@ public class CommentInfo {
     public void setComment(String comment) {
         this.comment = comment;
     }
+
+    public long getTimestamp(){return timestamp;}
+
+    public void setTimestamp(long timestamp){this.timestamp = timestamp;}
 }
