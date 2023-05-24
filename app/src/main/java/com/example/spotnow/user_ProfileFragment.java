@@ -38,6 +38,8 @@ public class user_ProfileFragment extends Fragment {
     TextView following;
     TextView follower;
 
+    String targetUId;
+
     Button report_button;
 
     private boolean isFollowing = false;
@@ -99,6 +101,7 @@ public class user_ProfileFragment extends Fragment {
                         progressBar.setProgress(100-userinfo.getReport_cnt()*5);
                         following.setText(Integer.toString(userinfo.getFollowing_num()));
                         follower.setText(Integer.toString(userinfo.getFollower_num()));
+                        targetUId = snapshot.getKey();
                     }
                 }
             }
@@ -108,9 +111,7 @@ public class user_ProfileFragment extends Fragment {
             }
         });
 
-
-
-        /*follow_button = rootView.findViewById(R.id.follow_button);
+        follow_button = rootView.findViewById(R.id.follow_button);
 
         checkFollowStatus();
 
@@ -123,7 +124,7 @@ public class user_ProfileFragment extends Fragment {
                     follow();
                 }
             }
-        });*/
+        });
 
         // Inflate the layout for this fragment
         return rootView;
@@ -148,31 +149,28 @@ public class user_ProfileFragment extends Fragment {
 
     //팔로우 메소드
     private void follow() {
-        String targetUserId = "targetUId";
+        String targetUserId = targetUId;
 
         //현재 들어와있는 User의 팔로워목록에 나를 추가
         mDatabase.child(targetUserId).child("followers").push().setValue(currentUserId);
-
         //내 팔로잉 목록에 현재 들어와있는 유저 추가
         mDatabase.child(currentUserId).child("following").push().setValue(targetUserId);
-
         isFollowing = true;
 
         updateButton();
     }
 
-    //언팔로우메소드
+    //언팔로우 메소드
     private void unfollow() {
         //언팔로우할 대상
-        String targetUserId="targetUId";
+        String targetUserId = targetUId;
 
         //들어와있는 User의 팔로워 목록에서 나를 삭제
         Query followerQuery = mDatabase.child(targetUserId).child("followers").orderByValue().equalTo(currentUserId);
         followerQuery.addListenerForSingleValueEvent(new ValueEventListener(){
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot){
-                DataSnapshot dataSnaptshot = null;
-                if(dataSnaptshot.exists()){
+                if(dataSnapshot.exists()){
                     for(DataSnapshot snapshot: dataSnapshot.getChildren()){
                         snapshot.getRef().removeValue();
                     }
@@ -198,7 +196,7 @@ public class user_ProfileFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                //예외처리
             }
         });
         mDatabase.child(currentUserId).child("following").child(targetUserId).removeValue();
