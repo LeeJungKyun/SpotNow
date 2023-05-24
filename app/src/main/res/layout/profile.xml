@@ -64,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/profile_name_top_margin"
                 android:layout_marginLeft="@dimen/profile_name_left_margin"
-                android:text="윤서겅듀"
+                android:text=""
                 android:textSize="20sp"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
@@ -73,7 +73,7 @@
                 android:id="@+id/profile_introduce"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="저는 윤서겅듀에요"
+                android:text=""
                 android:textSize="12sp"
                 android:textColor="#808080"
                 android:layout_marginLeft="@dimen/profile_name_left_margin"
@@ -96,14 +96,14 @@
             <TableRow>
                 <TextView
                     android:id="@+id/following_num"
-                    android:text="12"
+                    android:text=""
                     android:textSize ="18sp"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     />
                 <TextView
                     android:id="@+id/follow_num"
-                    android:text="17"
+                    android:text=""
                     android:textSize ="18sp"
                     android:textAlignment="center"
                     android:textColor="@color/black"
