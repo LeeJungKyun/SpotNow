@@ -18,6 +18,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 
@@ -150,10 +151,10 @@ public class user_ProfileFragment extends Fragment {
         String targetUserId = "targetUId";
 
         //현재 들어와있는 User의 팔로워목록에 나를 추가
-        mDatabase.child(targetUserId).child("followers").child(currentUserId).setValue(true);
+        mDatabase.child(targetUserId).child("followers").push().setValue(currentUserId);
 
         //내 팔로잉 목록에 현재 들어와있는 유저 추가
-        mDatabase.child(currentUserId).child("following").child(targetUserId).setValue(true);
+        mDatabase.child(currentUserId).child("following").push().setValue(targetUserId);
 
         isFollowing = true;
 
@@ -164,9 +165,42 @@ public class user_ProfileFragment extends Fragment {
     private void unfollow() {
         //언팔로우할 대상
         String targetUserId="targetUId";
+
         //들어와있는 User의 팔로워 목록에서 나를 삭제
-        mDatabase.child(targetUserId).child("followers").child(currentUserId).removeValue();
+        Query followerQuery = mDatabase.child(targetUserId).child("followers").orderByValue().equalTo(currentUserId);
+        followerQuery.addListenerForSingleValueEvent(new ValueEventListener(){
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot){
+                DataSnapshot dataSnaptshot = null;
+                if(dataSnaptshot.exists()){
+                    for(DataSnapshot snapshot: dataSnapshot.getChildren()){
+                        snapshot.getRef().removeValue();
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError){
+                //예외 처리
+            }
+        });
+
         //내 팔로잉 목록에서 들어와있는 User 삭제
+        Query followingQuery = mDatabase.child(currentUserId).child("following").orderByValue().equalTo(targetUserId);
+        followingQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                        snapshot.getRef().removeValue();
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         mDatabase.child(currentUserId).child("following").child(targetUserId).removeValue();
     }
 
