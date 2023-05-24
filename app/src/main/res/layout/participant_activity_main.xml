@@ -43,6 +43,7 @@
             android:layout_marginTop="8dp"
             android:background="@drawable/box_background"
             android:hint="제목 들어갈 거임"
+            android:fontFamily="@font/bold"
             android:paddingLeft="5dp"
             android:paddingTop="2dp"
             android:textSize="20sp" />
@@ -62,22 +63,25 @@
         android:scaleType="fitXY"
         android:src="@drawable/example" />
 
-    <TextView
-        android:id="@+id/bottom_text_view"
+    <ScrollView
         android:layout_width="360dp"
-        android:layout_height="200dp"
+        android:layout_height="220dp"
         android:layout_gravity="center"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="8dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="8dp"
         android:background="@drawable/box_background"
-        android:hint="Activity 내용 들어갈 거임"
-        android:padding="40dp"
-        android:paddingLeft="50dp"
-        android:paddingTop="50dp"
-        />
+        android:layout_marginBottom="8dp">
 
+        <TextView
+            android:id="@+id/bottom_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/bold"
+            android:padding="5dp"
+            android:paddingLeft="0dp"
+            android:textSize="20sp" />
+    </ScrollView>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -93,6 +97,7 @@
             android:layout_marginEnd="8dp"
             android:background="@drawable/button_style_1"
             android:text="참여"
+            android:fontFamily="@font/bold"
             android:textColor="@android:color/white" />
 
         <Button
@@ -102,6 +107,7 @@
             android:layout_marginEnd="8dp"
             android:background="@drawable/button_style_2"
             android:onClick="callReport"
+            android:fontFamily="@font/bold"
             android:text="신고"
             android:textColor="@android:color/white" />
     </LinearLayout>
@@ -126,6 +132,7 @@
                 android:background="@android:color/darker_gray" />
 
             <TextView
+                android:id="@+id/comment_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/divider"
@@ -133,12 +140,16 @@
                 android:layout_marginLeft="25dp"
                 android:layout_marginTop="5dp"
                 android:text="댓글"
+                android:fontFamily="@font/bold"
                 android:textSize="18sp" />
 
             <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="10dp"
                 android:id="@+id/commentShow"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:layout_below="@id/comment_view"/>
 
         </RelativeLayout>
     </LinearLayout>
@@ -158,6 +169,7 @@
             android:id="@+id/writeComment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/bold"
             android:text="입력" />
     </LinearLayout>
 

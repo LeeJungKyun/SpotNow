@@ -40,7 +40,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 
         // 댓글 내용과 사용자 이름을 뷰 홀더의 텍스트뷰에 설정
         holder.commentTextView.setText(comment.getComment());
-        holder.usernameTextView.setText(comment.getUserName());
+        holder.usernameTextView.setText("[" + comment.getUserName() + "] 의 답글");
     }
 
 

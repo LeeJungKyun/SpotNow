@@ -3,6 +3,7 @@ package com.example.spotnow.activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -101,8 +102,8 @@ public class participantFragment extends AppCompatActivity {
 
             ownerName.setText(activityOwner);
             titleTextView.setText(activityTitle);
-            contentTextView.setText("종목: "+activitySport+"\n"+"내용: "+activityContent+"\n"+"시작시간: "+activityStartTime+"\n"+"종료시간: "+activityEndTime+"\n"+"인원: "+activityPeopleCnt);
-
+            contentTextView.setText("종목: "+activitySport+"\n\n"+"내용: "+activityContent+"\n\n"+"시작시간: " +"\n" +activityStartTime+"\n\n"+"종료시간: " +"\n"+activityEndTime+"\n\n"+"인원: "+activityPeopleCnt);
+            contentTextView.setMovementMethod(new ScrollingMovementMethod());
             // Firebase에서 데이터 가져오기
             mDatabase = FirebaseDatabase.getInstance().getReference("activities");
             mDatabase.orderByChild("title").equalTo(activityTitle).addListenerForSingleValueEvent(new ValueEventListener() {
