@@ -43,6 +43,8 @@
             android:layout_marginTop="8dp"
             android:background="@drawable/box_background"
             android:hint="제목 들어갈 거임"
+            android:paddingLeft="5dp"
+            android:paddingTop="2dp"
             android:textSize="20sp" />
     </LinearLayout>
     <!-- Activity 사진 -->

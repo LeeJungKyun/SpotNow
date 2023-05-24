@@ -55,7 +55,7 @@ public class activity_listview_adapter extends BaseAdapter {
         ImageView activityImage = (ImageView) view.findViewById(R.id.activity_image);
         TextView activityTitle = (TextView) view.findViewById(R.id.activity_title);
         TextView activityAddress = (TextView) view.findViewById(R.id.activity_address);
-
+        activityImage.setClipToOutline(true);
         String imageUrl = sample.get(position).getActivityImage();
         Glide.with(view.getContext()).load(imageUrl)
                 .apply(new RequestOptions().centerCrop())

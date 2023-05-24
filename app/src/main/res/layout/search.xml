@@ -13,7 +13,7 @@
             android:layout_marginTop="@dimen/common_middle_margin"
             android:layout_marginBottom="@dimen/common_middle_margin"
             android:background="@drawable/custom_edittext_userinfo"
-            android:hint="장소, 주소 검색"
+            android:hint="유저 검색"
             android:imeOptions="actionSearch"
             android:inputType="text"
             android:maxLines="1"
