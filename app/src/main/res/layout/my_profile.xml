@@ -62,15 +62,10 @@
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:stretchColumns="*">
+        android:stretchColumns="*"
+        android:paddingLeft="100sp"
+        android:paddingRight="100sp">
         <TableRow>
-            <TextView
-                android:id="@+id/hosting_num"
-                android:text="7"
-                android:textSize ="18sp"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                />
             <TextView
                 android:id="@+id/following_num"
                 android:text="12"
@@ -88,13 +83,6 @@
         </TableRow>
 
         <TableRow>
-            <TextView
-                android:id="@+id/hosting"
-                android:text="호스팅"
-                android:textSize ="15sp"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                />
             <TextView
                 android:id="@+id/following"
                 android:text="팔로잉"
