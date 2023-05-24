@@ -1,25 +1,25 @@
 package com.example.spotnow.activity;
 
 public class CommentInfo {
-    private String userID;
+    private String userName;
     private String comment;
     private long timestamp;
 
     public CommentInfo() {
     }
 
-    public CommentInfo(String userID, String comment, long timestamp) {
-        this.userID = userID;
+    public CommentInfo(String userName, String comment, long timestamp) {
+        this.userName = userName;
         this.comment = comment;
         this.timestamp = timestamp;
     }
 
-    public String getUserID() {
-        return userID;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getComment() {

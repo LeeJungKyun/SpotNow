@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.spotnow.R;
@@ -22,7 +24,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class participantFragment extends AppCompatActivity {
 
@@ -35,10 +40,12 @@ public class participantFragment extends AppCompatActivity {
     private TextView ownerName;
     private TextView titleTextView;
     private TextView contentTextView;
+    private RecyclerView commentShow;
     private DatabaseReference mDatabase;
     private String ActivityId;
     private FirebaseAuth mAuth;
     private String UID;
+    private String UserName;
     private long timestamp;
 
     @Override
@@ -54,12 +61,32 @@ public class participantFragment extends AppCompatActivity {
         titleTextView = findViewById(R.id.title);
         contentTextView = findViewById(R.id.bottom_text_view);
         ownerName = findViewById(R.id.ownerName);
+        commentShow = findViewById(R.id.commentShow);
+        commentShow.setLayoutManager(new LinearLayoutManager(this));
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
             UID = currentUser.getUid();
         }
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users").child(UID);
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    String name = snapshot.child("name").getValue(String.class);
+                    UserName = name;
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // 데이터 읽기를 취소한 경우 처리할 내용을 작성합니다.
+            }
+        });
+
+        CommentAdapter adapter = new CommentAdapter();
+        commentShow.setAdapter(adapter);
+
 
         // 인텐트에서 데이터 받아오기
         Intent intent = getIntent();
@@ -75,7 +102,6 @@ public class participantFragment extends AppCompatActivity {
             ownerName.setText(activityOwner);
             titleTextView.setText(activityTitle);
             contentTextView.setText("종목: "+activitySport+"\n"+"내용: "+activityContent+"\n"+"시작시간: "+activityStartTime+"\n"+"종료시간: "+activityEndTime+"\n"+"인원: "+activityPeopleCnt);
-
 
             // Firebase에서 데이터 가져오기
             mDatabase = FirebaseDatabase.getInstance().getReference("activities");
@@ -107,7 +133,30 @@ public class participantFragment extends AppCompatActivity {
                 }
             });
 
-//            mDatabase.child("activities").child(ActivityId).child("comment").orderByChild()
+            DatabaseReference commentRef = FirebaseDatabase.getInstance().getReference().child("activities");
+            commentRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    List<CommentInfo> comments = new ArrayList<>();
+                    for (DataSnapshot commentSnapshot : snapshot.child(ActivityId).child("comment").getChildren()) {
+                        String commentText = commentSnapshot.child("comment").getValue(String.class);
+                        String userName = commentSnapshot.child("userName").getValue(String.class);
+                        long TimeStamp = new Date().getTime();
+
+                        CommentInfo commentInfo = new CommentInfo(userName, commentText, TimeStamp);
+                        comments.add(commentInfo);
+
+                        adapter.setCommentList(comments);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    // 데이터 읽기를 취소한 경우 처리할 내용을 작성합니다.
+                }
+            });
+
+
         }
 
         writeParticipateInfoButton.setOnClickListener(new View.OnClickListener() {
@@ -129,7 +178,7 @@ public class participantFragment extends AppCompatActivity {
             public void onClick(View v) {
                 String c = comment.getText().toString();
                 timestamp = new Date().getTime();
-                sendComment(UID, c, timestamp);
+                sendComment(UserName, c, timestamp);
                 comment.setText("");
             }
         });
@@ -155,7 +204,6 @@ public class participantFragment extends AppCompatActivity {
             Toast.makeText(this, "댓글을 입력해주세요.", Toast.LENGTH_SHORT).show();
             return;
         }
-
         mDatabase = FirebaseDatabase.getInstance().getReference().child("activities").child(ActivityId).child("comment");
         CommentInfo commentInfo = new CommentInfo(UID, c, timestamp);
 
@@ -165,5 +213,7 @@ public class participantFragment extends AppCompatActivity {
         mDatabase.child(commentId).setValue(commentInfo);
         Toast.makeText(this, c, Toast.LENGTH_SHORT).show();
     }
+
+
 
 }

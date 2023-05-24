@@ -107,7 +107,7 @@
     </LinearLayout>
 
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1">
@@ -126,7 +126,6 @@
                 android:background="@android:color/darker_gray" />
 
             <TextView
-                android:id="@+id/commentShow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/divider"
@@ -135,8 +134,14 @@
                 android:layout_marginTop="5dp"
                 android:text="댓글"
                 android:textSize="18sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/commentShow"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
         </RelativeLayout>
-    </ScrollView>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
