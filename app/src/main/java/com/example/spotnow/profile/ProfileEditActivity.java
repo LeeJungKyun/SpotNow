@@ -162,7 +162,6 @@ public class ProfileEditActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     Uri downloadUri = task.getResult();
                                     String uploadId = databaseReference.push().getKey();
-                                    databaseReference.child(uploadId).setValue(downloadUri.toString());
                                     Toast.makeText(getApplicationContext(), "Upload successful", Toast.LENGTH_LONG).show();
 
 
