@@ -200,6 +200,8 @@ public class user_ProfileFragment extends Fragment {
             }
         });
         mDatabase.child(currentUserId).child("following").child(targetUserId).removeValue();
+
+        updateButton();
     }
 
     private void updateButton() {
