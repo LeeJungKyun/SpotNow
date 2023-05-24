@@ -26,7 +26,7 @@ public abstract class Utility {
             Log.d("Utility", "Permision Error");
             return null;
         }
-        Location loc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        Location loc = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
         return new Coordinate(loc.getLatitude(),loc.getLongitude());
     }
