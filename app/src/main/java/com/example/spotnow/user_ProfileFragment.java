@@ -39,7 +39,7 @@ public class user_ProfileFragment extends Fragment {
     TextView following;
     TextView follower;
 
-    String targetUId;
+    String targetUId = "";
 
     Button report_button;
 
@@ -103,6 +103,7 @@ public class user_ProfileFragment extends Fragment {
                         following.setText(Integer.toString(userinfo.getFollowing_num()));
                         follower.setText(Integer.toString(userinfo.getFollower_num()));
                         targetUId = snapshot.getKey();
+                        checkFollowStatus();
                     }
                 }
             }
@@ -113,8 +114,6 @@ public class user_ProfileFragment extends Fragment {
         });
 
         follow_button = rootView.findViewById(R.id.follow_button);
-
-        checkFollowStatus();
 
         follow_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,9 +130,9 @@ public class user_ProfileFragment extends Fragment {
     }
 
     private void checkFollowStatus() {
-        String targetUserId = "targetUId";
+        Query query = mDatabase.child(currentUserId).child("following").orderByValue().equalTo(targetUId);
 
-        mDatabase.child(currentUserId).child("following").child(targetUserId).addListenerForSingleValueEvent(new ValueEventListener() {
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 isFollowing = dataSnapshot.exists();
