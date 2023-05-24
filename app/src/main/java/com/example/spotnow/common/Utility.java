@@ -28,6 +28,9 @@ public abstract class Utility {
         }
         Location loc = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
+        if (loc == null)
+            return null;
+
         return new Coordinate(loc.getLatitude(),loc.getLongitude());
     }
 

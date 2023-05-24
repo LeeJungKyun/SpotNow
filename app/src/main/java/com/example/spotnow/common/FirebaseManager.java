@@ -26,7 +26,7 @@ public abstract class FirebaseManager {
     //    ArrayList<String> path = new ArrayList<>();
 //        path.add("5cCu0sBUaDXynAsvjp7CJiZzocv2");
 //        path.add("follower");
-//    FirebaseManager.WriteData("users", path, "sex", 123);
+//    FirebaseManager.WriteData("users", path, 123);
     public static <T>void WriteData(String ref, ArrayList<String> path, T data){
         DatabaseReference nDatabase = database.getReference(ref);
 

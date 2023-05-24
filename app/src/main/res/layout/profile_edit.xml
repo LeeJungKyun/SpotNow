@@ -8,6 +8,11 @@
     android:gravity="center"
     tools:context=".main.MainActivity">
 
+    <ImageView
+        android:id="@+id/profile_image"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginBottom="20dp"/>
 
     <EditText
         android:id="@+id/profile_edit_pw"
