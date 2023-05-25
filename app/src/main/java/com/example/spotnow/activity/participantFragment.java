@@ -150,14 +150,31 @@ public class participantFragment extends AppCompatActivity {
                         adapter.setCommentList(comments);
                     }
                 }
-
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
                     // 데이터 읽기를 취소한 경우 처리할 내용을 작성합니다.
                 }
             });
+            commentRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    List<CommentInfo> comments = new ArrayList<>();
+                    for(DataSnapshot commentSnapshot : snapshot.child(ActivityId).child("comment").getChildren()){
+                        String commentText = commentSnapshot.child("comment").getValue(String.class);
+                        String userName = commentSnapshot.child("userName").getValue(String.class);
+                        long TimeStamp = new Date().getTime();
 
+                        CommentInfo commentInfo = new CommentInfo(userName, commentText, TimeStamp);
+                        comments.add(commentInfo);
 
+                        adapter.setCommentList(comments);
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
         }
 
         writeParticipateInfoButton.setOnClickListener(new View.OnClickListener() {
@@ -214,7 +231,4 @@ public class participantFragment extends AppCompatActivity {
         mDatabase.child(commentId).setValue(commentInfo);
         Toast.makeText(this, c, Toast.LENGTH_SHORT).show();
     }
-
-
-
 }
