@@ -15,8 +15,8 @@
         android:layout_weight="1">
         <ImageButton
             android:id="@+id/back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_gravity="top"
             android:layout_marginLeft="@dimen/profile_back_button_left_margin"
             android:layout_marginTop="@dimen/profile_back_button_top_margin"
@@ -52,7 +52,7 @@
             app:civ_border_overlay="true"
             app:civ_border_width="5dp"
             app:civ_border_color="#000000"
-            android:src="@drawable/ic_launcher_foreground" />
+            android:src="@drawable/ic_baseline_person_24" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
