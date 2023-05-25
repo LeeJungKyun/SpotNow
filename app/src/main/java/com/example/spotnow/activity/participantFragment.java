@@ -33,6 +33,7 @@ import java.util.List;
 public class participantFragment extends AppCompatActivity {
 
     private Dialog participantDialog;
+    private Dialog reportingDialog;
     private EditText comment;
     private Button writeParticipateInfoButton;
     private Button writeReportButton;
@@ -64,6 +65,8 @@ public class participantFragment extends AppCompatActivity {
         ownerName = findViewById(R.id.ownerName);
         commentShow = findViewById(R.id.commentShow);
         commentShow.setLayoutManager(new LinearLayoutManager(this));
+
+        timestamp = new Date().getTime();
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -180,7 +183,7 @@ public class participantFragment extends AppCompatActivity {
         writeParticipateInfoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showParticipantDialog();
+                showParticipantDialog(UserName, timestamp);
             }
         });
 
@@ -195,25 +198,41 @@ public class participantFragment extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String c = comment.getText().toString();
-                timestamp = new Date().getTime();
                 sendComment(UserName, c, timestamp);
                 comment.setText("");
             }
         });
     }
 
-    private void showParticipantDialog() {
+    private void showParticipantDialog(String userName, long TimeStamp) {
         participantDialog = new Dialog(this);
         participantDialog.setContentView(R.layout.participant_dialog);
+
+        EditText dialogEditText = participantDialog.findViewById(R.id.DiaText);
+        Button dialogButton = participantDialog.findViewById(R.id.DiaSubmitButton);
+
+        dialogButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                // Dialog에서 작성한 문자열 가져오기
+                String dialogText = dialogEditText.getText().toString();
+                String CommentText = "[참여]" + dialogText;
+                // 가져온 문자열 사용하기
+                sendComment(userName, CommentText, TimeStamp);
+
+                // Dialog 닫기
+                participantDialog.dismiss();
+            }
+        });
 
         participantDialog.show();
     }
 
     private void reporting() {
-        participantDialog = new Dialog(this);
-        participantDialog.setContentView(R.layout.report);
+        reportingDialog = new Dialog(this);
+        reportingDialog.setContentView(R.layout.report);
 
-        participantDialog.show();
+        reportingDialog.show();
     }
 
     private void sendComment(String UID, String c, long timestamp) {

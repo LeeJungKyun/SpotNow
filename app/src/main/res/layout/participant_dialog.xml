@@ -13,7 +13,7 @@
         android:layout_marginBottom="16dp" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/DiaText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
@@ -29,7 +29,7 @@
         android:orientation="horizontal"
         android:gravity="end">
     <Button
-        android:id="@+id/submitButton"
+        android:id="@+id/DiaSubmitButton"
         android:layout_width="78dp"
         android:layout_height="30dp"
         android:layout_marginEnd="8dp"
