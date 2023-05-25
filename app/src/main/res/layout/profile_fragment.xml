@@ -24,7 +24,7 @@
             app:civ_border_overlay="true"
             app:civ_border_width="5dp"
             app:civ_border_color="#000000"
-            android:src="" />
+            android:src="@drawable/ic_baseline_person_24" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/profile_name_top_margin"
                 android:layout_marginLeft="@dimen/profile_name_left_margin"
-                android:text="윤서겅듀"
+                android:text=""
                 android:textSize="20sp"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
@@ -45,7 +45,7 @@
                 android:id="@+id/profile_introduce"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="저는 윤서겅듀에요"
+                android:text=""
                 android:textSize="12sp"
                 android:textColor="#808080"
                 android:layout_marginLeft="@dimen/profile_name_left_margin"
