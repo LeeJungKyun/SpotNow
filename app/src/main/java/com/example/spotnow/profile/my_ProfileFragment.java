@@ -7,12 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.example.spotnow.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -46,6 +48,7 @@ public class my_ProfileFragment extends Fragment {
         Button profile_edit_button = rootView.findViewById(R.id.profile_edit_button);
         TextView following = rootView.findViewById(R.id.following_num);
         TextView follower = rootView.findViewById(R.id.follower_num);
+        ImageView profile_image = rootView.findViewById(R.id.profile_image);
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser(); // 현재 로그인 한 유저 정보 반환
@@ -71,7 +74,7 @@ public class my_ProfileFragment extends Fragment {
                     progressBar.setProgress(100-userInfo.getReport_cnt()*5);
                     following.setText(Integer.toString(userInfo.getFollowing_num()));
                     follower.setText(Integer.toString(userInfo.getFollower_num()));
-
+                    Glide.with(my_ProfileFragment.this).load(userInfo.getProfileImage()).into(profile_image);
                 }
             }
         });

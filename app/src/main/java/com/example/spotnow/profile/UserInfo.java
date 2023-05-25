@@ -1,6 +1,8 @@
 package com.example.spotnow.profile;
 
 public class UserInfo {
+    public  String profileImage;
+
     public String name;
     public String email;
     public String sport;
@@ -18,7 +20,7 @@ public class UserInfo {
 
     }
 
-    public UserInfo(String name, String email, String sport, String region, int report_cnt, String introduce_self, Integer following_num, Integer follower_num, String pw) {
+    public UserInfo(String name, String email, String sport, String region, int report_cnt, String introduce_self, Integer following_num, Integer follower_num, String pw,String profileImage) {
         this.name = name;
         this.email = email;
         this.sport = sport;
@@ -28,6 +30,7 @@ public class UserInfo {
         this.following_num = following_num;
         this.follower_num = follower_num;
         this.pw = pw;
+        this.profileImage = "";
     }
 
     public String getPw() {
@@ -100,5 +103,9 @@ public class UserInfo {
 
     public void setRegion(String region) {
         this.region = region;
+    }
+
+    public String getProfileImage(){
+        return profileImage;
     }
 }
