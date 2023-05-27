@@ -1,0 +1,99 @@
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_2023_05_18_3_05_PM__Changes_.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_2023_05_18_3_05_PM__Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Update_at_2023_05_18_3_05_PM__Changes_.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_2023_05_18_3_05_PM__Changes_.xml	(revision cd321eeceb9739d4b4a4c187faacd172e7e5c069)
++++ /dev/null	(revision cd321eeceb9739d4b4a4c187faacd172e7e5c069)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_2023_05_18_3_05_PM_[Changes]" date="1684389957913" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2023_05_18_3_05_PM_[Changes]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 2023/05/18 3:05 PM [Changes]" />
+-</changelist>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_2023_05_18_3_05_PM_[Changes]/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_2023_05_18_3_05_PM_[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Update_at_2023_05_18_3_05_PM_[Changes]/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_2023_05_18_3_05_PM_[Changes]/shelved.patch	(revision cd321eeceb9739d4b4a4c187faacd172e7e5c069)
++++ /dev/null	(revision cd321eeceb9739d4b4a4c187faacd172e7e5c069)
+@@ -1,61 +0,0 @@
+-Index: app/src/main/AndroidManifest.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:tools=\"http://schemas.android.com/tools\">\n\n    <!--permissions for MAP API-->\n    <uses-permission android:name=\"android.permission.INTERNET\" />\n    <uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\" />\n    <uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\" />\n\n\n    <application\n        android:allowBackup=\"true\"\n        android:dataExtractionRules=\"@xml/data_extraction_rules\"\n        android:fullBackupContent=\"@xml/backup_rules\"\n        android:icon=\"@mipmap/ic_launcher\"\n        android:label=\"@string/app_name\"\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\n        android:supportsRtl=\"true\"\n        android:theme=\"@style/Theme.SpotNow\"\n        android:usesCleartextTraffic=\"true\"\n        tools:targetApi=\"31\">\n        <activity android:name=\".MainActivity\"\n            android:exported=\"true\">\n        </activity>\n        <activity android:name=\".SignUpActivity\"></activity>\n        <activity android:name=\".ProfileEditActivity\"></activity>\n        <activity\n            android:name=\".SearchActivity\"\n            android:exported=\"true\">\n            <intent-filter>\n                <action android:name=\"android.intent.action.MAIN\" />\n\n                <category android:name=\"android.intent.category.LAUNCHER\" />\n            </intent-filter>\n\n            <meta-data\n                android:name=\"android.app.lib_name\"\n                android:value=\"\" />\n        </activity>\n        <meta-data android:name=\"com.naver.maps.map.CLIENT_ID\" android:value=\"7z4yarok73\" />\n\n    </application>\n\n</manifest>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+---- a/app/src/main/AndroidManifest.xml	(revision 9d914f5b3f49cdde0482c5c25427f54f9313fb75)
+-+++ b/app/src/main/AndroidManifest.xml	(date 1684218005811)
+-@@ -24,8 +24,11 @@
+-         </activity>
+-         <activity android:name=".SignUpActivity"></activity>
+-         <activity android:name=".ProfileEditActivity"></activity>
+-+        <activity android:name=".ownerActivity"></activity>
+-+        <activity android:name=".participantActivity"></activity>
+-+        <activity android:name=".SearchActivity"></activity>
+-         <activity
+--            android:name=".SearchActivity"
+-+            android:name=".LoginActivity"
+-             android:exported="true">
+-             <intent-filter>
+-                 <action android:name="android.intent.action.MAIN" />
+-Index: .idea/compiler.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"CompilerConfiguration\">\n    <bytecodeTargetLevel target=\"17\" />\n  </component>\n</project>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/.idea/compiler.xml b/.idea/compiler.xml
+---- a/.idea/compiler.xml	(revision 9d914f5b3f49cdde0482c5c25427f54f9313fb75)
+-+++ b/.idea/compiler.xml	(date 1684163769020)
+-@@ -1,6 +1,6 @@
+- <?xml version="1.0" encoding="UTF-8"?>
+- <project version="4">
+-   <component name="CompilerConfiguration">
+--    <bytecodeTargetLevel target="17" />
+-+    <bytecodeTargetLevel target="11" />
+-   </component>
+- </project>
+-\ No newline at end of file
+-Index: .idea/misc.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_17\" default=\"true\" project-jdk-name=\"jbr-17\" project-jdk-type=\"JavaSDK\">\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\n  </component>\n  <component name=\"ProjectType\">\n    <option name=\"id\" value=\"Android\" />\n  </component>\n</project>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/.idea/misc.xml b/.idea/misc.xml
+---- a/.idea/misc.xml	(revision 9d914f5b3f49cdde0482c5c25427f54f9313fb75)
+-+++ b/.idea/misc.xml	(date 1684163769016)
+-@@ -1,7 +1,7 @@
+- <?xml version="1.0" encoding="UTF-8"?>
+- <project version="4">
+-   <component name="ExternalStorageConfigurationManager" enabled="true" />
+--  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="jbr-17" project-jdk-type="JavaSDK">
+-+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK">
+-     <output url="file://$PROJECT_DIR$/build/classes" />
+-   </component>
+-   <component name="ProjectType">
+Index: app/src/main/java/com/example/spotnow/activity/participantFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.spotnow.activity;\n\nimport android.app.Dialog;\nimport android.content.Intent;\nimport android.os.Bundle;\nimport android.text.method.ScrollingMovementMethod;\nimport android.view.View;\nimport android.widget.Button;\nimport android.widget.EditText;\nimport android.widget.ImageView;\nimport android.widget.TextView;\nimport android.widget.Toast;\n\nimport androidx.annotation.NonNull;\nimport androidx.appcompat.app.AppCompatActivity;\nimport androidx.recyclerview.widget.LinearLayoutManager;\nimport androidx.recyclerview.widget.RecyclerView;\n\nimport com.bumptech.glide.Glide;\nimport com.example.spotnow.R;\nimport com.google.firebase.auth.FirebaseAuth;\nimport com.google.firebase.auth.FirebaseUser;\nimport com.google.firebase.database.DataSnapshot;\nimport com.google.firebase.database.DatabaseError;\nimport com.google.firebase.database.DatabaseReference;\nimport com.google.firebase.database.FirebaseDatabase;\nimport com.google.firebase.database.ValueEventListener;\n\nimport java.util.ArrayList;\nimport java.util.Date;\nimport java.util.List;\n\npublic class participantFragment extends AppCompatActivity {\n\n    private Dialog participantDialog;\n    private EditText comment;\n    private Button writeParticipateInfoButton;\n    private Button writeReportButton;\n    private Button writeCommentButton;\n    private ImageView activityImageView;\n    private TextView ownerName;\n    private TextView titleTextView;\n    private TextView contentTextView;\n    private RecyclerView commentShow;\n    private DatabaseReference mDatabase;\n    private String ActivityId;\n    private FirebaseAuth mAuth;\n    private String UID;\n    private String UserName;\n    private long timestamp;\n\n    @Override\n    protected void onCreate(Bundle savedInstanceState) {\n        super.onCreate(savedInstanceState);\n        setContentView(R.layout.participant_activity_main);\n\n        writeParticipateInfoButton = findViewById(R.id.writeParticipateInfo);\n        writeReportButton = findViewById(R.id.writeReport);\n        writeCommentButton = findViewById(R.id.writeComment);\n        comment = findViewById(R.id.comment);\n        activityImageView = findViewById(R.id.place_holder_image);\n        titleTextView = findViewById(R.id.title);\n        contentTextView = findViewById(R.id.bottom_text_view);\n        ownerName = findViewById(R.id.ownerName);\n        commentShow = findViewById(R.id.commentShow);\n        commentShow.setLayoutManager(new LinearLayoutManager(this));\n\n        mAuth = FirebaseAuth.getInstance();\n        FirebaseUser currentUser = mAuth.getCurrentUser();\n        if (currentUser != null) {\n            UID = currentUser.getUid();\n        }\n        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child(\"users\").child(UID);\n        userRef.addListenerForSingleValueEvent(new ValueEventListener() {\n            @Override\n            public void onDataChange(@NonNull DataSnapshot snapshot) {\n                if (snapshot.exists()) {\n                    String name = snapshot.child(\"name\").getValue(String.class);\n                    UserName = name;\n                }\n            }\n            @Override\n            public void onCancelled(@NonNull DatabaseError error) {\n                // 데이터 읽기를 취소한 경우 처리할 내용을 작성합니다.\n            }\n        });\n\n        CommentAdapter adapter = new CommentAdapter();\n        commentShow.setAdapter(adapter);\n\n\n        // 인텐트에서 데이터 받아오기\n        Intent intent = getIntent();\n        if (intent != null) {\n            String activityTitle = intent.getStringExtra(\"activityTitle\");\n            String activityContent = intent.getStringExtra(\"activityContent\");\n            String activityOwner = intent.getStringExtra(\"activityOwner\");\n            String activitySport = intent.getStringExtra(\"activitySport\");\n            String activityPeopleCnt = intent.getStringExtra(\"activityPeopleCnt\");\n            String activityStartTime = intent.getStringExtra(\"activityStartTime\");\n            String activityEndTime = intent.getStringExtra(\"activityEndTime\");\n\n            ownerName.setText(activityOwner);\n            titleTextView.setText(activityTitle);\n            contentTextView.setText(\"종목: \"+activitySport+\"\\n\\n\"+\"내용: \"+activityContent+\"\\n\\n\"+\"시작시간: \" +\"\\n\" +activityStartTime+\"\\n\\n\"+\"종료시간: \" +\"\\n\"+activityEndTime+\"\\n\\n\"+\"인원: \"+activityPeopleCnt);\n            contentTextView.setMovementMethod(new ScrollingMovementMethod());\n            // Firebase에서 데이터 가져오기\n            mDatabase = FirebaseDatabase.getInstance().getReference(\"activities\");\n            mDatabase.orderByChild(\"title\").equalTo(activityTitle).addListenerForSingleValueEvent(new ValueEventListener() {\n                @Override\n                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {\n                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {\n                        ActivityInfo activity = snapshot.getValue(ActivityInfo.class);\n                        if (activity != null && activity.getContent().equals(activityContent)) {\n                            // 원하는 데이터를 찾았을 경우\n                            String activityId = snapshot.getKey();\n                            ActivityId = activityId;\n                            Toast.makeText(participantFragment.this, ActivityId,Toast.LENGTH_SHORT).show();\n                            String imageUrl = activity.getImageUrl();\n\n                            Glide.with(participantFragment.this).load(imageUrl).into(activityImageView);\n\n                            Toast.makeText(participantFragment.this, \"Activity ID: \" + activityId, Toast.LENGTH_SHORT).show();\n                            Toast.makeText(participantFragment.this, \"Activity Title: \" + activity.getTitle(), Toast.LENGTH_SHORT).show();\n                            Toast.makeText(participantFragment.this, \"Activity Content: \" + activity.getContent(), Toast.LENGTH_SHORT).show();\n                            break;\n                        }\n                    }\n                }\n                @Override\n                public void onCancelled(@NonNull DatabaseError error) {\n                    // 실패했으\n                    Toast.makeText(participantFragment.this, \"Failed to read value.\", Toast.LENGTH_SHORT).show();\n                }\n            });\n\n            DatabaseReference commentRef = FirebaseDatabase.getInstance().getReference().child(\"activities\");\n            commentRef.addListenerForSingleValueEvent(new ValueEventListener() {\n                @Override\n                public void onDataChange(@NonNull DataSnapshot snapshot) {\n                    List<CommentInfo> comments = new ArrayList<>();\n                    for (DataSnapshot commentSnapshot : snapshot.child(ActivityId).child(\"comment\").getChildren()) {\n                        String commentText = commentSnapshot.child(\"comment\").getValue(String.class);\n                        String userName = commentSnapshot.child(\"userName\").getValue(String.class);\n                        long TimeStamp = new Date().getTime();\n\n                        CommentInfo commentInfo = new CommentInfo(userName, commentText, TimeStamp);\n                        comments.add(commentInfo);\n\n                        adapter.setCommentList(comments);\n                    }\n                }\n\n                @Override\n                public void onCancelled(@NonNull DatabaseError error) {\n                    // 데이터 읽기를 취소한 경우 처리할 내용을 작성합니다.\n                }\n            });\n\n\n        }\n\n        writeParticipateInfoButton.setOnClickListener(new View.OnClickListener() {\n            @Override\n            public void onClick(View v) {\n                showParticipantDialog();\n            }\n        });\n\n        writeReportButton.setOnClickListener(new View.OnClickListener() {\n            @Override\n            public void onClick(View v) {\n                reporting();\n            }\n        });\n\n        writeCommentButton.setOnClickListener(new View.OnClickListener() {\n            @Override\n            public void onClick(View v) {\n                String c = comment.getText().toString();\n                timestamp = new Date().getTime();\n                sendComment(UserName, c, timestamp);\n                comment.setText(\"\");\n            }\n        });\n    }\n\n    private void showParticipantDialog() {\n        participantDialog = new Dialog(this);\n        participantDialog.setContentView(R.layout.participant_dialog);\n\n        participantDialog.show();\n    }\n\n    private void reporting() {\n        participantDialog = new Dialog(this);\n        participantDialog.setContentView(R.layout.report);\n\n        participantDialog.show();\n    }\n\n    private void sendComment(String UID, String c, long timestamp) {\n        if (c.trim().isEmpty()) {\n            // 댓글이 비어있는 경우 처리\n            Toast.makeText(this, \"댓글을 입력해주세요.\", Toast.LENGTH_SHORT).show();\n            return;\n        }\n        mDatabase = FirebaseDatabase.getInstance().getReference().child(\"activities\").child(ActivityId).child(\"comment\");\n        CommentInfo commentInfo = new CommentInfo(UID, c, timestamp);\n\n        Toast.makeText(this, ActivityId, Toast.LENGTH_SHORT).show();\n\n        String commentId = mDatabase.push().getKey();\n        mDatabase.child(commentId).setValue(commentInfo);\n        Toast.makeText(this, c, Toast.LENGTH_SHORT).show();\n    }\n\n\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/spotnow/activity/participantFragment.java b/app/src/main/java/com/example/spotnow/activity/participantFragment.java
+--- a/app/src/main/java/com/example/spotnow/activity/participantFragment.java	(revision cd321eeceb9739d4b4a4c187faacd172e7e5c069)
++++ b/app/src/main/java/com/example/spotnow/activity/participantFragment.java	(date 1685187765376)
+@@ -181,6 +181,8 @@
+                 timestamp = new Date().getTime();
+                 sendComment(UserName, c, timestamp);
+                 comment.setText("");
++
++
+             }
+         });
+     }

@@ -200,6 +200,11 @@ public class participantFragment extends AppCompatActivity {
                 String c = comment.getText().toString();
                 sendComment(UserName, c, timestamp);
                 comment.setText("");
+
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
+
             }
         });
     }
