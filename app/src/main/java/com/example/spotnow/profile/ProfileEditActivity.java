@@ -162,19 +162,19 @@ public class ProfileEditActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     Uri downloadUri = task.getResult();
                                     String uploadId = databaseReference.push().getKey();
-                                    Toast.makeText(getApplicationContext(), "Upload successful", Toast.LENGTH_LONG).show();
+                                    //Toast.makeText(getApplicationContext(), "Upload successful", Toast.LENGTH_LONG).show();
 
 
                                     FirebaseDatabase.getInstance().getReference().child("users").child(
                                             currentUid).child("profileImage").setValue(downloadUri.toString());
 
                                 } else {
-                                    Toast.makeText(getApplicationContext(), "Upload failed: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                    //Toast.makeText(getApplicationContext(), "Upload failed: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                                 }
                             }
                         });
                     })
-                    .addOnFailureListener(e -> Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show())
+                    //.addOnFailureListener(e -> Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show())
                     .addOnProgressListener(snapshot -> {
                         double progress = (100.0 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
                         // Progress listener can be added here if needed
