@@ -6,12 +6,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.spotnow.R;
 import com.example.spotnow.main.reportPopupFragment;
 import com.google.firebase.auth.FirebaseAuth;
@@ -39,6 +42,7 @@ public class user_ProfileFragment extends Fragment {
     TextView region;
     TextView following;
     TextView follower;
+    ImageView userImage;
 
     String targetUId = "";
 
@@ -67,6 +71,7 @@ public class user_ProfileFragment extends Fragment {
         following = rootView.findViewById(R.id.following_num);
         follower = rootView.findViewById(R.id.follow_num);
         report_button = rootView.findViewById(R.id.report_button);
+        userImage = rootView.findViewById(R.id.profile_image);
 
         report_button.setOnClickListener(new View.OnClickListener()
         {
@@ -88,6 +93,7 @@ public class user_ProfileFragment extends Fragment {
 
         mDatabase = FirebaseDatabase.getInstance().getReference("users");
 
+
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -104,6 +110,11 @@ public class user_ProfileFragment extends Fragment {
                         following.setText(Integer.toString(userinfo.getFollowing_num()));
                         follower.setText(Integer.toString(userinfo.getFollower_num()));
                         targetUId = snapshot.getKey();
+                        Glide.with(user_ProfileFragment.this)
+                                .load(userinfo.getProfileImage())
+                                .apply(RequestOptions.circleCropTransform())
+                                .into(userImage);
+
                         checkFollowStatus();
                     }
                 }
