@@ -68,9 +68,6 @@ public class participantFragment extends AppCompatActivity {
 
         timestamp = new Date().getTime();
 
-        CommentAdapter adapter = new CommentAdapter();
-        commentShow.setAdapter(adapter);
-
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
@@ -90,6 +87,10 @@ public class participantFragment extends AppCompatActivity {
                 // 데이터 읽기를 취소한 경우 처리할 내용을 작성합니다.
             }
         });
+
+        CommentAdapter adapter = new CommentAdapter();
+        commentShow.setAdapter(adapter);
+
 
         // 인텐트에서 데이터 받아오기
         Intent intent = getIntent();
@@ -220,7 +221,6 @@ public class participantFragment extends AppCompatActivity {
                 String CommentText = "[참여]" + dialogText;
                 // 가져온 문자열 사용하기
                 sendComment(userName, CommentText, TimeStamp);
-                addParticipantCount();
 
                 // Dialog 닫기
                 participantDialog.dismiss();
@@ -251,9 +251,5 @@ public class participantFragment extends AppCompatActivity {
         String commentId = mDatabase.push().getKey();
         mDatabase.child(commentId).setValue(commentInfo);
         Toast.makeText(this, c, Toast.LENGTH_SHORT).show();
-    }
-
-    private void addParticipantCount(){
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("activities").child(ActivityId);
     }
 }

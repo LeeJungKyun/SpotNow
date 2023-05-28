@@ -8,7 +8,7 @@ public class activity_listview_info {
     private String activityContent;
     private String activityOwner;
     private String activitySport;
-    private int peopleCnt;
+    private String peopleCnt;
     private String startTime;
 
 
@@ -29,7 +29,7 @@ public class activity_listview_info {
         this.activitySport = activitySport;
     }
 
-    public activity_listview_info(String activityImage, String activityTitle, String activityContent, String activityOwner, String activitySport, int peopleCnt, String startTime, String endTime) {
+    public activity_listview_info(String activityImage, String activityTitle, String activityContent, String activityOwner, String activitySport, String peopleCnt, String startTime, String endTime) {
         this.activityImage = activityImage;
         this.activityTitle = activityTitle;
         this.activityContent = activityContent;
@@ -80,11 +80,11 @@ public class activity_listview_info {
         this.activitySport = activitySport;
     }
 
-    public int getPeopleCnt() {
+    public String getPeopleCnt() {
         return peopleCnt;
     }
 
-    public void setPeopleCnt(int peopleCnt) {
+    public void setPeopleCnt(String peopleCnt) {
         this.peopleCnt = peopleCnt;
     }
 
