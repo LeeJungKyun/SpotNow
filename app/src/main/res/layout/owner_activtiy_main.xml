@@ -18,7 +18,8 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:layout_gravity="center"
-        android:textSize="12sp" />
+        android:paddingLeft="10dp"
+        android:textSize="10sp" />
 
     <!-- Activity 사진 -->
     <RelativeLayout
@@ -60,6 +61,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="6dp"
             android:text="액티비티 종목" />
 
         <Spinner
@@ -70,6 +72,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="6dp"
             android:text="시작시간" />
 
         <LinearLayout
@@ -106,6 +109,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="6dp"
             android:text="종료시간" />
 
         <LinearLayout
@@ -143,6 +147,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="6dp"
             android:text="인원수" />
 
         <EditText
@@ -154,6 +159,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="8dp"
             android:text="내용" />
 
         <EditText
