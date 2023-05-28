@@ -85,30 +85,30 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.home:
                         selectedFragment = new HomeFragment();
                         break;
-                    case R.id.my_activity:
-                        mDatabaseA.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                                    String activityOwner = snapshot.child("activityOwner").getValue(String.class);
-                                    activityOwners.add(activityOwner);
-                                }
-                                boolean isValueFound = activityOwners.contains(name);
-
-                                if (isValueFound) {
-                                    // 찾는 값이 ArrayList 안에 있을 때
-                                    selectedFragment = new ownerFragment();
-                                } else {
-                                    // 찾는 값이 ArrayList 안에 없을 때
-                                    //selectedFragment = new participantFragment();
-                                }
-                            }
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-                                Log.e("firebase", "Error retrieving activity owners");
-                            }
-                        });
-                        break;
+//                    case R.id.my_activity:
+//                        mDatabaseA.addValueEventListener(new ValueEventListener() {
+//                            @Override
+//                            public void onDataChange(DataSnapshot dataSnapshot) {
+//                                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+//                                    String activityOwner = snapshot.child("activityOwner").getValue(String.class);
+//                                    activityOwners.add(activityOwner);
+//                                }
+//                                boolean isValueFound = activityOwners.contains(name);
+//
+//                                if (isValueFound) {
+//                                    // 찾는 값이 ArrayList 안에 있을 때
+//                                    selectedFragment = new ownerFragment();
+//                                } else {
+//                                    // 찾는 값이 ArrayList 안에 없을 때
+//                                    //selectedFragment = new participantFragment();
+//                                }
+//                            }
+//                            @Override
+//                            public void onCancelled(DatabaseError databaseError) {
+//                                Log.e("firebase", "Error retrieving activity owners");
+//                            }
+//                        });
+//                        break;
                     case R.id.profile:
                         selectedFragment = new my_ProfileFragment();
                         break;
