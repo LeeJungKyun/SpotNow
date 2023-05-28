@@ -38,12 +38,8 @@ import java.util.UUID;
 
 public class ownerActivity extends AppCompatActivity {
 
-    private Dialog deleteCheckDialog;
     private EditText Comment;
-    private Button readParticipantListButton;
-    private Button deleteActivityButton;
     private Button modifyActivityButton;
-    private Button writeCommentButton;
     private ImageView placeHolderImage;
     private Spinner activityTypeSpinner;
     private Spinner monthSpinner;
@@ -76,11 +72,7 @@ public class ownerActivity extends AppCompatActivity {
         setContentView(R.layout.owner_activtiy_main);
 
         textView = findViewById(R.id.text_view);
-        readParticipantListButton = findViewById(R.id.readParticipantList);
-        deleteActivityButton = findViewById(R.id.deleteActivity);
         modifyActivityButton = findViewById(R.id.modifyActivity);
-        writeCommentButton = findViewById(R.id.writeComment);
-        Comment = findViewById(R.id.comment);
         placeHolderImage = findViewById(R.id.place_holder_image);
         activityTypeSpinner = findViewById(R.id.sport_spinner);
         monthSpinner = findViewById(R.id.month_spinner);
@@ -97,19 +89,19 @@ public class ownerActivity extends AppCompatActivity {
 
         mStorage = FirebaseStorage.getInstance().getReference();
 
-        readParticipantListButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                callParticipantList();
-            }
-        });
+//        readParticipantListButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                callParticipantList();
+//            }
+//        });
 
-        writeCommentButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendComment();
-            }
-        });
+//        writeCommentButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                sendComment();
+//            }
+//        });
 
         placeHolderImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -178,32 +170,11 @@ public class ownerActivity extends AppCompatActivity {
     });
 
 
-//        mDatabase = FirebaseDatabase.getInstance().getReference();
-//        mDatabase.child("users").child(uid).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<DataSnapshot> task) {
-//                if (!task.isSuccessful()) {
-//                    Log.e("firebase", "Error getting data", task.getException());
-//                }
-//                else {
-//                    userInfo = task.getResult().getValue(UserInfo.class); // 유저 정보 한번 불러오기
-//
-//
-//                }
-//            }
-//        });
-
-
         modifyActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {uploadActivity();}
         });
 
-    }
-
-    private void callParticipantList() {
-        // 대기 목록 호출
-        // 이부분은 아마 등록하는 부분에서는 지워도 될듯 혹시 몰라 남겨놓음
     }
 
     public void uploadActivity(){

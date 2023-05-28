@@ -81,11 +81,11 @@ public class ownerFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.owner_activtiy_main, container, false);
 
         textView = rootView.findViewById(R.id.text_view);
-        readParticipantListButton = rootView.findViewById(R.id.readParticipantList);
-        deleteActivityButton = rootView.findViewById(R.id.deleteActivity);
+//        readParticipantListButton = rootView.findViewById(R.id.readParticipantList);
+//        deleteActivityButton = rootView.findViewById(R.id.deleteActivity);
         modifyActivityButton = rootView.findViewById(R.id.modifyActivity);
-        writeCommentButton = rootView.findViewById(R.id.writeComment);
-        Comment = rootView.findViewById(R.id.comment);
+//        writeCommentButton = rootView.findViewById(R.id.writeComment);
+//        Comment = rootView.findViewById(R.id.comment);
         placeHolderImage = rootView.findViewById(R.id.place_holder_image);
         activityTypeSpinner = rootView.findViewById(R.id.sport_spinner);
         monthSpinner = rootView.findViewById(R.id.month_spinner);
