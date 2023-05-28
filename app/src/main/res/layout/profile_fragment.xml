@@ -62,7 +62,9 @@
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:stretchColumns="*">
+            android:stretchColumns="*"
+            android:paddingLeft="100sp"
+            android:paddingRight="100sp">
             <TableRow>
                 <TextView
                     android:id="@+id/following_num"
@@ -125,6 +127,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
+            android:layout_marginTop="20dp"
             android:padding="10dp"
             android:layout_gravity="center_vertical"
             android:text="매너지수"/>
@@ -135,7 +138,7 @@
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:progress="40"
+            android:progress="0"
             android:max="100" />
     </LinearLayout>
 
@@ -143,9 +146,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="800"
-        android:orientation="vertical"
-        android:layout_marginTop="10dp">
+        android:layout_weight="400"
+        android:orientation="vertical">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
