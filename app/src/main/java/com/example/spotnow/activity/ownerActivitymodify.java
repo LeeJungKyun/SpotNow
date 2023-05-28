@@ -207,11 +207,11 @@ public class ownerActivitymodify extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference().child("activities").child(ActivityId).child("comment");
         CommentInfo commentInfo = new CommentInfo(UID, c, timestamp);
 
-        Toast.makeText(this, ActivityId, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, ActivityId, Toast.LENGTH_SHORT).show();
 
         String commentId = mDatabase.push().getKey();
         mDatabase.child(commentId).setValue(commentInfo);
-        Toast.makeText(this, c, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, c, Toast.LENGTH_SHORT).show();
     }
 
 

@@ -133,7 +133,7 @@ public class participantFragment extends AppCompatActivity {
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
                     // 실패했으
-                    Toast.makeText(participantFragment.this, "Failed to read value.", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(participantFragment.this, "Failed to read value.", Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -246,10 +246,10 @@ public class participantFragment extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference().child("activities").child(ActivityId).child("comment");
         CommentInfo commentInfo = new CommentInfo(UID, c, timestamp);
 
-        Toast.makeText(this, ActivityId, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, ActivityId, Toast.LENGTH_SHORT).show();
 
         String commentId = mDatabase.push().getKey();
         mDatabase.child(commentId).setValue(commentInfo);
-        Toast.makeText(this, c, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, c, Toast.LENGTH_SHORT).show();
     }
 }
