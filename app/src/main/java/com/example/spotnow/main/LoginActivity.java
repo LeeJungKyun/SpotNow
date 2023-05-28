@@ -23,8 +23,8 @@ import com.google.firebase.auth.FirebaseUser;
 public class LoginActivity extends AppCompatActivity
 {
 
-    private FirebaseAuth.AuthStateListener firebaseAuthListener;
-    private FirebaseAuth firebaseAuth;
+    public FirebaseAuth.AuthStateListener firebaseAuthListener;
+    public FirebaseAuth firebaseAuth;
     Button sign_up_button;
     Button sign_in_button;
     private EditText editTextEmail;
@@ -104,7 +104,6 @@ public class LoginActivity extends AppCompatActivity
                 if (task.isSuccessful())
                 {
                     // 로그인 성공
-                    Toast.makeText(getApplicationContext(), "로그인 성공", Toast.LENGTH_SHORT).show();
                     firebaseAuth.addAuthStateListener(firebaseAuthListener);
                 } else
                 {
