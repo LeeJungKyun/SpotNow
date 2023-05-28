@@ -10,7 +10,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.spotnow.common.SearchActivity;
 import com.example.spotnow.activity.ownerActivitymodify;
@@ -333,8 +332,6 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
 
                 slidingUp = v.findViewById(R.id.main_panel);
                 slidingUp.setPanelState(PanelState.EXPANDED);
-
-                Toast.makeText(getContext(), m.spotName + " Marker click!" + "spotID:" + clickedSpotID, Toast.LENGTH_SHORT).show();
 
                 return true;
             }
