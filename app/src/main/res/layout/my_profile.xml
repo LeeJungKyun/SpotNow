@@ -24,7 +24,7 @@
             app:civ_border_overlay="true"
             app:civ_border_width="5dp"
             app:civ_border_color="#000000"
-            android:src="@drawable/ic_launcher_background"
+            android:src="@drawable/ic_baseline_person_24"
              />
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/profile_name_top_margin"
             android:layout_marginLeft="@dimen/profile_name_left_margin"
-            android:text="윤서겅듀"
+            android:text=""
             android:textSize="20sp"
             android:textColor="@color/black"
             android:textStyle="bold" />
@@ -46,7 +46,7 @@
             android:id="@+id/profile_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="저는 윤서겅듀에요"
+            android:text=""
             android:textSize="12sp"
             android:textColor="#808080"
             android:layout_marginLeft="@dimen/profile_name_left_margin"
@@ -69,14 +69,14 @@
         <TableRow>
             <TextView
                 android:id="@+id/following_num"
-                android:text="12"
+                android:text=""
                 android:textSize ="18sp"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 />
             <TextView
                 android:id="@+id/follow_num"
-                android:text="17"
+                android:text=""
                 android:textSize ="18sp"
                 android:textAlignment="center"
                 android:textColor="@color/black"
