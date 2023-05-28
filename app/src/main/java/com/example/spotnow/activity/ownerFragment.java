@@ -279,7 +279,7 @@ public class ownerFragment extends Fragment {
         // user id 와 comment를 (id, comment) firebase에 저장
         // 여기서 c를 가져와서 DB에 저장한 뒤 댓글 창에 보여주기
 
-        Toast.makeText(getActivity().getApplicationContext(), c, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getActivity().getApplicationContext(), c, Toast.LENGTH_SHORT).show();
 
         Comment.setText("");
     }

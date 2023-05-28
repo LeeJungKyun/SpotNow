@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -198,7 +197,6 @@ public class ownerActivity extends AppCompatActivity {
 
         // 전체값 팔수 입력
         if (TiTle.isEmpty() || sport.equals("*선택*") || startTime.isEmpty() || endTime.isEmpty() || participantCount.isEmpty() || content.isEmpty()) {
-            Toast.makeText(ownerActivity.this, "모든 항목을 입력해주세요.", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -209,7 +207,7 @@ public class ownerActivity extends AppCompatActivity {
                     sdf.parse(startTime);
                     sdf.parse(endTime);
                 } catch (ParseException e) {
-                    Toast.makeText(ownerActivity.this, "날짜 형식이 잘못되었습니다. 올바른 형식은 'YYYY-MM-DD-HH:MM'입니다.", Toast.LENGTH_SHORT).show();
+
                     return;
                 } catch (java.text.ParseException e) {
                     throw new RuntimeException(e);
@@ -232,7 +230,6 @@ public class ownerActivity extends AppCompatActivity {
         //firebase
         // activity id를 찾아서
         // user id 와 comment를 (id, comment) firebase에 저장
-        Toast.makeText(getApplicationContext(), comment, Toast.LENGTH_SHORT).show();
 
         Comment.setText("");
     }
@@ -277,7 +274,7 @@ public class ownerActivity extends AppCompatActivity {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
                                     // 이미지의 다운로드 URL을 가져오는데 실패
-                                    Toast.makeText(ownerActivity.this, "이미지 업로드에 실패하였습니다.(DownloadERROR)", Toast.LENGTH_SHORT).show();
+
                                 }
                             });
                         }
@@ -286,7 +283,7 @@ public class ownerActivity extends AppCompatActivity {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             // 이미지 업로드 실패
-                            Toast.makeText(ownerActivity.this, "이미지 업로드에 실패하였습니다.(UPLOADERROR)", Toast.LENGTH_SHORT).show();
+
                         }
                     });
         } else {
@@ -300,7 +297,6 @@ public class ownerActivity extends AppCompatActivity {
 
 
         ActivityInfo activity = new ActivityInfo(title, sport, content, startTime, endTime, peopleCnt, spotID, imageUrl, activityOwner);
-        Toast.makeText(getApplicationContext(), activity.spotID + activity.title, Toast.LENGTH_SHORT).show();
         mDatabase.child("activities").push().setValue(activity);
     }
 

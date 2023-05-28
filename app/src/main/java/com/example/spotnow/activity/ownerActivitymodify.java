@@ -115,14 +115,13 @@ public class ownerActivitymodify extends AppCompatActivity {
                             // 원하는 데이터를 찾았을 경우
                             String activityId = snapshot.getKey();
                             ActivityId = activityId;
-                            Toast.makeText(ownerActivitymodify.this, ActivityId,Toast.LENGTH_SHORT).show();
                             String imageUrl = activity.getImageUrl();
 
                             Glide.with(ownerActivitymodify.this).load(imageUrl).into(activityImageView);
 
-                            Toast.makeText(ownerActivitymodify.this, "Activity ID: " + activityId, Toast.LENGTH_SHORT).show();
-                            Toast.makeText(ownerActivitymodify.this, "Activity Title: " + activity.getTitle(), Toast.LENGTH_SHORT).show();
-                            Toast.makeText(ownerActivitymodify.this, "Activity Content: " + activity.getContent(), Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(ownerActivitymodify.this, "Activity ID: " + activityId, Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(ownerActivitymodify.this, "Activity Title: " + activity.getTitle(), Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(ownerActivitymodify.this, "Activity Content: " + activity.getContent(), Toast.LENGTH_SHORT).show();
                             break;
                         }
                     }
@@ -130,7 +129,7 @@ public class ownerActivitymodify extends AppCompatActivity {
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
                     // 실패했으
-                    Toast.makeText(ownerActivitymodify.this, "Failed to read value.", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(ownerActivitymodify.this, "Failed to read value.", Toast.LENGTH_SHORT).show();
                 }
             });
 
