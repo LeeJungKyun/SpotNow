@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.spotnow.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -74,7 +75,10 @@ public class my_ProfileFragment extends Fragment {
                     progressBar.setProgress(100-userInfo.getReport_cnt()*5);
                     following.setText(Integer.toString(userInfo.getFollowing_num()));
                     follower.setText(Integer.toString(userInfo.getFollower_num()));
-                    Glide.with(my_ProfileFragment.this).load(userInfo.getProfileImage()).into(profile_image);
+                    Glide.with(my_ProfileFragment.this)
+                            .load(userInfo.getProfileImage())
+                            .apply(RequestOptions.circleCropTransform())
+                            .into(profile_image);
                 }
             }
         });

@@ -31,7 +31,7 @@
             android:layout_marginTop="@dimen/profile_back_button_top_margin"
             android:text="신고"
             android:textColor="@color/black"
-            android:backgroundTint="#FFDBDB"/>
+            android:background="#FFDBDB"/>
     </FrameLayout>
 
     <!--    프로필 레이아웃 -->
@@ -42,7 +42,7 @@
         android:orientation="horizontal"
         >
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_image"
             android:layout_width="124dp"
             android:layout_height="124dp"
@@ -85,6 +85,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
         android:layout_weight="40">
         <TableLayout
             android:layout_marginTop="10dp"
@@ -142,7 +143,7 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:backgroundTint="#B80248FC"
+            android:background="#B80248FC"
             android:text="팔로우"
             android:textColor="@color/white"
             android:textStyle="bold"
@@ -192,7 +193,7 @@
             android:gravity="center"
             android:layout_width="289dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="@dimen/activity_list_left_margin"
+            android:layout_gravity="center"
             android:layout_marginTop="@dimen/activity_list_top_margin"
             android:background="#E2F5FF"/>
     </LinearLayout>
@@ -213,7 +214,7 @@
             android:id="@+id/profile_region"
             android:layout_width="289dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="@dimen/address_left_margin"
+            android:layout_gravity="center"
             android:layout_marginTop="@dimen/address_top_margin"
             android:background="#EEE9FB"/>
     </LinearLayout>
