@@ -118,27 +118,19 @@ public class participantFragment extends AppCompatActivity {
                             // 원하는 데이터를 찾았을 경우
                             String activityId = snapshot.getKey();
                             ActivityId = activityId;
-//                            Toast.makeText(participantFragment.this, ActivityId,Toast.LENGTH_SHORT).show();
                             String imageUrl = activity.getImageUrl();
-
                             Glide.with(participantFragment.this).load(imageUrl).into(activityImageView);
-
-//                            Toast.makeText(participantFragment.this, "Activity ID: " + activityId, Toast.LENGTH_SHORT).show();
-//                            Toast.makeText(participantFragment.this, "Activity Title: " + activity.getTitle(), Toast.LENGTH_SHORT).show();
-//                            Toast.makeText(participantFragment.this, "Activity Content: " + activity.getContent(), Toast.LENGTH_SHORT).show();
                             break;
                         }
                     }
                 }
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-                    // 실패했으
-                    Toast.makeText(participantFragment.this, "Failed to read value.", Toast.LENGTH_SHORT).show();
                 }
             });
 
             DatabaseReference commentRef = FirebaseDatabase.getInstance().getReference().child("activities");
-            commentRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            commentRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     List<CommentInfo> comments = new ArrayList<>();
@@ -163,12 +155,15 @@ public class participantFragment extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     List<CommentInfo> comments = new ArrayList<>();
                     for(DataSnapshot commentSnapshot : snapshot.child(ActivityId).child("comment").getChildren()){
+
                         String commentText = commentSnapshot.child("comment").getValue(String.class);
                         String userName = commentSnapshot.child("userName").getValue(String.class);
                         long TimeStamp = new Date().getTime();
 
+
                         CommentInfo commentInfo = new CommentInfo(userName, commentText, TimeStamp);
                         comments.add(commentInfo);
+
 
                         adapter.setCommentList(comments);
                     }
@@ -200,8 +195,6 @@ public class participantFragment extends AppCompatActivity {
                 String c = comment.getText().toString();
                 sendComment(UserName, c, timestamp);
                 comment.setText("");
-
-
             }
         });
     }
@@ -219,6 +212,7 @@ public class participantFragment extends AppCompatActivity {
                 // Dialog에서 작성한 문자열 가져오기
                 String dialogText = dialogEditText.getText().toString();
                 String CommentText = "[참여]" + dialogText;
+                addParticipantCount();
                 // 가져온 문자열 사용하기
                 sendComment(userName, CommentText, TimeStamp);
 
@@ -245,11 +239,25 @@ public class participantFragment extends AppCompatActivity {
         }
         mDatabase = FirebaseDatabase.getInstance().getReference().child("activities").child(ActivityId).child("comment");
         CommentInfo commentInfo = new CommentInfo(UID, c, timestamp);
-
-        Toast.makeText(this, ActivityId, Toast.LENGTH_SHORT).show();
-
         String commentId = mDatabase.push().getKey();
         mDatabase.child(commentId).setValue(commentInfo);
-        Toast.makeText(this, c, Toast.LENGTH_SHORT).show();
+    }
+    private void addParticipantCount(){
+        DatabaseReference participantAdd = FirebaseDatabase.getInstance().getReference().child("activities").child(ActivityId).child("peopleCnt");
+        participantAdd.addListenerForSingleValueEvent((new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String peopleCnt = snapshot.getValue(String.class);
+                int peopleCntInt = Integer.parseInt(peopleCnt);
+                peopleCntInt++;
+                peopleCnt = Integer.toString(peopleCntInt);
+                participantAdd.setValue(peopleCnt);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        }));
     }
 }
