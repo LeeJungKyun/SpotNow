@@ -72,9 +72,6 @@ public class reportPopupFragment extends DialogFragment
                 });
             }
         });
-
-
-
         // 다이얼로그 UI 요소에 대한 작업 수행
 
         return view;
