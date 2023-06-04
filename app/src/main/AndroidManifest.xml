@@ -41,7 +41,9 @@
         <activity android:name=".profile.ProfileEditActivity"></activity>
         <activity android:name=".activity.ownerActivity"></activity>
 
-        <activity android:name=".activity.participantFragment"></activity>
+        <activity
+            android:name=".activity.participantFragment"
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".main.reportPopupFragment" android:theme="@android:style/Theme.Dialog"/>
 
         <activity android:name=".common.SearchActivity"

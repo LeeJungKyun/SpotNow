@@ -1,10 +1,13 @@
 package com.example.spotnow.activity;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -91,6 +94,20 @@ public class participantFragment extends AppCompatActivity {
         CommentAdapter adapter = new CommentAdapter();
         commentShow.setAdapter(adapter);
 
+        final int defaultSoftInputMode = getWindow().getAttributes().softInputMode;
+        comment.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+                } else {
+                    getWindow().setSoftInputMode(defaultSoftInputMode);
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(comment.getWindowToken(), 0);
+                }
+            }
+        });
+
 
         // 인텐트에서 데이터 받아오기
         Intent intent = getIntent();
@@ -164,7 +181,6 @@ public class participantFragment extends AppCompatActivity {
                         CommentInfo commentInfo = new CommentInfo(userName, commentText, TimeStamp);
                         comments.add(commentInfo);
 
-
                         adapter.setCommentList(comments);
                     }
                 }
@@ -195,6 +211,9 @@ public class participantFragment extends AppCompatActivity {
                 String c = comment.getText().toString();
                 sendComment(UserName, c, timestamp);
                 comment.setText("");
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(comment.getWindowToken(), 0);
+                comment.clearFocus();
             }
         });
     }
@@ -242,6 +261,7 @@ public class participantFragment extends AppCompatActivity {
         String commentId = mDatabase.push().getKey();
         mDatabase.child(commentId).setValue(commentInfo);
     }
+
     private void addParticipantCount(){
         DatabaseReference participantAdd = FirebaseDatabase.getInstance().getReference().child("activities").child(ActivityId).child("peopleCnt");
         participantAdd.addListenerForSingleValueEvent((new ValueEventListener() {
@@ -256,7 +276,6 @@ public class participantFragment extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         }));
     }
