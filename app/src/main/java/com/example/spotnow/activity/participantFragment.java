@@ -108,7 +108,6 @@ public class participantFragment extends AppCompatActivity {
             }
         });
 
-
         // 인텐트에서 데이터 받아오기
         Intent intent = getIntent();
         if (intent != null) {
