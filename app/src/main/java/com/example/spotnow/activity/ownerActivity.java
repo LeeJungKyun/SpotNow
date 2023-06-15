@@ -45,10 +45,10 @@ public class ownerActivity extends AppCompatActivity {
     private Spinner daySpinner;
     private Spinner hourSpinner;
     private Spinner minuteSpinner;
-    private Spinner endMonthSpinner; // 추가된 부분
-    private Spinner endDaySpinner; // 추가된 부분
-    private Spinner endHourSpinner; // 추가된 부분
-    private Spinner endMinuteSpinner; // 추가된 부분
+    private Spinner endMonthSpinner;
+    private Spinner endDaySpinner;
+    private Spinner endHourSpinner;
+    private Spinner endMinuteSpinner;
 
     private EditText participantCountEditText;
     private EditText contentEditText;
@@ -60,7 +60,7 @@ public class ownerActivity extends AppCompatActivity {
     private StorageReference mStorage;
 
     private static final int PICK_IMAGE_REQUEST = 1;
-    private Uri selectedImageUri; // 선택된 이미지의 Uri를 저장하는 변수
+    private Uri selectedImageUri; // Remember Selected Image's URI
     private String activityOwner;
 
     private FirebaseAuth mAuth;
@@ -78,10 +78,10 @@ public class ownerActivity extends AppCompatActivity {
         daySpinner = findViewById(R.id.day_spinner);
         hourSpinner = findViewById(R.id.hour_spinner);
         minuteSpinner = findViewById(R.id.minute_spinner);
-        endMonthSpinner = findViewById(R.id.end_month_spinner); // 추가된 부분
-        endDaySpinner = findViewById(R.id.end_day_spinner); // 추가된 부분
-        endHourSpinner = findViewById(R.id.end_hour_spinner); // 추가된 부분
-        endMinuteSpinner = findViewById(R.id.end_minute_spinner); // 추가된 부분
+        endMonthSpinner = findViewById(R.id.end_month_spinner);
+        endDaySpinner = findViewById(R.id.end_day_spinner);
+        endHourSpinner = findViewById(R.id.end_hour_spinner);
+        endMinuteSpinner = findViewById(R.id.end_minute_spinner);
         participantCountEditText = findViewById(R.id.participant_count_edit_text);
         contentEditText = findViewById(R.id.content_edit_text);
         title = findViewById(R.id.title);
@@ -105,7 +105,7 @@ public class ownerActivity extends AppCompatActivity {
         placeHolderImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openImagePicker(); // 앨벤여는거 함수 밑에 있음
+                openImagePicker(); // function to open album
             }
         });
 
@@ -148,9 +148,9 @@ public class ownerActivity extends AppCompatActivity {
 
 
         mAuth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = mAuth.getCurrentUser(); // 현재 로그인 한 유저 정보 반환
+        FirebaseUser currentUser = mAuth.getCurrentUser(); // Return current user's information
 
-        final String uid = currentUser.getUid(); // 유저의 uid 저장
+        final String uid = currentUser.getUid();
 
         ArrayList<String> path = new ArrayList<>();
         path.add(uid);
@@ -195,31 +195,30 @@ public class ownerActivity extends AppCompatActivity {
         String participantCount = participantCountEditText.getText().toString();
         String content = contentEditText.getText().toString();
 
-        // 전체값 팔수 입력
+        // Check if all the required values are entered
         if (TiTle.isEmpty() || sport.equals("*선택*") || startTime.isEmpty() || endTime.isEmpty() || participantCount.isEmpty() || content.isEmpty()) {
             return;
         }
 
-                /* 날짜 형식 확인
+                /* Check date format
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH:mm");
                 sdf.setLenient(false);
                 try {
                     sdf.parse(startTime);
                     sdf.parse(endTime);
                 } catch (ParseException e) {
-
                     return;
                 } catch (java.text.ParseException e) {
                     throw new RuntimeException(e);
                 }
                 */
 
-        // HomeFragment로부터 spotID를 받아옴
+        // Get spotID from HomeFragment
         Intent getIntent = getIntent();
         long spotID = getIntent.getLongExtra("spotID", 0);
         String spotAddress = getIntent.getStringExtra("spotAddress");
 
-        // 이미지 업로드 후 액티비티 저장
+        // Upload image and save the activity
         uploadImageAndCreateActivity(TiTle, sport, startTime, endTime, participantCount, content, spotID,activityOwner);
 
         finish();
@@ -227,9 +226,9 @@ public class ownerActivity extends AppCompatActivity {
 
     private void sendComment() {
         String comment = Comment.getText().toString();
-        //firebase
-        // activity id를 찾아서
-        // user id 와 comment를 (id, comment) firebase에 저장
+        // Firebase
+        // Find activity id
+        // Save user id and comment in Firebase (id, comment)
 
         Comment.setText("");
     }
@@ -246,9 +245,9 @@ public class ownerActivity extends AppCompatActivity {
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null) {
             selectedImageUri = data.getData();
             placeHolderImage.setImageURI(selectedImageUri);
-            textView.setVisibility(View.GONE); // 이미지가 선택되면 TextView를 숨김
+            textView.setVisibility(View.GONE); // Hide TextView when an image is selected
         } else {
-            textView.setVisibility(View.VISIBLE); // 이미지가 선택되지 않으면 TextView를 보이게 함
+            textView.setVisibility(View.VISIBLE); // Show TextView when no image is selected
         }
     }
 
@@ -260,20 +259,20 @@ public class ownerActivity extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            // 이미지 업로드 성공
+                            // Image upload successful
                             imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
-                                    // 이미지의 다운로드 URL을 가져옴
+                                    // Get the download URL of the image
                                     String imageUrl = uri.toString();
 
-                                    // 액티비티 정보와 이미지 URL을 함께 저장
+                                    // Save activity information with the image URL
                                     createActivity(title, sport, startTime, endTime, peopleCnt, content, spotID, imageUrl,activityOwner);
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    // 이미지의 다운로드 URL을 가져오는데 실패
+                                    // Failed to get the download URL of the image
 
                                 }
                             });
@@ -282,12 +281,12 @@ public class ownerActivity extends AppCompatActivity {
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            // 이미지 업로드 실패
+                            // Image upload failed
 
                         }
                     });
         } else {
-            // 이미지가 선택되지 않았을 경우에도 액티비티 저장
+            // Save activity even if no image is selected
             createActivity(title, sport, startTime, endTime, peopleCnt, content, spotID, null,activityOwner);
         }
     }

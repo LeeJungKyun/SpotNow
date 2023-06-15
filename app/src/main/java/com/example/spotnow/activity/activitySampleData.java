@@ -1,15 +1,18 @@
 package com.example.spotnow.activity;
 
 public class activitySampleData {
-    private int activityImage;
-    private String activityTitle;
-    private String activityAddress;
+    private int activityImage; // Resource ID of the activity image
+    private String activityTitle; // Title of the activity
+    private String activityAddress; // Address of the activity
 
+    // Constructor with image, title, and address parameters
     public activitySampleData(int activityImage, String activityTitle, String activityAddress) {
         this.activityImage = activityImage;
         this.activityTitle = activityTitle;
         this.activityAddress = activityAddress;
     }
+
+    // Getter and setter methods for the private fields
 
     public int getActivityImage() {
         return activityImage;

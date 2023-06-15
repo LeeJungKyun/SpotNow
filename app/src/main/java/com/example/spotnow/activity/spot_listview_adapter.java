@@ -12,8 +12,7 @@ import com.example.spotnow.R;
 
 import java.util.ArrayList;
 
-public class spot_listview_adapter extends BaseAdapter
-{
+public class spot_listview_adapter extends BaseAdapter {
     Context mContext = null;
     LayoutInflater mLayoutInflater = null;
     ArrayList<spot_listview_info> sample;
@@ -26,31 +25,31 @@ public class spot_listview_adapter extends BaseAdapter
 
     @Override
     public int getCount() {
-        return sample.size();
+        return sample.size(); // Return the total number of items in the sample list
     }
 
     @Override
     public long getItemId(int position) {
-        return position;
+        return position; // Return the item ID of the specified position
     }
 
     @Override
     public spot_listview_info getItem(int position) {
-        return sample.get(position);
+        return sample.get(position); // Return the item at the specified position
     }
 
     @Override
-    public View getView(int position, View coverView, ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent) {
         View view = mLayoutInflater.inflate(R.layout.spot_listview_format, null);
 
-        ImageView imageView = (ImageView)view.findViewById(R.id.spot_image);
-        TextView movieName = (TextView)view.findViewById(R.id.spot_name);
-        TextView grade = (TextView)view.findViewById(R.id.spot_address);
+        ImageView imageView = (ImageView) view.findViewById(R.id.spot_image);
+        TextView movieName = (TextView) view.findViewById(R.id.spot_name);
+        TextView grade = (TextView) view.findViewById(R.id.spot_address);
 
-        imageView.setImageResource(sample.get(position).getImage());
-        movieName.setText(sample.get(position).getName());
-        grade.setText(sample.get(position).getAddress());
+        imageView.setImageResource(sample.get(position).getImage()); // Set the image resource for the ImageView
+        movieName.setText(sample.get(position).getName()); // Set the movie name in the TextView
+        grade.setText(sample.get(position).getAddress()); // Set the grade in the TextView
 
-        return view;
+        return view; // Return the constructed view
     }
 }

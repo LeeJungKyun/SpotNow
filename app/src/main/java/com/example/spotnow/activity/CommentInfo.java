@@ -1,11 +1,12 @@
 package com.example.spotnow.activity;
 
 public class CommentInfo {
-    private String userName;
-    private String comment;
-    private long timestamp;
+    private String userName; // User name associated with the comment
+    private String comment; // The actual comment content
+    private long timestamp; // Timestamp of the comment
 
     public CommentInfo() {
+        // Empty constructor required for Firebase
     }
 
     public CommentInfo(String userName, String comment, long timestamp) {
@@ -30,7 +31,11 @@ public class CommentInfo {
         this.comment = comment;
     }
 
-    public long getTimestamp(){return timestamp;}
+    public long getTimestamp() {
+        return timestamp;
+    }
 
-    public void setTimestamp(long timestamp){this.timestamp = timestamp;}
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
 }

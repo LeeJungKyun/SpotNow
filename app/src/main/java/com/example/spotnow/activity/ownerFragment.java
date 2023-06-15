@@ -59,10 +59,10 @@ public class ownerFragment extends Fragment {
     private Spinner daySpinner;
     private Spinner hourSpinner;
     private Spinner minuteSpinner;
-    private Spinner endMonthSpinner; // 추가된 부분
-    private Spinner endDaySpinner; // 추가된 부분
-    private Spinner endHourSpinner; // 추가된 부분
-    private Spinner endMinuteSpinner; // 추가된 부분
+    private Spinner endMonthSpinner;
+    private Spinner endDaySpinner;
+    private Spinner endHourSpinner;
+    private Spinner endMinuteSpinner;
 
     private EditText participantCountEditText;
     private EditText contentEditText;
@@ -71,7 +71,7 @@ public class ownerFragment extends Fragment {
     private DatabaseReference mDatabase;
     private StorageReference mStorage;
     private static final int PICK_IMAGE_REQUEST = 1;
-    private Uri selectedImageUri; // 선택된 이미지의 Uri를 저장하는 변수
+    private Uri selectedImageUri; // Remember Selected Image's URI
     private String activityOwner;
 
     private FirebaseAuth mAuth;
@@ -123,7 +123,6 @@ public class ownerFragment extends Fragment {
         readParticipantListButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 참가자 목록을 읽는 동작 수행
                 readParticipantList();
             }
         });
@@ -131,7 +130,6 @@ public class ownerFragment extends Fragment {
         deleteActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 활동 삭제를 수행
                 showDeleteCheckDialog();
             }
         });
@@ -139,7 +137,6 @@ public class ownerFragment extends Fragment {
         modifyActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 활동 수정을 수행
                 modifyActivity();
             }
         });
@@ -147,7 +144,6 @@ public class ownerFragment extends Fragment {
         writeCommentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 댓글 작성을 수행
                 sendComment();
             }
         });
@@ -156,44 +152,43 @@ public class ownerFragment extends Fragment {
     }
 
     private void setupActivityTypeSpinner() {
-        // 스피너에 표시될 아이템 목록 설정
+        // Set items shows in spinner
         ArrayList<String> activityTypes = new ArrayList<>();
         activityTypes.add("Type1");
         activityTypes.add("Type2");
         activityTypes.add("Type3");
 
-        // 어댑터를 생성하여 스피너에 연결
+        // Make adapter and connect spinner
         ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, activityTypes);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         activityTypeSpinner.setAdapter(adapter);
     }
 
     private void setupDateTimeSpinners() {
-        // 월 스피너에 표시될 아이템 목록 설정
+        // Month spinner
         ArrayList<String> months = new ArrayList<>();
         for (int i = 1; i <= 12; i++) {
             months.add(String.valueOf(i));
         }
 
-        // 일 스피너에 표시될 아이템 목록 설정
+        // Day spinner
         ArrayList<String> days = new ArrayList<>();
         for (int i = 1; i <= 31; i++) {
             days.add(String.valueOf(i));
         }
 
-        // 시간 스피너에 표시될 아이템 목록 설정
+        // Hour spinner
         ArrayList<String> hours = new ArrayList<>();
         for (int i = 0; i <= 23; i++) {
             hours.add(String.format("%02d", i));
         }
 
-        // 분 스피너에 표시될 아이템 목록 설정
+        // Minutes spinner
         ArrayList<String> minutes = new ArrayList<>();
         for (int i = 0; i <= 59; i++) {
             minutes.add(String.format("%02d", i));
         }
 
-        // 어댑터를 생성하여 스피너에 연결
         ArrayAdapter<String> monthAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, months);
         ArrayAdapter<String> dayAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, days);
         ArrayAdapter<String> hourAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, hours);
@@ -209,10 +204,10 @@ public class ownerFragment extends Fragment {
         hourSpinner.setAdapter(hourAdapter);
         minuteSpinner.setAdapter(minuteAdapter);
 
-        endMonthSpinner.setAdapter(monthAdapter); // 추가된 부분
-        endDaySpinner.setAdapter(dayAdapter); // 추가된 부분
-        endHourSpinner.setAdapter(hourAdapter); // 추가된 부분
-        endMinuteSpinner.setAdapter(minuteAdapter); // 추가된 부분
+        endMonthSpinner.setAdapter(monthAdapter);
+        endDaySpinner.setAdapter(dayAdapter);
+        endHourSpinner.setAdapter(hourAdapter);
+        endMinuteSpinner.setAdapter(minuteAdapter);
     }
 
     private void openFileChooser() {
@@ -232,8 +227,7 @@ public class ownerFragment extends Fragment {
     }
 
     private void readParticipantList() {
-        // 참가자 목록을 읽는 동작 수행하는 메서드
-        // 구현 내용 생략
+        // call method to read participant list
     }
 
     private void showDeleteCheckDialog() {
@@ -246,7 +240,7 @@ public class ownerFragment extends Fragment {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 활동 삭제를 수행하는 메서드 호출
+                // call method to delete
                 deleteActivity();
                 deleteCheckDialog.dismiss();
             }
@@ -263,23 +257,21 @@ public class ownerFragment extends Fragment {
     }
 
     private void deleteActivity() {
-        // 활동 삭제를 수행하는 메서드
-        // 구현 내용 생략
+        // Perform action to delete the activity
     }
 
     private void modifyActivity() {
-        // 활동 수정을 수행하는 메서드
-        // 구현 내용 생략
+        // Perform action to modify the activity
     }
 
     private void sendComment() {
         String c = Comment.getText().toString();
         //firebase
-        // activity id를 찾아서
-        // user id 와 comment를 (id, comment) firebase에 저장
-        // 여기서 c를 가져와서 DB에 저장한 뒤 댓글 창에 보여주기
+        // find activity id
+        // save user id and comment to Firebase (id, comment)
+        // Retrieve 'c' here and save it to
 
-//        Toast.makeText(getActivity().getApplicationContext(), c, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity().getApplicationContext(), c, Toast.LENGTH_SHORT).show();
 
         Comment.setText("");
     }

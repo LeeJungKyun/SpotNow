@@ -81,7 +81,7 @@ public class ownerActivitymodify extends AppCompatActivity {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                // 데이터 읽기를 취소한 경우 처리할 내용을 작성합니다.
+                // Handle canceled data reading.
             }
         });
 
@@ -89,7 +89,7 @@ public class ownerActivitymodify extends AppCompatActivity {
         commentShow.setAdapter(adapter);
 
 
-        // 인텐트에서 데이터 받아오기
+        // Get data from the intent
         Intent intent = getIntent();
         if (intent != null) {
             String activityTitle = intent.getStringExtra("activityTitle");
@@ -104,7 +104,7 @@ public class ownerActivitymodify extends AppCompatActivity {
             titleTextView.setText(activityTitle);
             contentTextView.setText("종목: "+activitySport+"\n\n"+"내용: "+activityContent+"\n\n"+"시작시간: " +"\n" +activityStartTime+"\n\n"+"종료시간: " +"\n"+activityEndTime+"\n\n"+"인원: "+activityPeopleCnt);
             contentTextView.setMovementMethod(new ScrollingMovementMethod());
-            // Firebase에서 데이터 가져오기
+            // Get data from Firebase
             mDatabase = FirebaseDatabase.getInstance().getReference("activities");
             mDatabase.orderByChild("title").equalTo(activityTitle).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -128,7 +128,7 @@ public class ownerActivitymodify extends AppCompatActivity {
                 }
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-                    // 실패했으
+                    // Handle failed data reading.
 //                    Toast.makeText(ownerActivitymodify.this, "Failed to read value.", Toast.LENGTH_SHORT).show();
                 }
             });
@@ -152,7 +152,7 @@ public class ownerActivitymodify extends AppCompatActivity {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-                    // 데이터 읽기를 취소한 경우 처리할 내용을 작성합니다.
+                    // Handle canceled data reading.
                 }
             });
 
@@ -200,7 +200,7 @@ public class ownerActivitymodify extends AppCompatActivity {
 
     private void sendComment(String UID, String c, long timestamp) {
         if (c.trim().isEmpty()) {
-            // 댓글이 비어있는 경우 처리
+            // Handle empty comment case
             Toast.makeText(this, "댓글을 입력해주세요.", Toast.LENGTH_SHORT).show();
             return;
         }

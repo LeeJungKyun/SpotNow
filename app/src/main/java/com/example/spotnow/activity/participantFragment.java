@@ -58,6 +58,7 @@ public class participantFragment extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.participant_activity_main);
 
+        // Initialize views
         writeParticipateInfoButton = findViewById(R.id.writeParticipateInfo);
         writeReportButton = findViewById(R.id.writeReport);
         writeCommentButton = findViewById(R.id.writeComment);
@@ -69,13 +70,17 @@ public class participantFragment extends AppCompatActivity {
         commentShow = findViewById(R.id.commentShow);
         commentShow.setLayoutManager(new LinearLayoutManager(this));
 
+        // Get current timestamp
         timestamp = new Date().getTime();
 
+        // Initialize Firebase authentication
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
             UID = currentUser.getUid();
         }
+
+        // Retrieve user name from Firebase database
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users").child(UID);
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -87,13 +92,15 @@ public class participantFragment extends AppCompatActivity {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                // 데이터 읽기를 취소한 경우 처리할 내용을 작성합니다.
+                // Handle canceled data reading
             }
         });
 
+        // Set up RecyclerView adapter for comments
         CommentAdapter adapter = new CommentAdapter();
         commentShow.setAdapter(adapter);
 
+        // Set up soft keyboard behavior
         final int defaultSoftInputMode = getWindow().getAttributes().softInputMode;
         comment.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -108,9 +115,10 @@ public class participantFragment extends AppCompatActivity {
             }
         });
 
-        // 인텐트에서 데이터 받아오기
+        // Get data from Intent
         Intent intent = getIntent();
         if (intent != null) {
+            // Extract activity details from Intent
             String activityTitle = intent.getStringExtra("activityTitle");
             String activityContent = intent.getStringExtra("activityContent");
             String activityOwner = intent.getStringExtra("activityOwner");
@@ -119,11 +127,13 @@ public class participantFragment extends AppCompatActivity {
             String activityStartTime = intent.getStringExtra("activityStartTime");
             String activityEndTime = intent.getStringExtra("activityEndTime");
 
+            // Set activity details to corresponding views
             ownerName.setText(activityOwner);
             titleTextView.setText(activityTitle);
             contentTextView.setText("종목: "+activitySport+"\n\n"+"내용: "+activityContent+"\n\n"+"시작시간: " +"\n" +activityStartTime+"\n\n"+"종료시간: " +"\n"+activityEndTime+"\n\n"+"인원: "+activityPeopleCnt);
             contentTextView.setMovementMethod(new ScrollingMovementMethod());
-            // Firebase에서 데이터 가져오기
+
+            // Retrieve image URL from Firebase and load it into ImageView using Glide
             mDatabase = FirebaseDatabase.getInstance().getReference("activities");
             mDatabase.orderByChild("title").equalTo(activityTitle).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -131,7 +141,6 @@ public class participantFragment extends AppCompatActivity {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         ActivityInfo activity = snapshot.getValue(ActivityInfo.class);
                         if (activity != null && activity.getContent().equals(activityContent)) {
-                            // 원하는 데이터를 찾았을 경우
                             String activityId = snapshot.getKey();
                             ActivityId = activityId;
                             String imageUrl = activity.getImageUrl();
@@ -142,9 +151,11 @@ public class participantFragment extends AppCompatActivity {
                 }
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
+                    // Handle canceled database reading
                 }
             });
 
+            // Retrieve comments from Firebase and update the RecyclerView
             DatabaseReference commentRef = FirebaseDatabase.getInstance().getReference().child("activities");
             commentRef.addValueEventListener(new ValueEventListener() {
                 @Override
@@ -163,9 +174,11 @@ public class participantFragment extends AppCompatActivity {
                 }
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-                    // 데이터 읽기를 취소한 경우 처리할 내용을 작성합니다.
+                    // Handle canceled database reading
                 }
             });
+
+            // Add comment into Firebase
             commentRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -176,7 +189,6 @@ public class participantFragment extends AppCompatActivity {
                         String userName = commentSnapshot.child("userName").getValue(String.class);
                         long TimeStamp = new Date().getTime();
 
-
                         CommentInfo commentInfo = new CommentInfo(userName, commentText, TimeStamp);
                         comments.add(commentInfo);
 
@@ -185,11 +197,12 @@ public class participantFragment extends AppCompatActivity {
                 }
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-
+                    // Handle canceled database reading
                 }
             });
         }
 
+        // Set up click listener for writeParticipateInfoButton
         writeParticipateInfoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -197,6 +210,7 @@ public class participantFragment extends AppCompatActivity {
             }
         });
 
+        // Set up click listener for writeReportButton
         writeReportButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -204,6 +218,7 @@ public class participantFragment extends AppCompatActivity {
             }
         });
 
+        // Set up click listener for writeCommentButton
         writeCommentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -217,6 +232,7 @@ public class participantFragment extends AppCompatActivity {
         });
     }
 
+    // Show participant dialog with user name and timestamp
     private void showParticipantDialog(String userName, long TimeStamp) {
         participantDialog = new Dialog(this);
         participantDialog.setContentView(R.layout.participant_dialog);
@@ -227,14 +243,11 @@ public class participantFragment extends AppCompatActivity {
         dialogButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                // Dialog에서 작성한 문자열 가져오기
                 String dialogText = dialogEditText.getText().toString();
                 String CommentText = "[참여]" + dialogText;
                 addParticipantCount();
-                // 가져온 문자열 사용하기
                 sendComment(userName, CommentText, TimeStamp);
 
-                // Dialog 닫기
                 participantDialog.dismiss();
             }
         });
@@ -242,6 +255,7 @@ public class participantFragment extends AppCompatActivity {
         participantDialog.show();
     }
 
+    // Show reporting dialog
     private void reporting() {
         reportingDialog = new Dialog(this);
         reportingDialog.setContentView(R.layout.report);
@@ -249,9 +263,9 @@ public class participantFragment extends AppCompatActivity {
         reportingDialog.show();
     }
 
+    // Send comment to Firebase
     private void sendComment(String UID, String c, long timestamp) {
         if (c.trim().isEmpty()) {
-            // 댓글이 비어있는 경우 처리
             Toast.makeText(this, "댓글을 입력해주세요.", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -261,6 +275,7 @@ public class participantFragment extends AppCompatActivity {
         mDatabase.child(commentId).setValue(commentInfo);
     }
 
+    // Increment participant count in Firebase
     private void addParticipantCount(){
         DatabaseReference participantAdd = FirebaseDatabase.getInstance().getReference().child("activities").child(ActivityId).child("peopleCnt");
         participantAdd.addListenerForSingleValueEvent((new ValueEventListener() {
@@ -275,6 +290,7 @@ public class participantFragment extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                // Handle canceled database reading
             }
         }));
     }
