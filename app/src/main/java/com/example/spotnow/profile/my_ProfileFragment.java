@@ -26,9 +26,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class my_ProfileFragment extends Fragment {
-    private FirebaseAuth mAuth;
-
-    private DatabaseReference mDatabase;
 
     UserInfo userInfo;
 
@@ -51,13 +48,13 @@ public class my_ProfileFragment extends Fragment {
         TextView follower = rootView.findViewById(R.id.follower_num);
         ImageView profile_image = rootView.findViewById(R.id.profile_image);
 
-        mAuth = FirebaseAuth.getInstance();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser(); // 현재 로그인 한 유저 정보 반환
 
         final String uid = currentUser.getUid(); // 유저의 uid 저장
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        //get child from DB
         mDatabase.child("users").child(uid).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -67,7 +64,7 @@ public class my_ProfileFragment extends Fragment {
                 else {
                     userInfo = task.getResult().getValue(UserInfo.class); // 유저 정보 한번 불러오기
 
-                    // 데이터 반영
+                    //set data to view
                     name.setText(userInfo.getName());
                     introduce.setText(userInfo.getIntroduce_self());
                     like_sport.setText(userInfo.getSport());
@@ -87,7 +84,7 @@ public class my_ProfileFragment extends Fragment {
         profile_edit_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // profile_edit_button 클릭 시 실행될 코드
+                // profile_edit_button clicked event
                 Intent intent = new Intent(getActivity(), ProfileEditActivity.class);
                 startActivity(intent);
             }

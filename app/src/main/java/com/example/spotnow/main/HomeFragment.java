@@ -11,34 +11,32 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.spotnow.common.SearchActivity;
-import com.example.spotnow.activity.ownerActivitymodify;
-import com.sothree.slidinguppanel.SlidingUpPanelLayout;
-import com.sothree.slidinguppanel.SlidingUpPanelLayout.PanelState;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.example.spotnow.activity.ActivityInfo;
 import com.example.spotnow.R;
+import com.example.spotnow.activity.ActivityInfo;
+import com.example.spotnow.activity.activitySampleData;
+import com.example.spotnow.activity.activity_listview_adapter;
 import com.example.spotnow.activity.activity_listview_info;
+import com.example.spotnow.activity.ownerActivity;
+import com.example.spotnow.activity.ownerActivitymodify;
+import com.example.spotnow.activity.participantFragment;
 import com.example.spotnow.common.Coordinate;
 import com.example.spotnow.common.FirebaseManager;
 import com.example.spotnow.common.MarkerInfo;
+import com.example.spotnow.common.SearchActivity;
 import com.example.spotnow.common.Utility;
-import com.example.spotnow.activity.ownerActivity;
-import com.example.spotnow.activity.participantFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.LocationTrackingMode;
 import com.naver.maps.map.MapFragment;
@@ -48,8 +46,8 @@ import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.overlay.Overlay;
 import com.naver.maps.map.util.FusedLocationSource;
 import com.naver.maps.map.util.MarkerIcons;
-import com.example.spotnow.activity.activitySampleData;
-import com.example.spotnow.activity.activity_listview_adapter;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout.PanelState;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -131,9 +129,7 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
             output = input.substring(startIndex, endIndex);
             activity_address.setText(output);
         }
-//        activity_address.setText(result);
 
-        //로그인 안하고 디버깅할때 해야함소
         FirebaseManager.init();
 
         FragmentManager fm = getFragmentManager();

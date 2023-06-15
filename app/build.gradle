@@ -5,16 +5,16 @@ plugins {
 
 android {
     namespace 'com.example.spotnow'
-    compileSdk 33
+    compileSdk 32
 
     defaultConfig {
         applicationId "com.example.spotnow"
         minSdk 21
-        targetSdk 33
+        targetSdk 32
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -22,6 +22,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    testOptions{
+        unitTests{
+            includeAndroidResources = true
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -37,8 +43,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:21.0.3'
     implementation 'com.google.firebase:firebase-storage:20.0.1'
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    testImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'androidx.test:core:1.4.0'
+
 
     //Circle ImageView
     implementation 'de.hdodenhof:circleimageview:3.1.0'
@@ -53,12 +60,13 @@ dependencies {
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test:runner:1.4.0'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     androidTestImplementation 'androidx.test:core:1.4.0'
+    androidTestImplementation 'androidx.test:rules:1.4.0'
+    androidTestImplementation 'androidx.test:monitor:1.4.0@@aar'
+    androidTestUtil 'androidx.test:orchestrator:1.4.0'
 
     // Mockito dependencies
     testImplementation 'org.mockito:mockito-core:3.10.0'
-    androidTestImplementation 'org.mockito:mockito-android:3.10.0'
-
 }

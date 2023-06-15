@@ -60,8 +60,8 @@ public class user_ProfileFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.profile, container, false);
 
         mAuth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = mAuth.getCurrentUser(); // 현재 로그인 한 유저 정보 반환
-        final String uid = currentUser.getUid(); // 유저의 uid 저장
+        FirebaseUser currentUser = mAuth.getCurrentUser(); // Get the current logged-in user information
+        final String uid = currentUser.getUid(); // Save the user's UID
 
         user_name = rootView.findViewById(R.id.profile_name);
         introduce = rootView.findViewById(R.id.profile_introduce);
@@ -73,11 +73,9 @@ public class user_ProfileFragment extends Fragment {
         report_button = rootView.findViewById(R.id.report_button);
         userImage = rootView.findViewById(R.id.profile_image);
 
-        report_button.setOnClickListener(new View.OnClickListener()
-        {
+        report_button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 Bundle args = new Bundle();
                 args.putString("name", selected_name);
                 reportPopupFragment reportPopupFragment = new reportPopupFragment();
@@ -86,27 +84,23 @@ public class user_ProfileFragment extends Fragment {
             }
         });
 
-        if (getArguments() != null)
-        {
-            selected_name = getArguments().getString("selected_name"); // 번들에서 이름 가져오기
+        if (getArguments() != null) {
+            selected_name = getArguments().getString("selected_name"); // Get the name from the bundle
         }
 
         mDatabase = FirebaseDatabase.getInstance().getReference("users");
 
-
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot snapshot : dataSnapshot.getChildren())
-                {
-                    UserInfo userinfo = snapshot.getValue(UserInfo.class); // 선택된 유저 정보와 일치하는 유저 객체 저장
-                    if(userinfo.getName().equals(selected_name)) // 똑같은 이름인지 돌면서 확인
-                    {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    UserInfo userinfo = snapshot.getValue(UserInfo.class); // Save the user object that matches the selected user information
+                    if (userinfo.getName().equals(selected_name)) { // Check if the names match
                         user_name.setText(userinfo.getName());
                         introduce.setText(userinfo.getIntroduce_self());
                         like_sport.setText(userinfo.getSport());
                         region.setText(userinfo.getRegion());
-                        progressBar.setProgress(100-userinfo.getReport_cnt()*5);
+                        progressBar.setProgress(100 - userinfo.getReport_cnt() * 5);
                         following.setText(Integer.toString(userinfo.getFollowing_num()));
                         follower.setText(Integer.toString(userinfo.getFollower_num()));
                         targetUId = snapshot.getKey();
@@ -114,14 +108,14 @@ public class user_ProfileFragment extends Fragment {
                                 .load(userinfo.getProfileImage())
                                 .apply(RequestOptions.circleCropTransform())
                                 .into(userImage);
-
                         checkFollowStatus();
                     }
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                // Handle error
             }
         });
 
@@ -137,7 +131,7 @@ public class user_ProfileFragment extends Fragment {
                 }
             }
         });
-        // Inflate the layout for this fragment
+
         return rootView;
     }
 
@@ -153,24 +147,23 @@ public class user_ProfileFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("CheckFollowStatus","팔로우 상태 확인에서 에러");
-                //에러처리
+                Log.e("CheckFollowStatus","Error while checking follow status");
+                // Handle error
             }
         });
     }
 
-    //팔로우 메소드
     private void follow() {
         String targetUserId = targetUId;
 
-        //현재 들어와있는 User의 팔로워목록에 나를 추가
+        // Add myself to the follower list of the current user
         mDatabase.child(targetUserId).child("followers").push().setValue(currentUserId);
 
-        //내 팔로잉 목록에 현재 들어와있는 유저 추가
+        // Add the current user to my following list
         mDatabase.child(currentUserId).child("following").push().setValue(targetUserId);
         isFollowing = true;
 
-        // currentUserId의 following_num 증가
+        // Increase following_num for currentUserId
         DatabaseReference currentuserRef = mDatabase.child(currentUserId);
         currentuserRef.child("following_num").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -181,12 +174,14 @@ public class user_ProfileFragment extends Fragment {
                     currentuserRef.child("following_num").setValue(followingNum);
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                // 에러 처리
+                // Handle error
             }
         });
-        // targetUserId의 follower_num 증가
+
+        // Increase follower_num for targetUserId
         DatabaseReference targetuserRef = mDatabase.child(targetUserId);
         targetuserRef.child("follower_num").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -197,36 +192,36 @@ public class user_ProfileFragment extends Fragment {
                     targetuserRef.child("follower_num").setValue(followerNum);
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                // 에러 처리
+                // Handle error
             }
         });
 
         updateButton();
     }
 
-    //언팔로우 메소드
     private void unfollow() {
-        //언팔로우할 대상
         String targetUserId = targetUId;
 
-        //들어와있는 User의 팔로워 목록에서 나를 삭제하고 숫자 감소 시키기
+        // Remove myself from the follower list of the current user and decrease the follower count
         Query followerQuery = mDatabase.child(targetUserId).child("followers").orderByValue().equalTo(currentUserId);
         DatabaseReference targetuserRef = mDatabase.child(targetUserId);
-        followerQuery.addListenerForSingleValueEvent(new ValueEventListener(){
+        followerQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot){
-                if(dataSnapshot.exists()){
-                    for(DataSnapshot snapshot: dataSnapshot.getChildren()){
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         snapshot.getRef().removeValue();
                     }
                 }
             }
+
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError){
-                //예외 처리
-                Log.e("Unfollow","On cancelled");
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle exception
+                Log.e("Unfollow","OnCancelled");
             }
         });
         targetuserRef.child("follower_num").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -238,20 +233,21 @@ public class user_ProfileFragment extends Fragment {
                     targetuserRef.child("follower_num").setValue(followerNum);
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                // 에러 처리
+                // Handle error
             }
         });
 
-        //내 팔로잉 목록에서 들어와있는 User 삭제
+        // Remove the current user from my following list and decrease the following count
         Query followingQuery = mDatabase.child(currentUserId).child("following").orderByValue().equalTo(targetUserId);
         DatabaseReference currentuserRef = mDatabase.child(currentUserId);
         followingQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         snapshot.getRef().removeValue();
                     }
                 }
@@ -259,7 +255,7 @@ public class user_ProfileFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                //예외처리
+                // Handle exception
             }
         });
         currentuserRef.child("following_num").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -271,11 +267,13 @@ public class user_ProfileFragment extends Fragment {
                     currentuserRef.child("following_num").setValue(followingNum);
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                // 에러 처리
+                // Handle error
             }
         });
+
         mDatabase.child(currentUserId).child("following").child(targetUserId).removeValue();
         isFollowing = false;
         updateButton();
@@ -283,9 +281,9 @@ public class user_ProfileFragment extends Fragment {
 
     private void updateButton() {
         if (isFollowing) {
-            follow_button.setText("언팔로우");
+            follow_button.setText("Unfollow");
         } else {
-            follow_button.setText("팔로우");
+            follow_button.setText("Follow");
         }
     }
 }
