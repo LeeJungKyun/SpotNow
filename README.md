@@ -26,5 +26,3 @@ c. Location(GPS System)
 
 d. Create Activity
    Not just participate to the created Activities, if you want to creat activity click the + button in navigation bar
-
-4. 
